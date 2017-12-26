@@ -1,0 +1,402 @@
+*{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+html {
+	background-image: url("../img/gradient.png");
+	background-repeat: repeat-x;
+	
+}
+
+body{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: url("../img/sea.png");
+	background-repeat: repeat-x;
+	background-position: center bottom;
+}
+
+ul{
+	padding-top: 1%;
+	padding-left: 15%;
+}
+
+ul li { 
+	display: block;
+	color: #000000;
+	cursor: pointer;
+	height: 100px;
+	overflow: hidden;
+    width: 90%;
+	font: 13pt sans-serif;
+	text-decoration: none;
+}
+
+ul li a{
+	color: #0A50D1;
+	text-decoration: none;
+}	
+
+ul li p:hover{
+	color:#FF0000;
+	/*background-color: #CC0000;*/
+}
+
+ul li:hover{
+	
+}
+
+#menu{
+	box-shadow: 5px 0 10px rgba(0,0,150,0.5);
+	border: 0px solid white;
+	background-color: rgba(0, 0, 0, 0);
+	margin-left: 2%;
+	height: 100%;
+	width: 20%;
+}
+
+#logo{
+	position:relative;
+	width:70%;
+	top: 50px;
+	left: 10%;
+}
+#fish{
+	position:relative;
+	top: -125px;
+	left: 25%;
+	width:70%;
+}
+
+#content{
+	position:fixed;
+	left: 25%;
+	top: 0;
+	width: 85%;
+	height:100%;
+	/*overflow: hidden;*/
+	overflow-y: scroll;
+}
+
+#footer {
+	position: fixed;
+	top: 95%;
+	left: 0;
+	width: 100%;
+}
+
+#autor{
+	position: absolute;
+	top: 0;
+	left: 3%;
+	font: 8pt sans-serif;
+}
+
+.button1{
+	position:relative;
+	background-image: url("../img/bubble1.png");
+	background-repeat: no-repeat;
+	height: 100%;
+	width: 45%;
+	left: 45%;
+	text-decoration: none;
+}
+
+.button1 p{
+	position:relative;
+	top: 38%;
+	left:25%;
+}
+
+.button2{
+	position:relative;
+	background-image: url("../img/bubble2.png");
+	background-repeat: no-repeat;
+	height: 100%;
+	width: 45%;
+	left: 0%;
+	text-decoration: none;
+}
+
+.button2 p{
+	position:relative;
+	top: 38%;
+	left:15%;
+}
+
+.button3{
+	position:relative;
+	background-image: url("../img/bubble3.png");
+	background-repeat: no-repeat;
+	height: 100%;
+	width: 45%;
+	left: 30%;
+	text-decoration: none;
+}
+
+.button3 p{
+	position:relative;
+	top: 38%;
+	left:15%;
+}
+
+.button4{
+	position:relative;
+	background-image: url("../img/bubble4.png");
+	background-repeat: no-repeat;
+	height: 100%;
+	width: 45%;
+	left: 5%;
+	text-decoration: none;
+}
+
+.button4 p{
+	position:relative;
+	top: 38%;
+	left:3%;
+}
+
+.button5{
+	position:relative;
+	background-image: url("../img/bubble5.png");
+	background-repeat: no-repeat;
+	height: 100%;
+	width: 45%;
+	left: 45%;
+	text-decoration: none;
+}
+
+.button5 p{
+	position:relative;
+	top: 38%;
+	left:10%;
+}
+
+.game_image {
+	height: 60%;
+	width: 90%;
+}
+
+.technologies_image_1 {
+	height: 25%;
+	width: 30%;
+}
+
+.technologies_image_2 {
+	height: 20%;
+	/* width: 40%; */
+}
+
+#about{
+	position: absolute;
+	top: 45px;
+	left: 200px;
+	background-color: #ffffff;
+	border: 1 solid #ffffff;
+	border-radius: 50px 50px;
+    color: #0A50D1;
+	box-shadow: 5px 0 10px rgba(0,0,150,0.5);
+	height: 100px;
+	width: 650px;
+	padding: 25px;
+	overflow: hidden;
+}
+
+#news{
+	position: absolute;
+	top: 250px;
+	left: 0;
+	background-color: #ffffff;
+	border: 1 solid #ffffff;
+	border-radius: 50px 50px;
+    color: #0A50D1;
+	box-shadow: 5px 0 10px rgba(0,0,150,0.5);
+	height: 300px;
+	width: 500px;
+	padding: 25px;
+	overflow: hidden;
+}
+
+#news_big{
+	position: absolute;
+	top: 50px;
+	left: 50px;
+	background-color: #ffffff;
+	border: 1 solid #ffffff;
+	border-radius: 50px 50px;
+    color: #0A50D1;
+	box-shadow: 5px 0 10px rgba(0,0,150,0.5);
+	height: 350px;
+	width: 850px;
+	padding: 25px;
+	overflow: hidden;
+}
+
+#contacts{
+	position: absolute;
+	top: 275px;
+	left: 625px;
+	background-color: #ffffff;
+	border: 1 solid #ffffff;
+	border-radius: 50px 50px;
+    color: #0A50D1;
+	box-shadow: 5px 0 10px rgba(0,0,150,0.5);
+	height: 200px;
+	width: 300px;
+	padding: 25px;
+	overflow: hidden;
+}
+
+#swheroes{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	background-color: #ffffff;
+	border: 1 solid #ffffff;
+	border-radius: 50px 50px;
+    color: #0A50D1;
+	box-shadow: 5px 0 10px rgba(0,0,150,0.5);
+	height: 500px;
+	width: 400px;
+	padding: 25px;
+	text-align: center;
+	overflow: hidden;
+}
+
+#swheroes img {
+	border: 1 solid #ffffff;
+	border-radius: 25px 25px;
+}
+
+#mkquest{
+	position: absolute;
+	top: 10px;
+	left: 500px;
+	background-color: #ffffff;
+	border: 1 solid #ffffff;
+	border-radius: 50px 50px;
+    color: #0A50D1;
+	box-shadow: 5px 0 10px rgba(0,0,150,0.5);
+	height: 500px;
+	width: 400px;
+	padding: 25px;
+	text-align: center;
+	overflow: hidden;
+}
+
+#mkquest img {
+	border: 1 solid #ffffff;
+	border-radius: 25px 25px;
+}
+
+#technologies{
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	background-color: #ffffff;
+	border: 1 solid #ffffff;
+	border-radius: 50px 50px;
+    color: #0A50D1;
+	box-shadow: 5px 0 10px rgba(0,0,150,0.5);
+	height: 500px;
+	width: 800px;
+	padding: 25px;
+	overflow: hidden;
+}
+
+#game1{
+	position: absolute;
+	top: 10px;
+	left: 0px;
+	background-color: #ffffff;
+	border: 1 solid #ffffff;
+	border-radius: 50px 50px;
+    color: #0A50D1;
+	box-shadow: 5px 0 10px rgba(0,0,150,0.5);
+	height: 250px;
+	width: 480px;
+	padding: 10px;
+	text-align: left;
+	overflow: hidden;
+}
+
+#game1 img {
+	border: 1 solid #ffffff;
+	border-radius: 25px 25px;
+	margin-right: 5px;
+	height: 200px;
+	width: 250px;
+	float:left;
+}
+
+#game1 h3 {
+	text-align: right;
+	margin-bottom: 5px;
+	margin-right: 25px;
+}
+
+#game2{
+	position: absolute;
+	top: 125px;
+	left: 550px;
+	background-color: #ffffff;
+	border: 1 solid #ffffff;
+	border-radius: 50px 50px;
+    color: #0A50D1;
+	box-shadow: 5px 0 10px rgba(0,0,150,0.5);
+	height: 250px;
+	width: 450px;
+	padding: 10px;
+	text-align: left;
+	overflow: hidden;
+}
+
+#game2 img {
+	border: 1 solid #ffffff;
+	border-radius: 25px 25px;
+	margin-right: 5px;
+	height: 200px;
+	width: 250px;
+	float:left;
+}
+
+#game2 h3 {
+	text-align: right;
+	margin-bottom: 5px;
+	margin-right: 25px;
+}
+
+#game3{
+	position: absolute;
+	top: 315px;
+	left: 50px;
+	background-color: #ffffff;
+	border: 1 solid #ffffff;
+	border-radius: 50px 50px;
+    color: #0A50D1;
+	box-shadow: 5px 0 10px rgba(0,0,150,0.5);
+	height: 250px;
+	width: 450px;
+	padding: 10px;
+	text-align: left;
+	overflow: hidden;
+}
+
+#game3 img {
+	border: 1 solid #ffffff;
+	border-radius: 25px 25px;
+	margin-right: 5px;
+	height: 200px;
+	width: 250px;
+	float:left;
+}
+
+#game3 h3 {
+	text-align: right;
+	margin-bottom: 5px;
+	margin-right: 25px;
+}

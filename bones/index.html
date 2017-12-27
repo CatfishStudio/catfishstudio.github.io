@@ -17,26 +17,25 @@
     <div id="content"></div>
     <div id="vk_ads_75957"></div>
     <script type="text/javascript">
-        setTimeout(function() {
+      setTimeout(function() {
         var adsParams = {"ad_unit_id":75957,"ad_unit_hash":"1b45c35128829f9b1de08ef93d5ce56c"};
         function vkAdsInit() {
-            VK.Widgets.Ads('vk_ads_75957', {}, adsParams);
+          VK.Widgets.Ads('vk_ads_75957', {}, adsParams);
         }
         if (window.VK && VK.Widgets) {
-            vkAdsInit();
+          vkAdsInit();
         } else {
-            if (!window.vkAsyncInitCallbacks) window.vkAsyncInitCallbacks = [];
-            vkAsyncInitCallbacks.push(vkAdsInit);
-            var protocol = ((location.protocol === 'https:') ? 'https:' : 'http:');
-            var adsElem = document.getElementById('vk_ads_75957');
-            var scriptElem = document.createElement('script');
-            scriptElem.type = 'text/javascript';
-            scriptElem.async = true;
-            scriptElem.src = protocol + '//vk.com/js/api/openapi.js?122';
-            adsElem.parentNode.insertBefore(scriptElem, adsElem.nextSibling);
+          if (!window.vkAsyncInitCallbacks) window.vkAsyncInitCallbacks = [];
+          vkAsyncInitCallbacks.push(vkAdsInit);
+          var protocol = ((location.protocol === 'https:') ? 'https:' : 'http:');
+          var adsElem = document.getElementById('vk_ads_75957');
+          var scriptElem = document.createElement('script');
+          scriptElem.type = 'text/javascript';
+          scriptElem.async = true;
+          scriptElem.src = protocol + '//vk.com/js/api/openapi.js?151';
+          adsElem.parentNode.insertBefore(scriptElem, adsElem.nextSibling);
         }
-        }, 0);
+      }, 0);
     </script>
-    
 </body>
 </html>

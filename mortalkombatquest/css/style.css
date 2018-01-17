@@ -4,3 +4,9 @@
     top: 150px;
     left: 860px;
 }
+
+#RemoveLoadGame {
+	position: absolute;
+	top: 176px;
+	left: 0px;
+}

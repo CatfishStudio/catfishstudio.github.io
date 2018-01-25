@@ -1,0 +1,171 @@
+{"frames": {
+
+"akuma_card.png":
+{
+	"frame": {"x":0,"y":0,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"alex_card.png":
+{
+	"frame": {"x":190,"y":0,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"chun_li_card.png":
+{
+	"frame": {"x":380,"y":0,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"dudley_card.png":
+{
+	"frame": {"x":570,"y":0,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"elena_card.png":
+{
+	"frame": {"x":760,"y":0,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"gill_card.png":
+{
+	"frame": {"x":0,"y":273,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"hugo_card.png":
+{
+	"frame": {"x":190,"y":273,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"ibuki_card.png":
+{
+	"frame": {"x":380,"y":273,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"ken_card.png":
+{
+	"frame": {"x":570,"y":273,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"makoto_card.png":
+{
+	"frame": {"x":760,"y":273,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"necro_card.png":
+{
+	"frame": {"x":0,"y":546,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"oro_card.png":
+{
+	"frame": {"x":190,"y":546,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"q_card.png":
+{
+	"frame": {"x":380,"y":546,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"remy_card.png":
+{
+	"frame": {"x":570,"y":546,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"ryu_card.png":
+{
+	"frame": {"x":760,"y":546,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"sean_card.png":
+{
+	"frame": {"x":0,"y":819,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"twelve_card.png":
+{
+	"frame": {"x":190,"y":819,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"urien_card.png":
+{
+	"frame": {"x":380,"y":819,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"yang_card.png":
+{
+	"frame": {"x":570,"y":819,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+},
+"yun_card.png":
+{
+	"frame": {"x":760,"y":819,"w":190,"h":273},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":190,"h":273},
+	"sourceSize": {"w":190,"h":275}
+}
+}, 
+"meta": {
+	"app": "http://www.texturepacker.com",
+	"version": "1.0",
+	"image": "BigCards.png",
+	"format": "RGBA8888",
+	"size": {"w":950,"h":1092}
+}
+}

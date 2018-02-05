@@ -50,6 +50,28 @@ section{
 	font: 12pt Georgia, 'Times New Roman', Times, serif;
 }
 
+section a{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+section a:link {
+  border-bottom: 1px dashed; 
+}
+section a:visited {
+  /*color: #EF7D55;*/
+  /*color: #154088;*/
+}
+section a:hover {
+  color: #154088; 
+  /*color: #497DDD;*/
+  border-bottom: .07em solid;
+}
+section a:active {
+  color: #497DDD; 
+  border-bottom: 1px dashed;
+}
+
 footer{
 	display: block;
 	font: 8pt sans-serif;
@@ -69,28 +91,6 @@ table{
 	position: relative;
 	top: -100px;
 	margin-left: 5%;
-}
-
-a{
-    text-decoration: none;
-    color: #FFFFFF;
-}
-
-a:link {
-  border-bottom: 1px dashed; 
-}
-a:visited {
-  /*color: #EF7D55;*/
-  /*color: #154088;*/
-}
-a:hover {
-  color: #154088; 
-  /*color: #497DDD;*/
-  border-bottom: .07em solid;
-}
-a:active {
-  color: #497DDD; 
-  border-bottom: 1px dashed;
 }
 
 #waves{

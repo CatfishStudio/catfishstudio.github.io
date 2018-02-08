@@ -22,6 +22,7 @@ var StreetFighterCards;
             this.state.add(StreetFighterCards.Preloader.Name, StreetFighterCards.Preloader, false);
             this.state.add(StreetFighterCards.Menu.Name, StreetFighterCards.Menu, false);
             this.state.add(StreetFighterCards.ChoiceFighter.Name, StreetFighterCards.ChoiceFighter, false);
+            this.state.add(StreetFighterCards.Tournament.Name, StreetFighterCards.Tournament, false);
         }
         Game.getInstance = function () {
             if (StreetFighterCards.Game.instance === null) {
@@ -42,6 +43,8 @@ var Constants = (function () {
     }
     Constants.GAME_WIDTH = 800;
     Constants.GAME_HEIGHT = 600;
+    Constants.CARD_TYPE_ATTACK = 'card_type_attack';
+    Constants.CARD_TYPE_DEFENSE = 'card_type_defense';
     Constants.BUTTON_PLAY = 'button_play';
     Constants.BUTTON_SETTINGS = 'button_settings';
     Constants.BUTTON_SETTINGS_CLOSE = 'button_settings_close';
@@ -72,6 +75,7 @@ var Images = (function () {
     Images.TutorialImage = 'tutorial.png';
     Images.ButtonOff = 'buttons_off.png';
     Images.ButtonOn = 'buttons_on.png';
+    Images.BackgroundTournament = 'tournament/background_tournament.jpg';
     Images.preloadList = [
         Images.MenuImage,
         Images.BorderImage,
@@ -81,6 +85,7 @@ var Images = (function () {
         Images.TutorialImage,
         Images.ButtonOff,
         Images.ButtonOn,
+        Images.BackgroundTournament,
     ];
     return Images;
 }());
@@ -366,9 +371,9 @@ var Fabrique;
             var button = new Phaser.Button(this.game, 0, 0, Sheet.ButtonStyle1, this.onButtonClick, this, 1, 2);
             button.name = name;
             this.addChild(button);
-            var textBack = new Phaser.Text(this.game, textX - 1, 14, text, { font: "16px Arial Black", fill: "#FFFFFF" });
+            var textBack = new Phaser.Text(this.game, textX - 1, 14, text, { font: "bold 16px Arial", fill: "#FFFFFF" });
             this.addChild(textBack);
-            var textFront = new Phaser.Text(this.game, textX, 15, text, { font: "16px Arial Black", fill: "#9B372C" });
+            var textFront = new Phaser.Text(this.game, textX, 15, text, { font: "bold 16px Arial", fill: "#9B372C" });
             this.addChild(textFront);
         };
         ButtonOrange.prototype.onButtonClick = function (event) {
@@ -398,7 +403,7 @@ var Fabrique;
             button.events.onInputOut.add(this.onButtonInputOut, this);
             button.events.onInputOver.add(this.onButtonInputOver, this);
             this.addChild(button);
-            this.textButton = new Phaser.Text(this.game, textX, 20, text, { font: "16px Arial Black", fill: "#666666" });
+            this.textButton = new Phaser.Text(this.game, textX, 20, text, { font: "bold 16px Arial", fill: "#666666" });
             this.addChild(this.textButton);
         };
         ButtonComix.prototype.onButtonClick = function (event) {
@@ -462,10 +467,14 @@ var Fabrique;
             this.init();
         }
         FighterCard.prototype.init = function () {
-            this.damageText = this.game.add.text(5, 240, "5%", { font: "18px Arial", fill: "#FFFFFF", align: "left" });
-            this.addChild(this.damageText);
-            this.defenseText = this.game.add.text(5, 45, "10%", { font: "18px Arial", fill: "#FFFFFF", align: "left" });
+            this.defenseText = this.game.add.text(13, 13, "500", { font: "bold 18px Times New Roman", fill: "#FFFFFF", align: "left" });
             this.addChild(this.defenseText);
+            this.healthText = this.game.add.text(150, 13, "200", { font: "bold 18px Times New Roman", fill: "#FFFFFF", align: "left" });
+            this.addChild(this.healthText);
+            this.damageText = this.game.add.text(11, 242, "300", { font: "bold 18px Times New Roman", fill: "#D83900", align: "left" });
+            this.addChild(this.damageText);
+            this.energyText = this.game.add.text(157, 242, "10", { font: "bold 18px Times New Roman", fill: "#0026FF", align: "left" });
+            this.addChild(this.energyText);
         };
         return FighterCard;
     }(Phaser.Sprite));
@@ -598,6 +607,7 @@ var StreetFighterCards;
                     */
                     _this.game.load.spritesheet(Sheet.preloadList[0], 'assets/images/' + Sheet.preloadList[0], 186, 46);
                     _this.game.load.spritesheet(Sheet.preloadList[1], 'assets/images/' + Sheet.preloadList[1], 187, 56);
+                    _this.game.load.json('deck1', 'assets/data/deck1.json');
                 }
             });
         };
@@ -698,10 +708,19 @@ var StreetFighterCards;
             this.buttonInvate = new ButtonOrange(this.game, this.groupButtons, Constants.BUTTON_INVATE, 'ПРИГЛАСИТЬ', 30, 0, 100);
             this.buttonSettings.event.add(this.onButtonClick, this);
         };
+        Menu.prototype.dataInit = function () {
+            var deck1 = this.game.cache.getJSON('deck1').Deck;
+            console.log(deck1);
+            for (var key in deck1.cards) {
+                console.log(key);
+                console.log(deck1.cards[key].type);
+            }
+        };
         Menu.prototype.onButtonClick = function (event) {
             switch (event.name) {
                 case Constants.BUTTON_PLAY:
                     {
+                        this.dataInit();
                         this.game.state.start(StreetFighterCards.ChoiceFighter.Name, true, false);
                         break;
                     }
@@ -802,6 +821,11 @@ var StreetFighterCards;
         };
         ChoiceFighter.prototype.onButtonClick = function (event) {
             switch (event.name) {
+                case Constants.BUTTON_SELECT:
+                    {
+                        this.game.state.start(StreetFighterCards.Tournament.Name, true, false);
+                        break;
+                    }
                 case Constants.BUTTON_BACK:
                     {
                         this.game.state.start(StreetFighterCards.Menu.Name, true, false);
@@ -826,6 +850,27 @@ var StreetFighterCards;
     }(Phaser.State));
     StreetFighterCards.ChoiceFighter = ChoiceFighter;
 })(StreetFighterCards || (StreetFighterCards = {}));
+var StreetFighterCards;
+(function (StreetFighterCards) {
+    var Tournament = (function (_super) {
+        __extends(Tournament, _super);
+        function Tournament() {
+            _super.call(this);
+            this.name = StreetFighterCards.Menu.Name;
+        }
+        Tournament.prototype.create = function () {
+            this.group = new Phaser.Group(this.game, this.stage);
+            this.background = new Phaser.Sprite(this.game, 0, 0, Images.BackgroundTournament);
+            this.group.addChild(this.background);
+        };
+        Tournament.prototype.shutdown = function () {
+            this.group.removeAll();
+        };
+        Tournament.Name = "tournament";
+        return Tournament;
+    }(Phaser.State));
+    StreetFighterCards.Tournament = Tournament;
+})(StreetFighterCards || (StreetFighterCards = {}));
 /// <reference path="..\node_modules\phaser-ce\typescript\phaser.d.ts" />
 /// <reference path="Data\Constants.ts" />
 /// <reference path="Data\Config.ts" />
@@ -845,4 +890,5 @@ var StreetFighterCards;
 /// <reference path="States\Preloader.ts" />
 /// <reference path="States\Menu.ts" />
 /// <reference path="States\ChoiceFighter.ts" />
+/// <reference path="States\Tournament.ts" />
 /// <reference path="app.ts" /> 

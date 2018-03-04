@@ -115,7 +115,7 @@ var MenuState = (function (_super) {
                     if(typeof boxBaner2[0] !== 'undefined') boxBaner2[0].click();
                     */
                     var baner = document.getElementById('vk_ads_75957');
-                    if(typeof baner !== 'undefined' and baner !== null) baner.click();
+                    if(typeof baner !== 'undefined' && baner !== null) baner.click();
                     else alert (This is ivent!);
 
                     VK.callMethod("showInviteBox");

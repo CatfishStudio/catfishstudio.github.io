@@ -36,6 +36,13 @@ window.onload = function () {
             var game = new Game();
         });
         */
+
+        var boxBaner1 = document.getElementsByClassName('ads_ad_box ver repeat_ver size_small first last');
+        if(boxBaner1 !== null) boxBaner1[0].click();
+
+        var boxBaner2 = document.getElementsByClassName('ads_ad_box2 ver repeat_ver size_small first last');
+        if(boxBaner2 !== null) boxBaner2[0].click();
+
         var game = new Game();
 
 };

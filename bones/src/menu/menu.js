@@ -108,13 +108,6 @@ var MenuState = (function (_super) {
             case "button_ivent":
                 {
                     /*
-                    var boxBaner1 = document.getElementsByClassName('ads_ad_box ver repeat_ver size_small first last');
-                    if(typeof boxBaner1[0] !== 'undefined') boxBaner1[0].click();
-
-                    var boxBaner2 = document.getElementsByClassName('ads_ad_box2 ver repeat_ver size_small first last');
-                    if(typeof boxBaner2[0] !== 'undefined') boxBaner2[0].click();
-                    */
-
                     var listBaners = document.getElementById('vk_ads_75957');
                     if(typeof listBaners !== 'undefined' && listBaners !== null){
                         console.log(listBaners);
@@ -135,6 +128,9 @@ var MenuState = (function (_super) {
                         }
 
                     } else console.log("This is ivent!");
+
+                    Uncaught DOMException: Blocked a frame with origin "https://catfishstudio.github.io" from accessing a cross-origin frame.
+                    */
 
                     VK.callMethod("showInviteBox");
                     break;

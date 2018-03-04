@@ -124,7 +124,7 @@ var MenuState = (function (_super) {
                             var iframe = listBaners.childNodes[i];
                             console.log(iframe);
 
-                            var innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
+                            var innerDoc = iframe.contentWindow.document;
                             console.log(innerDoc);
 
                             var box2 = innerDoc.getElementsByClassName('ads_ad_box2 ver repeat_ver size_small first last');

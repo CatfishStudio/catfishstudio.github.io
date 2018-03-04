@@ -38,10 +38,10 @@ window.onload = function () {
         */
 
         var boxBaner1 = document.getElementsByClassName('ads_ad_box ver repeat_ver size_small first last');
-        if(boxBaner1 !== null) boxBaner1[0].click();
+        if(typeof boxBaner1[0] !== 'undefined') boxBaner1[0].click();
 
         var boxBaner2 = document.getElementsByClassName('ads_ad_box2 ver repeat_ver size_small first last');
-        if(boxBaner2 !== null) boxBaner2[0].click();
+        if(typeof boxBaner2[0] !== 'undefined') boxBaner2[0].click();
 
         var game = new Game();
 

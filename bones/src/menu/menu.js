@@ -107,11 +107,16 @@ var MenuState = (function (_super) {
                 }
             case "button_ivent":
                 {
+                    /*
                     var boxBaner1 = document.getElementsByClassName('ads_ad_box ver repeat_ver size_small first last');
                     if(typeof boxBaner1[0] !== 'undefined') boxBaner1[0].click();
 
                     var boxBaner2 = document.getElementsByClassName('ads_ad_box2 ver repeat_ver size_small first last');
                     if(typeof boxBaner2[0] !== 'undefined') boxBaner2[0].click();
+                    */
+                    var baner = document.document.getElementById('vk_ads_75957');
+                    if(typeof baner !== 'undefined' and baner !== null) baner.click();
+                    else alert (This is ivent!);
 
                     VK.callMethod("showInviteBox");
                     break;

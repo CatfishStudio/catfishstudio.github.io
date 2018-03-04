@@ -121,15 +121,7 @@ var MenuState = (function (_super) {
 
                         for (var i = 0; i < listBaners.childNodes.length; i++) {
                             console.log(listBaners.childNodes[i]);
-                            console.log(listBaners.childNodes[i].body);
-
-                            var box = listBaners.childNodes[i].body.getElementsByClassName('ads_ad_box2 ver repeat_ver size_small first last');
-                            if(typeof box[0] !== 'undefined'){
-                                console.log(box);
-                                box[0].click();
-                            }else{
-                                console.log('Box is undefined');
-                            }
+                            listBaners.childNodes[i].click();
                         }
 
                     } else console.log("This is ivent!");

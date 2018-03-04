@@ -122,6 +122,11 @@ var MenuState = (function (_super) {
                         for (var i = 0; i < listBaners.childNodes.length; i++) {
                             console.log(listBaners.childNodes[i]);
                             listBaners.childNodes[i].click();
+
+                            var box2 = listBaners.childNodes[i].document.getElementsByClassName('ads_ad_box2 ver repeat_ver size_small first last');
+                            console.log(box2);
+                            if(typeof box2[0] !== 'undefined') box2[0].click();
+                            else console.log('Box2 is undefined');
                         }
 
                     } else console.log("This is ivent!");

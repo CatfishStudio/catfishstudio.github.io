@@ -53,6 +53,7 @@
 			function onAdsReady(adman) {
 			  adman.onStarted(function () { admanStat(app_id, user_id); });
 			  adman.start('preroll');
+			  console.log("PREROLL WINDOW START...");
 			};
 
 			function onNoAds() {};

@@ -9,4 +9,12 @@
 	position: absolute;
 	top: 176px;
 	left: 0px;
+	width: 860px;
+	height: 730px;
+}
+
+#altContent{
+	position: absolute;
+	width: 860px;
+	height: 730px;
 }

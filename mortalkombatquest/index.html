@@ -6,6 +6,32 @@
 	<title>RemoveLoadGame</title>
 	<meta name="description" content="" />
 	
+	<script src="//vk.com/js/api/xd_connection.js?2"></script>
+	<script src="https://ad.mail.ru/static/admanhtml/rbadman-html5.min.js"></script>
+	<script src="https://vk.com/js/api/adman_init.js"></script>
+	<script src="https://js.appscentrum.com/scr/preroll.js"></script>
+	<script type="text/javascript">
+		window.addEventListener('load', function() {
+
+			var user_id = null;
+			var app_id = 4759608;
+
+			admanInit({
+				user_id: user_id,
+				app_id: app_id,
+				type: 'preloader'
+			}, onAdsReady, onNoAds);
+
+			function onAdsReady(adman) {
+				adman.onStarted(function () { admanStat(app_id, user_id); });
+				adman.start('preroll');
+			};
+
+			function onNoAds() {};
+		});
+	</script>
+    
+
 	<script src="js/swfobject.js"></script>
 	<script>
 		var flashvars = {

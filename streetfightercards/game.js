@@ -24,11 +24,6 @@ var StreetFighterCards;
             this.state.add(StreetFighterCards.ChoiceFighter.Name, StreetFighterCards.ChoiceFighter, false);
             this.state.add(StreetFighterCards.Tournament.Name, StreetFighterCards.Tournament, false);
             this.state.add(StreetFighterCards.Level.Name, StreetFighterCards.Level, false);
-			
-			/* Инициализация ВКонтакте */
-			VK.init({
-				apiId: 5883565
-			});
         }
         Game.getInstance = function () {
             if (StreetFighterCards.Game.instance === null) {

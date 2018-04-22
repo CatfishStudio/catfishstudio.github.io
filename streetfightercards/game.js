@@ -882,7 +882,7 @@ var SocialVK = (function () {
     SocialVK.vkWallPost = function () {
         if (GameData.Data.progressIndex > 0) {
             var postPers = GameData.Data.personages[GameData.Data.tournamentListIds[GameData.Data.progressIndex - 1]];
-			VK.api("wall.post", {message: 'Я одержал победу в схватке с ' + postPers.name + ' в игре Street Fighter Cards.\nДрузья присоединяйтесь к игре https://vk.com/app5883565', attachments: 'photo-62618339_456239021'}); 
+			VK.api("wall.post", {message: 'Я одержал победу в схватке с ' + postPers.name + ' в игре Street Fighter Cards.\nДрузья присоединяйтесь к игре https://vk.com/app5883565', attachments: 'photo-62618339_456239021'});
         }
     };
     SocialVK.vkWallPostWin = function () {
@@ -902,10 +902,10 @@ var SocialVK = (function () {
         Utilits.Data.debugLog('VK SAVE DATA:', jsonData);
     };
     SocialVK.onVkDataSet = function (response) {
-        Utilits.Data.debugLog('VK SET DATA:', response);
+        //Utilits.Data.debugLog('VK SET DATA:', response);
     };
     SocialVK.onVkSetDataError = function (response) {
-        console.error('VK SET DATA ERROR:', response);
+        //console.error('VK SET DATA ERROR:', response);
     };
     /**
      * Загрузка данных с сервера VK
@@ -2618,6 +2618,7 @@ var StreetFighterCards;
             this.buttonInvate.event.add(this.onButtonClick, this);
         };
         Menu.prototype.onVkDataGet = function (response) {
+            Utilits.Data.debugLog('ON VK DATA GET', response);
             SocialVK.LoadData(response.toString());
             if (GameData.Data.fighterIndex >= 0 && GameData.Data.progressIndex < 20) {
                 this.buttonContinue = new ButtonOrange(this.game, this.groupButtons, Constants.BUTTON_CONTINUE, 'ПРОДОЛЖИТЬ', 37, 0, -50);

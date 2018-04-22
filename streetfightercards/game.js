@@ -330,7 +330,7 @@ var Config = (function () {
     Config.settingSound = true;
     Config.settingMusic = true;
     Config.settingTutorial = true;
-    Config.buildDev = false;
+    Config.buildDev = true;
     return Config;
 }());
 var Images = (function () {
@@ -472,6 +472,14 @@ var Sounds = (function () {
     Sounds.ButtonSound = 'button';
     Sounds.CardFlipSound1 = 'flip1';
     Sounds.CardFlipSound2 = 'flip2';
+    Sounds.DamageManSound = 'sound_damage_man';
+    Sounds.DamageWomanSound = 'sound_damage_woman';
+    Sounds.HitHandSound = 'sound_hit_hand';
+    Sounds.HitLegSound = 'sound_hin_leg';
+    Sounds.FightersReadySound = 'sound_fighters_ready';
+    Sounds.KoSound = 'sound_ko';
+    Sounds.YouLoseSound = 'sound_you_lose';
+    Sounds.YouWinSound = 'sound_you_win';
     Sounds.preloadList = [
         Sounds.MenuMusic1,
         Sounds.MenuMusic2,
@@ -482,6 +490,14 @@ var Sounds = (function () {
         Sounds.ButtonSound,
         Sounds.CardFlipSound1,
         Sounds.CardFlipSound2,
+        Sounds.DamageManSound,
+        Sounds.DamageWomanSound,
+        Sounds.HitHandSound,
+        Sounds.HitLegSound,
+        Sounds.FightersReadySound,
+        Sounds.KoSound,
+        Sounds.YouLoseSound,
+        Sounds.YouWinSound
     ];
     return Sounds;
 }());
@@ -751,9 +767,10 @@ var GameData;
             GameData.Data.tournamentListIds.push(5); // boss
             Utilits.Data.debugLog("Tournament List:", GameData.Data.tournamentListIds);
         };
+        // Данные которые должны храниться на сервере
         Data.fighterIndex = -1; // id выбранного игроком персонажа (в сохранение)
         Data.progressIndex = -1; // индекс прогресса в игре (в сохранение)
-        Data.comixIndex = 0; // индекс комикса
+        Data.comixIndex = 0; // индекс комикса (в сохранение)
         Data.fighters = [
             [0, 'Akuma', 'akuma_card.png', 'tournament/akuma.png', 'icons/akuma.png'],
             [1, 'Alex', 'alex_card.png', 'tournament/alex.png', 'icons/alex.png'],
@@ -865,11 +882,57 @@ var SocialVK = (function () {
     SocialVK.vkWallPost = function () {
         if (GameData.Data.progressIndex > 0) {
             var postPers = GameData.Data.personages[GameData.Data.tournamentListIds[GameData.Data.progressIndex - 1]];
-			VK.api("wall.post", {message: 'Я обержал победу в схватке с ' + postPers.name + ' в игре Street Fighter Cards. Друзья присоединяйтесь к игре https://vk.com/app5883565', attachments: 'photo-62618339_456239021'}); 
+			VK.api("wall.post", {message: 'Я одержал победу в схватке с ' + postPers.name + ' в игре Street Fighter Cards.\nДрузья присоединяйтесь к игре https://vk.com/app5883565', attachments: 'photo-62618339_456239021'}); 
         }
     };
     SocialVK.vkWallPostWin = function () {
-        VK.api("wall.post", {message: 'Примите поздравления! Вы победили всех соперников в игре Street Fighter Cards. Друзья присоединяйтесь к игре https://vk.com/app5883565', attachments: 'photo-62618339_456239022'}); 
+        VK.api("wall.post", {message: 'Примите поздравления! Вы победили всех соперников в игре Street Fighter Cards.\nДрузья присоединяйтесь к игре https://vk.com/app5883565', attachments: 'photo-62618339_456239022'}); 
+    };
+    /**
+     * Сохранение данных на сервер VK
+     */
+    SocialVK.vkSaveData = function () {
+        var jsonData = '{';
+        jsonData += '"fi": ' + GameData.Data.fighterIndex.toString() + ',';
+        jsonData += '"pi": ' + GameData.Data.progressIndex.toString() + ',';
+        jsonData += '"ci": ' + GameData.Data.comixIndex.toString() + ',';
+        jsonData += '"list": [' + GameData.Data.tournamentListIds.toString() + ']';
+        jsonData += '}';
+        VK.api('storage.set', { key:'sfc_data', value: jsonData, global:0 }, SocialVK.onVkDataSet, SocialVK.onVkSetDataError);
+        Utilits.Data.debugLog('VK SAVE DATA:', jsonData);
+    };
+    SocialVK.onVkDataSet = function (response) {
+        Utilits.Data.debugLog('VK SET DATA:', response);
+    };
+    SocialVK.onVkSetDataError = function (response) {
+        console.error('VK SET DATA ERROR:', response);
+    };
+    /**
+     * Загрузка данных с сервера VK
+     */
+    SocialVK.vkLoadData = function (onVkDataGet) {
+        VK.api('storage.get', { key:'sfc_data' }, onVkDataGet, SocialVK.onVkGetDataError);
+    };
+    SocialVK.onVkGetDataError = function (response) {
+        console.error('VK GET DATA ERROR:', response);
+    };
+    SocialVK.LoadData = function (jsonData) {
+        GameData.Data.comixIndex = 0;
+        GameData.Data.progressIndex = -1;
+        GameData.Data.fighterIndex = -1;
+        GameData.Data.tournamentListIds = [];
+        JSON.parse(jsonData, function (key, value) {
+            if (key === 'fi')
+                GameData.Data.fighterIndex = value;
+            if (key === 'pi')
+                GameData.Data.progressIndex = value;
+            if (key === 'ci')
+                GameData.Data.comixIndex = value;
+            if (key === 'list')
+                GameData.Data.tournamentListIds = value;
+            return value;
+        });
+        Utilits.Data.debugLog('LOAD DATA COMPLETE', jsonData);
     };
     return SocialVK;
 }());
@@ -2540,9 +2603,12 @@ var StreetFighterCards;
             this.groupButtons = new Phaser.Group(this.game, this.groupMenu);
             this.groupButtons.x = 300;
             this.groupButtons.y = 300;
-            if (GameData.Data.fighterIndex >= 0) {
+            if (GameData.Data.fighterIndex >= 0 && GameData.Data.progressIndex < 20) {
                 this.buttonContinue = new ButtonOrange(this.game, this.groupButtons, Constants.BUTTON_CONTINUE, 'ПРОДОЛЖИТЬ', 37, 0, -50);
                 this.buttonContinue.event.add(this.onButtonClick, this);
+            }
+            else {
+                SocialVK.vkLoadData(this.onVkDataGet);
             }
             this.buttonStart = new ButtonOrange(this.game, this.groupButtons, Constants.BUTTON_PLAY, 'НАЧАТЬ ИГРУ', 35, 0, 0);
             this.buttonStart.event.add(this.onButtonClick, this);
@@ -2550,6 +2616,13 @@ var StreetFighterCards;
             this.buttonSettings.event.add(this.onButtonClick, this);
             this.buttonInvate = new ButtonOrange(this.game, this.groupButtons, Constants.BUTTON_INVATE, 'ПРИГЛАСИТЬ', 35, 0, 100);
             this.buttonInvate.event.add(this.onButtonClick, this);
+        };
+        Menu.prototype.onVkDataGet = function (response) {
+            SocialVK.LoadData(response.toString());
+            if (GameData.Data.fighterIndex >= 0 && GameData.Data.progressIndex < 20) {
+                this.buttonContinue = new ButtonOrange(this.game, this.groupButtons, Constants.BUTTON_CONTINUE, 'ПРОДОЛЖИТЬ', 37, 0, -50);
+                this.buttonContinue.event.add(this.onButtonClick, this);
+            }
         };
         Menu.prototype.settingsCreate = function () {
             this.settings = new Settings(this.game, this.groupMenu);
@@ -2564,6 +2637,10 @@ var StreetFighterCards;
             switch (event.name) {
                 case Constants.BUTTON_PLAY:
                     {
+                        GameData.Data.comixIndex = 0;
+                        GameData.Data.progressIndex = -1;
+                        GameData.Data.fighterIndex = -1;
+                        GameData.Data.tournamentListIds = [];
                         this.game.state.start(StreetFighterCards.ChoiceFighter.Name, true, false);
                         break;
                     }
@@ -2738,6 +2815,7 @@ var StreetFighterCards;
             }
             this.createComix();
             this.playMusic();
+            SocialVK.vkSaveData();
         };
         Tournament.prototype.shutdown = function () {
             this.icons.forEach(function (icon) {
@@ -2921,6 +2999,16 @@ var StreetFighterCards;
         }
         Level.prototype.create = function () {
             this.battleEnd = false;
+            var playerName = GameData.Data.personages[GameData.Data.fighterIndex].name;
+            var opponentName = GameData.Data.personages[GameData.Data.tournamentListIds[GameData.Data.progressIndex]].name;
+            if (playerName === 'Chun Li' || playerName === 'Elena' || playerName === 'Ibuki')
+                this.playerVoiceWoman = true;
+            else
+                this.playerVoiceWoman = false;
+            if (opponentName === 'Chun Li' || opponentName === 'Elena' || opponentName === 'Ibuki')
+                this.opponentVoiceWoman = true;
+            else
+                this.opponentVoiceWoman = false;
             this.group = new Phaser.Group(this.game, this.stage);
             this.boardGroup = new Phaser.Group(this.game, this.stage);
             this.borderGroup = new Phaser.Group(this.game, this.stage);
@@ -2932,7 +3020,7 @@ var StreetFighterCards;
             this.playerDeck = [];
             this.playerHand = [];
             this.playerSlots = [null, null, null];
-            this.opponentLife = 10; //GameData.Data.personages[GameData.Data.tournamentListIds[GameData.Data.progressIndex]].life;
+            this.opponentLife = GameData.Data.personages[GameData.Data.tournamentListIds[GameData.Data.progressIndex]].life;
             this.opponentEnergy = this.energyCount;
             this.opponentDeck = [];
             this.opponentHand = [];
@@ -3060,39 +3148,6 @@ var StreetFighterCards;
                     }
                 default:
                     break;
-            }
-        };
-        Level.prototype.playMusic = function () {
-            GameData.Data.musicSelected++;
-            if (GameData.Data.musicSelected > 4)
-                GameData.Data.musicSelected = 2;
-            GameData.Data.music.stop();
-            GameData.Data.music.key = GameData.Data.musicList[GameData.Data.musicSelected][0];
-            GameData.Data.music.loop = true;
-            GameData.Data.music.volume = GameData.Data.musicList[GameData.Data.musicSelected][1];
-            if (Config.settingMusic) {
-                GameData.Data.music.play();
-            }
-        };
-        Level.prototype.playButtonSound = function () {
-            if (Config.settingSound) {
-                GameData.Data.buttonSound.loop = false;
-                GameData.Data.buttonSound.volume = 0.5;
-                GameData.Data.buttonSound.play();
-            }
-        };
-        Level.prototype.playFlipUpSound = function () {
-            if (Config.settingSound) {
-                GameData.Data.flipUpSound.loop = false;
-                GameData.Data.flipUpSound.volume = 0.5;
-                GameData.Data.flipUpSound.play();
-            }
-        };
-        Level.prototype.playFlipDownSound = function () {
-            if (Config.settingSound) {
-                GameData.Data.flipDownSound.loop = false;
-                GameData.Data.flipDownSound.volume = 0.5;
-                GameData.Data.flipDownSound.play();
             }
         };
         Level.prototype.createBackground = function () {
@@ -3225,6 +3280,7 @@ var StreetFighterCards;
         Level.prototype.showAnimFight = function () {
             var fight = new AnimationFight(this.game, 200, 50);
             this.borderGroup.addChild(fight);
+            this.playVoiceReady();
         };
         // ДЕЙСТВИЕ: Взять карту
         Level.prototype.onDragStart = function (sprite, pointer, x, y) {
@@ -3500,7 +3556,9 @@ var StreetFighterCards;
                 this.implementHits();
             }
         };
-        // ВЫПОЛНЕНИЕ УДАРОВ
+        /**
+         * ВЫПОЛНЕНИЕ УДАРОВ
+         */
         Level.prototype.implementHits = function () {
             var _this = this;
             Utilits.Data.debugLog("IMPLEMENTATION: cards [slot/steep]:", [this.totalHits, this.steepHits]);
@@ -3589,6 +3647,7 @@ var StreetFighterCards;
                     }
                     this.playerAnimation.hitAnimation(playerCard.cardData);
                     this.correctPositionFighterAnimation();
+                    this.playSoundPlayerHit(playerCard.cardData);
                 }
                 else {
                     // #3: слот игрока пустой, стол оппонента не пустой
@@ -3602,6 +3661,7 @@ var StreetFighterCards;
                         }
                         this.opponentAnimation.hitAnimation(opponentCard.cardData); // оппонент выполняет атаку
                         this.correctPositionFighterAnimation();
+                        this.playSoundOpponentHit(opponentCard.cardData);
                     }
                     else {
                         // #4: оба слота не пустые
@@ -3614,6 +3674,8 @@ var StreetFighterCards;
                                 this.playerAnimation.hitAnimation(playerCard.cardData); // выполняется карта игрока
                                 this.opponentAnimation.hitAnimation(opponentCard.cardData); // выполняется карта оппонента
                                 this.correctPositionFighterAnimation();
+                                this.playSoundPlayerHit(playerCard.cardData);
+                                this.playSoundOpponentHit(opponentCard.cardData);
                             }
                             else {
                                 // блок (игрок) - блок (оппонент)
@@ -3622,6 +3684,8 @@ var StreetFighterCards;
                                 this.playerAnimation.hitAnimation(playerCard.cardData); // выполняется карта игрока
                                 this.opponentAnimation.hitAnimation(opponentCard.cardData); // выполняется карта оппонента
                                 this.correctPositionFighterAnimation();
+                                this.playSoundPlayerHit(playerCard.cardData);
+                                this.playSoundOpponentHit(opponentCard.cardData);
                             }
                             this.damageCalculation(Constants.PLAYER, opponentCard, playerCard);
                             this.damageCalculation(Constants.OPPONENT, playerCard, opponentCard);
@@ -3647,17 +3711,21 @@ var StreetFighterCards;
                 this.targetDamage = null;
                 this.playerAnimation.damageAnimation();
                 this.correctPositionFighterAnimation();
+                this.playSoundPlayerDamage();
             }
             else if (this.targetDamage === Constants.OPPONENT) {
                 this.targetDamage = null;
                 this.opponentAnimation.damageAnimation();
                 this.correctPositionFighterAnimation();
+                this.playSoundOpponentDamage();
             }
             else if (this.targetDamage === Constants.PLAYER_AND_OPPONENT) {
                 this.targetDamage = null;
                 this.playerAnimation.damageAnimation();
                 this.opponentAnimation.damageAnimation();
                 this.correctPositionFighterAnimation();
+                this.playSoundPlayerDamage();
+                this.playSoundOpponentDamage();
             }
             Utilits.Data.debugLog('ANIMATION steep hits:', this.steepHits);
             if (this.steepHits >= 2) {
@@ -3745,20 +3813,28 @@ var StreetFighterCards;
             this.opponentEnergy = this.energyCount;
             this.opponentProgressBar.setEnergy(this.opponentEnergy);
         };
-        // Завершение битвы
+        /**
+         * Завершение битвы
+         */
         Level.prototype.endBattle = function () {
             this.cardsDragAndDrop(false);
             var ko = new AnimationKO(this.game, 315, 100);
             this.borderGroup.addChild(ko);
             if (this.playerLife > 0 && this.opponentLife <= 0) {
                 GameData.Data.progressIndex++;
+                this.playVoiceYouWin();
+            }
+            else {
+                this.playVoiceYouLose();
             }
             setTimeout(function () {
                 this.game.state.start(StreetFighterCards.Tournament.Name, true, false);
                 Utilits.Data.debugLog("BATTLE", "END!");
             }.bind(this), 3000);
         };
-        // Обучение и подсказки
+        /**
+         * Обучение и подсказки
+         */
         Level.prototype.tutorHidden = function () {
             if (this.tutorial !== null && this.tutorial !== undefined) {
                 this.tutorial.hidden();
@@ -3767,6 +3843,140 @@ var StreetFighterCards;
         Level.prototype.tutorMessage = function (message) {
             if (this.tutorial !== null && this.tutorial !== undefined) {
                 this.tutorial.showTemporarily(message);
+            }
+        };
+        /**
+         * Звуки и музыка
+         */
+        Level.prototype.playMusic = function () {
+            GameData.Data.musicSelected++;
+            if (GameData.Data.musicSelected > 4)
+                GameData.Data.musicSelected = 2;
+            GameData.Data.music.stop();
+            GameData.Data.music.key = GameData.Data.musicList[GameData.Data.musicSelected][0];
+            GameData.Data.music.loop = true;
+            GameData.Data.music.volume = GameData.Data.musicList[GameData.Data.musicSelected][1];
+            if (Config.settingMusic) {
+                GameData.Data.music.play();
+            }
+        };
+        Level.prototype.playVoiceReady = function () {
+            if (GameData.Data.voiceSound === undefined || GameData.Data.voiceSound === null) {
+                GameData.Data.voiceSound = this.game.add.audio(Sounds.FightersReadySound);
+            }
+            GameData.Data.voiceSound.loop = false;
+            GameData.Data.voiceSound.key = Sounds.FightersReadySound;
+            GameData.Data.voiceSound.volume = 0.2;
+            GameData.Data.voiceSound.play();
+        };
+        Level.prototype.playVoiceKO = function () {
+            if (GameData.Data.voiceSound === undefined || GameData.Data.voiceSound === null) {
+                GameData.Data.voiceSound = this.game.add.audio(Sounds.KoSound);
+            }
+            GameData.Data.voiceSound.loop = false;
+            GameData.Data.voiceSound.key = Sounds.KoSound;
+            GameData.Data.voiceSound.volume = 0.2;
+            GameData.Data.voiceSound.play();
+        };
+        Level.prototype.playVoiceYouLose = function () {
+            if (GameData.Data.voiceSound === undefined || GameData.Data.voiceSound === null) {
+                GameData.Data.voiceSound = this.game.add.audio(Sounds.YouLoseSound);
+            }
+            GameData.Data.voiceSound.loop = false;
+            GameData.Data.voiceSound.key = Sounds.YouLoseSound;
+            GameData.Data.voiceSound.volume = 0.2;
+            GameData.Data.voiceSound.play();
+        };
+        Level.prototype.playVoiceYouWin = function () {
+            if (GameData.Data.voiceSound === undefined || GameData.Data.voiceSound === null) {
+                GameData.Data.voiceSound = this.game.add.audio(Sounds.YouWinSound);
+            }
+            GameData.Data.voiceSound.loop = false;
+            GameData.Data.voiceSound.key = Sounds.YouWinSound;
+            GameData.Data.voiceSound.volume = 0.2;
+            GameData.Data.voiceSound.play();
+        };
+        Level.prototype.playSoundPlayerDamage = function () {
+            if (GameData.Data.playerSound === undefined || GameData.Data.playerSound === null) {
+                if (this.playerVoiceWoman === false)
+                    GameData.Data.playerSound = this.game.add.audio(Sounds.DamageManSound);
+                else
+                    GameData.Data.playerSound = this.game.add.audio(Sounds.DamageWomanSound);
+            }
+            GameData.Data.playerSound.loop = false;
+            if (this.playerVoiceWoman === false)
+                GameData.Data.playerSound.key = Sounds.DamageManSound;
+            else
+                GameData.Data.playerSound.key = Sounds.DamageWomanSound;
+            GameData.Data.playerSound.volume = 0.2;
+            GameData.Data.playerSound.play();
+        };
+        Level.prototype.playSoundPlayerHit = function (cardData) {
+            if (GameData.Data.playerSound === undefined || GameData.Data.playerSound === null) {
+                GameData.Data.playerSound = this.game.add.audio(Sounds.HitHandSound);
+            }
+            if (cardData.type === Constants.CARD_TYPE_ATTACK) {
+                if (cardData.power > 20) {
+                    GameData.Data.playerSound.key = Sounds.HitLegSound;
+                }
+                else {
+                    GameData.Data.playerSound.key = Sounds.HitHandSound;
+                }
+                GameData.Data.playerSound.loop = false;
+                GameData.Data.playerSound.volume = 0.2;
+                GameData.Data.playerSound.play();
+            }
+        };
+        Level.prototype.playSoundOpponentDamage = function () {
+            if (GameData.Data.opponentSound === undefined || GameData.Data.opponentSound === null) {
+                if (this.opponentVoiceWoman === false)
+                    GameData.Data.opponentSound = this.game.add.audio(Sounds.DamageManSound);
+                else
+                    GameData.Data.opponentSound = this.game.add.audio(Sounds.DamageWomanSound);
+            }
+            GameData.Data.opponentSound.loop = false;
+            if (this.opponentVoiceWoman === false)
+                GameData.Data.opponentSound.key = Sounds.DamageManSound;
+            else
+                GameData.Data.opponentSound.key = Sounds.DamageWomanSound;
+            GameData.Data.opponentSound.volume = 0.2;
+            GameData.Data.opponentSound.play();
+        };
+        Level.prototype.playSoundOpponentHit = function (cardData) {
+            if (GameData.Data.opponentSound === undefined || GameData.Data.opponentSound === null) {
+                GameData.Data.opponentSound = this.game.add.audio(Sounds.HitHandSound);
+            }
+            if (cardData.type === Constants.CARD_TYPE_ATTACK) {
+                if (cardData.power > 20) {
+                    GameData.Data.opponentSound.key = Sounds.HitLegSound;
+                }
+                else {
+                    GameData.Data.opponentSound.key = Sounds.HitHandSound;
+                }
+                GameData.Data.opponentSound.loop = false;
+                GameData.Data.opponentSound.volume = 0.2;
+                GameData.Data.opponentSound.play();
+            }
+        };
+        Level.prototype.playButtonSound = function () {
+            if (Config.settingSound) {
+                GameData.Data.buttonSound.loop = false;
+                GameData.Data.buttonSound.volume = 0.5;
+                GameData.Data.buttonSound.play();
+            }
+        };
+        Level.prototype.playFlipUpSound = function () {
+            if (Config.settingSound) {
+                GameData.Data.flipUpSound.loop = false;
+                GameData.Data.flipUpSound.volume = 0.5;
+                GameData.Data.flipUpSound.play();
+            }
+        };
+        Level.prototype.playFlipDownSound = function () {
+            if (Config.settingSound) {
+                GameData.Data.flipDownSound.loop = false;
+                GameData.Data.flipDownSound.volume = 0.5;
+                GameData.Data.flipDownSound.play();
             }
         };
         Level.Name = "level";

@@ -2618,8 +2618,8 @@ var StreetFighterCards;
             this.buttonInvate.event.add(this.onButtonClick, this);
         };
         Menu.prototype.onVkDataGet = function (response) {
-            Utilits.Data.debugLog('ON VK DATA GET', response.toString());
-            SocialVK.LoadData(response.toString());
+            Utilits.Data.debugLog('ON VK DATA GET', response);
+            SocialVK.LoadData(response[0].toString());
             if (GameData.Data.fighterIndex >= 0 && GameData.Data.progressIndex < 20) {
                 this.buttonContinue = new ButtonOrange(this.game, this.groupButtons, Constants.BUTTON_CONTINUE, 'ПРОДОЛЖИТЬ', 37, 0, -50);
                 this.buttonContinue.event.add(this.onButtonClick, this);

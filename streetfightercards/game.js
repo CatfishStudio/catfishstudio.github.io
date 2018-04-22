@@ -330,7 +330,7 @@ var Config = (function () {
     Config.settingSound = true;
     Config.settingMusic = true;
     Config.settingTutorial = true;
-    Config.buildDev = true;
+    Config.buildDev = false;
     return Config;
 }());
 var Images = (function () {
@@ -882,7 +882,7 @@ var SocialVK = (function () {
     SocialVK.vkWallPost = function () {
         if (GameData.Data.progressIndex > 0) {
             var postPers = GameData.Data.personages[GameData.Data.tournamentListIds[GameData.Data.progressIndex - 1]];
-            VK.api("wall.post", { message: 'Я одержал победу в схватке с ' + postPers.name + ' в игре Street Fighter Cards.\nДрузья присоединяйтесь к игре https://vk.com/app5883565', attachments: 'photo-62618339_456239021' });
+			VK.api("wall.post", { message: 'Я одержал победу в схватке с ' + postPers.name + ' в игре Street Fighter Cards.\nДрузья присоединяйтесь к игре https://vk.com/app5883565', attachments: 'photo-62618339_456239021' });
         }
     };
     SocialVK.vkWallPostWin = function () {

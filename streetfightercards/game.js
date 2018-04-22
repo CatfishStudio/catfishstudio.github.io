@@ -341,6 +341,7 @@ var Constants = (function () {
     Constants.ANIMATION_PLAYER_COMPLETE = "animation_player_complete";
     Constants.ANIMATION_OPPONENT_COMPLETE = "animation_opponent_complete";
     Constants.ANIMATION_FLASH_COMPLETE = "animation_flash_complete";
+    Constants.BUTTON_CONTINUE = 'button_continue';
     Constants.BUTTON_PLAY = 'button_play';
     Constants.BUTTON_SETTINGS = 'button_settings';
     Constants.BUTTON_SETTINGS_CLOSE = 'button_settings_close';
@@ -363,7 +364,7 @@ var Config = (function () {
     Config.settingSound = true;
     Config.settingMusic = true;
     Config.settingTutorial = true;
-    Config.buildDev = true;
+    Config.buildDev = false;
     return Config;
 }());
 var Images = (function () {
@@ -375,7 +376,8 @@ var Images = (function () {
     Images.ChoiceImage = 'choice.png';
     Images.ArrowLeft = 'arrow_left.png';
     Images.ArrowRight = 'arrow_right.png';
-    Images.TutorialImage = 'tutorial.png';
+    Images.TutorialLeftImage = 'tutorial_left.png';
+    Images.TutorialRightImage = 'tutorial_right.png';
     Images.ButtonOff = 'buttons_off.png';
     Images.ButtonOn = 'buttons_on.png';
     Images.BackgroundTournament = 'tournament/background_tournament.jpg';
@@ -392,7 +394,8 @@ var Images = (function () {
         Images.ChoiceImage,
         Images.ArrowLeft,
         Images.ArrowRight,
-        Images.TutorialImage,
+        Images.TutorialLeftImage,
+        Images.TutorialRightImage,
         Images.ButtonOff,
         Images.ButtonOn,
         Images.BackgroundTournament,
@@ -490,6 +493,31 @@ var Images = (function () {
         'comix/comix_page_21.jpg',
     ];
     return Images;
+}());
+var Sounds = (function () {
+    function Sounds() {
+    }
+    Sounds.MenuMusic1 = 'music1';
+    Sounds.MenuMusic2 = 'music2';
+    Sounds.BattleMusic1 = 'battle1';
+    Sounds.BattleMusic2 = 'battle2';
+    Sounds.BattleMusic3 = 'battle3';
+    Sounds.ArrowSound = 'arrow';
+    Sounds.ButtonSound = 'button';
+    Sounds.CardFlipSound1 = 'flip1';
+    Sounds.CardFlipSound2 = 'flip2';
+    Sounds.preloadList = [
+        Sounds.MenuMusic1,
+        Sounds.MenuMusic2,
+        Sounds.BattleMusic1,
+        Sounds.BattleMusic2,
+        Sounds.BattleMusic3,
+        Sounds.ArrowSound,
+        Sounds.ButtonSound,
+        Sounds.CardFlipSound1,
+        Sounds.CardFlipSound2,
+    ];
+    return Sounds;
 }());
 var Animations = (function () {
     function Animations() {
@@ -757,7 +785,7 @@ var GameData;
             GameData.Data.tournamentListIds.push(5); // boss
             Utilits.Data.debugLog("Tournament List:", GameData.Data.tournamentListIds);
         };
-        Data.fighterIndex = 0; // id выбранного игроком персонажа (в сохранение)
+        Data.fighterIndex = -1; // id выбранного игроком персонажа (в сохранение)
         Data.progressIndex = -1; // индекс прогресса в игре (в сохранение)
         Data.comixIndex = 0; // индекс комикса
         Data.fighters = [
@@ -805,6 +833,21 @@ var GameData;
             ['comix/comix_page_20.jpg'],
             ['comix/comix_page_21.jpg']
         ];
+        Data.musicSelected = 2;
+        Data.musicList = [
+            [Sounds.MenuMusic1, 0.1],
+            [Sounds.MenuMusic2, 0.3],
+            [Sounds.BattleMusic1, 0.2],
+            [Sounds.BattleMusic2, 0.3],
+            [Sounds.BattleMusic3, 0.2]
+        ];
+        Data.tutorList = [
+            'Выберите бойца.\nНажмите "Выбрать"',
+            'Турнирная таблица.\nНажмите "Начать бой"',
+            'Положите карту в слот\nи нажмите "Ход"',
+            'Этот слот оппонента\nон вам недоступен',
+            'Недостаточно энергии\nдля этой карты'
+        ];
         return Data;
     }());
     GameData.Data = Data;
@@ -847,6 +890,17 @@ var Utilits;
     }());
     Utilits.Data = Data;
 })(Utilits || (Utilits = {}));
+var SocialVK = (function () {
+    function SocialVK() {
+    }
+    SocialVK.vkInvite = function () {
+        VK.callMethod("showInviteBox");
+    };
+    SocialVK.vkWallPost = function (text, photo) {
+        VK.api("wall.post", {message: text, attachments: photo}); 
+    };
+    return SocialVK;
+}());
 var Fabrique;
 (function (Fabrique) {
     var AnimationBigKen = (function (_super) {
@@ -1272,7 +1326,13 @@ var Fabrique;
             this.footer = new Phaser.Sprite(this.game, 0, this.headerHeight, bitmapData);
             this.addChild(this.footer);
             // Text
-            energyText = this.game.add.text(14, 6, this.cardData.energy.toString(), { font: "bold 18px Times New Roman", fill: "#FFFFFF", align: "left" });
+            var energyValue = this.cardData.energy.toString();
+            if (energyValue.length > 1) {
+                energyText = this.game.add.text(10, 6, this.cardData.energy.toString(), { font: "bold 18px Times New Roman", fill: "#FFFFFF", align: "left" });
+            }
+            else {
+                energyText = this.game.add.text(14, 6, this.cardData.energy.toString(), { font: "bold 18px Times New Roman", fill: "#FFFFFF", align: "left" });
+            }
             this.addChild(energyText);
             this.footer.addChild(powerText);
         };
@@ -1287,6 +1347,7 @@ var Fabrique;
         __extends(Comix, _super);
         function Comix(game, parent) {
             _super.call(this, game, parent);
+            this.event = new Phaser.Signal();
             if (GameData.Data.comixIndex >= (GameData.Data.progressIndex + 2)) {
                 this.removeAll();
             }
@@ -1300,7 +1361,6 @@ var Fabrique;
             this.removeAll();
         };
         Comix.prototype.init = function () {
-            this.event = new Phaser.Signal();
             this.index = 0;
             this.createBackground();
             this.createButton();
@@ -1324,6 +1384,7 @@ var Fabrique;
             this.addChild(border);
         };
         Comix.prototype.onButtonClick = function (event) {
+            this.playButtonSound();
             if ((GameData.Data.comixes[GameData.Data.comixIndex].length - 1) === this.index) {
                 this.shutdown();
                 this.parent.removeChild(this);
@@ -1334,6 +1395,13 @@ var Fabrique;
             else {
                 this.index++;
                 this.background.loadTexture(GameData.Data.comixes[GameData.Data.comixIndex][this.index]);
+            }
+        };
+        Comix.prototype.playButtonSound = function () {
+            if (Config.settingSound) {
+                GameData.Data.buttonSound.loop = false;
+                GameData.Data.buttonSound.volume = 0.5;
+                GameData.Data.buttonSound.play();
             }
         };
         return Comix;
@@ -1853,6 +1921,7 @@ var Fabrique;
             this.event.dispatch(event);
         };
         Settings.prototype.onButtonClick = function (event) {
+            this.playButtonSound();
             switch (event.name) {
                 case 'sound':
                     {
@@ -1875,6 +1944,7 @@ var Fabrique;
                 case 'music':
                     {
                         if (Config.settingMusic === true) {
+                            this.stopMusic();
                             Config.settingMusic = false;
                             this.removeChild(event);
                             event = new Phaser.Button(this.game, event.x, event.y, Images.ButtonOff, this.onButtonClick, this);
@@ -1882,6 +1952,7 @@ var Fabrique;
                             this.addChild(event);
                         }
                         else {
+                            this.playMusic();
                             Config.settingMusic = true;
                             this.removeChild(event);
                             event = new Phaser.Button(this.game, event.x, event.y, Images.ButtonOn, this.onButtonClick, this);
@@ -1910,6 +1981,19 @@ var Fabrique;
                     }
                 default:
                     break;
+            }
+        };
+        Settings.prototype.stopMusic = function () {
+            GameData.Data.music.stop();
+        };
+        Settings.prototype.playMusic = function () {
+            GameData.Data.music.play();
+        };
+        Settings.prototype.playButtonSound = function () {
+            if (Config.settingSound) {
+                GameData.Data.buttonSound.loop = false;
+                GameData.Data.buttonSound.volume = 0.5;
+                GameData.Data.buttonSound.play();
             }
         };
         return Settings;
@@ -1956,6 +2040,7 @@ var Fabrique;
             }
         };
         Slides.prototype.onButtonClick = function (event) {
+            this.playArrowSound();
             switch (event.name) {
                 case Constants.BUTTON_ARROW_LEFT:
                     {
@@ -2003,6 +2088,13 @@ var Fabrique;
                 this.buttonRight.visible = true;
             }
             this.canClick = true;
+        };
+        Slides.prototype.playArrowSound = function () {
+            if (Config.settingSound) {
+                GameData.Data.arrowSound.loop = false;
+                GameData.Data.arrowSound.volume = 0.1;
+                GameData.Data.arrowSound.play();
+            }
         };
         return Slides;
     }(Phaser.Group));
@@ -2136,8 +2228,12 @@ var Fabrique;
         };
         Timer.prototype.pauseTimer = function (value) {
             if (value === void 0) { value = true; }
+            /*
+            if(value === true) this.timer.pause();
+            else this.timer.start(this.count);
+            */
             if (value === true)
-                this.timer.pause();
+                this.timer.stop(false);
             else
                 this.timer.start(this.count);
             Utilits.Data.debugLog("TIMER PAUSE:", value);
@@ -2168,9 +2264,15 @@ var Fabrique;
 (function (Fabrique) {
     var Tutorial = (function (_super) {
         __extends(Tutorial, _super);
-        function Tutorial(game, text) {
-            _super.call(this, game, 25, 600, Images.TutorialImage);
+        function Tutorial(game, text, orientation) {
+            if (orientation === Tutorial.LEFT) {
+                _super.call(this, game, 25, 600, Images.TutorialLeftImage);
+            }
+            else {
+                _super.call(this, game, 625, 600, Images.TutorialRightImage);
+            }
             this.text = text;
+            this.orientation = orientation;
             this.init();
         }
         Tutorial.prototype.shutdown = function () {
@@ -2178,15 +2280,21 @@ var Fabrique;
             this.removeChild(this.dialog);
         };
         Tutorial.prototype.init = function () {
+            this.statusIsDisplayed = true;
             this.tween = this.game.add.tween(this);
             this.tween.to({ x: this.x, y: this.y - 225 }, 750, 'Linear');
             this.tween.onComplete.add(this.onComplete, this);
             this.tween.start();
         };
         Tutorial.prototype.onComplete = function () {
-            this.createDialog();
+            if (this.orientation === Tutorial.LEFT) {
+                this.createLeftDialog();
+            }
+            else {
+                this.createRightDialog();
+            }
         };
-        Tutorial.prototype.createDialog = function () {
+        Tutorial.prototype.createLeftDialog = function () {
             this.dialog = new Phaser.Sprite(this.game, 0, 0);
             var graphics = this.game.add.graphics(0, 0);
             graphics.beginFill(0xFFFFFF, 1);
@@ -2197,21 +2305,43 @@ var Fabrique;
             graphics.lineTo(-20, 20);
             graphics.endFill();
             graphics.beginFill(0xFFFFFF, 1);
-            graphics.lineStyle(0, 0x000000, 1);
-            graphics.drawRoundedRect(0, 0, 200, 50, 15);
-            graphics.endFill();
-            graphics.beginFill(0xFFFFFF, 0);
             graphics.lineStyle(2, 0x000000, 1);
-            graphics.drawRoundedRect(0, 0, 200, 50, 15);
+            graphics.drawRoundedRect(0, 0, 200, 70, 15);
             graphics.endFill();
             graphics.beginFill(0xFFFFFF, 1);
             graphics.lineStyle(1, 0xFFFFFF, 1);
             graphics.drawRect(-1, 28, 4, 11);
             graphics.endFill();
             this.dialog.addChild(graphics);
-            var messageText = this.game.add.text(5, 5, this.text, { font: "18px Georgia", fill: "#000000", align: "left" });
-            this.dialog.addChild(messageText);
+            this.messageText = this.game.add.text(5, 5, this.text, { font: "18px Georgia", fill: "#000000", align: "left" });
+            this.dialog.addChild(this.messageText);
             this.dialog.x = 110;
+            this.dialog.y = 75;
+            this.addChild(this.dialog);
+            this.tweenDialogStart();
+        };
+        Tutorial.prototype.createRightDialog = function () {
+            this.dialog = new Phaser.Sprite(this.game, 0, 0);
+            var graphics = this.game.add.graphics(0, 0);
+            graphics.beginFill(0xFFFFFF, 1);
+            graphics.lineStyle(2, 0x000000, 1);
+            graphics.moveTo(-40, 20);
+            graphics.lineTo(-65, 30);
+            graphics.lineTo(-65, 47);
+            graphics.lineTo(-40, 20);
+            graphics.endFill();
+            graphics.beginFill(0xFFFFFF, 1);
+            graphics.lineStyle(2, 0x000000, 1);
+            graphics.drawRoundedRect(-265, 0, 200, 70, 15);
+            graphics.endFill();
+            graphics.beginFill(0xFFFFFF, 1);
+            graphics.lineStyle(1, 0xFFFFFF, 1);
+            graphics.drawRect(-68, 30, 4, 13.5);
+            graphics.endFill();
+            this.dialog.addChild(graphics);
+            this.messageText = this.game.add.text(-260, 5, this.text, { font: "18px Georgia", fill: "#000000", align: "left" });
+            this.dialog.addChild(this.messageText);
+            this.dialog.x = 85;
             this.dialog.y = 75;
             this.addChild(this.dialog);
             this.tweenDialogStart();
@@ -2228,6 +2358,42 @@ var Fabrique;
             this.tween.onComplete.add(this.tweenDialogStart, this);
             this.tween.start();
         };
+        Tutorial.prototype.hidden = function () {
+            if (this.statusIsDisplayed) {
+                this.tween.stop();
+                this.y = 375;
+                this.tween = this.game.add.tween(this);
+                this.tween.to({ x: this.x, y: this.y + 225 }, 250, 'Linear');
+                this.tween.onComplete.add(this.onHidden, this);
+                this.tween.start();
+            }
+        };
+        Tutorial.prototype.onHidden = function () {
+            this.statusIsDisplayed = false;
+            this.y = 600;
+        };
+        Tutorial.prototype.showTemporarily = function (message) {
+            if (this.statusIsDisplayed)
+                return;
+            this.statusIsDisplayed = true;
+            this.messageText.setText(message);
+            this.tween = this.game.add.tween(this);
+            this.tween.to({ x: this.x, y: this.y - 225 }, 250, 'Linear');
+            this.tween.onComplete.add(this.onTemporarily, this);
+            this.tween.start();
+        };
+        Tutorial.prototype.onTemporarily = function () {
+            var _this = this;
+            this.y = 375;
+            this.timer = this.game.time.create(false);
+            this.timer.loop(2000, function () {
+                _this.timer.stop();
+                _this.hidden();
+            }, this);
+            this.timer.start();
+        };
+        Tutorial.LEFT = "left";
+        Tutorial.RIGHT = "right";
         return Tutorial;
     }(Phaser.Sprite));
     Fabrique.Tutorial = Tutorial;
@@ -2276,6 +2442,9 @@ var StreetFighterCards;
                     _this.game.load.spritesheet(Sheet.preloadList[2], 'assets/images/' + Sheet.preloadList[2], 108, 31);
                     Decks.preloadList.forEach(function (assetName) {
                         _this.game.load.json(assetName, 'assets/data/' + assetName);
+                    });
+                    Sounds.preloadList.forEach(function (assetName) {
+                        _this.game.load.audio(assetName, ['assets/sounds/' + assetName + '.mp3', 'assets/sounds/' + assetName + '.ogg']);
                     });
                 }
             });
@@ -2344,6 +2513,7 @@ var StreetFighterCards;
             this.name = Menu.Name;
         }
         Menu.prototype.create = function () {
+            this.initSounds();
             this.groupMenu = new Phaser.Group(this.game, this.stage);
             this.menuSprite = new Phaser.Sprite(this.game, 0, 0, Images.MenuImage);
             this.groupMenu.addChild(this.menuSprite);
@@ -2360,6 +2530,8 @@ var StreetFighterCards;
             this.createButtons();
         };
         Menu.prototype.shutdown = function () {
+            if (this.buttonContinue !== undefined && this.buttonContinue !== null)
+                this.buttonContinue.shutdown();
             this.buttonStart.shutdown();
             this.buttonSettings.shutdown();
             this.buttonInvate.shutdown();
@@ -2367,16 +2539,36 @@ var StreetFighterCards;
             this.groupButtons.removeAll();
             this.game.stage.removeChildren();
         };
+        Menu.prototype.initSounds = function () {
+            if (GameData.Data.music === undefined || GameData.Data.music === null) {
+                GameData.Data.music = this.game.add.audio(GameData.Data.musicList[0][0]);
+                GameData.Data.buttonSound = this.game.add.audio(Sounds.ButtonSound);
+                GameData.Data.arrowSound = this.game.add.audio(Sounds.ArrowSound);
+                GameData.Data.flipUpSound = this.game.add.audio(Sounds.CardFlipSound1);
+                GameData.Data.flipDownSound = this.game.add.audio(Sounds.CardFlipSound2);
+            }
+            else {
+                GameData.Data.music.stop();
+                GameData.Data.music.key = GameData.Data.musicList[0][0];
+            }
+            GameData.Data.music.loop = true;
+            GameData.Data.music.volume = GameData.Data.musicList[0][1];
+            GameData.Data.music.play();
+        };
         Menu.prototype.createButtons = function () {
             this.groupButtons = new Phaser.Group(this.game, this.groupMenu);
             this.groupButtons.x = 300;
             this.groupButtons.y = 300;
+            if (GameData.Data.fighterIndex >= 0) {
+                this.buttonContinue = new ButtonOrange(this.game, this.groupButtons, Constants.BUTTON_CONTINUE, 'ПРОДОЛЖИТЬ', 37, 0, -50);
+                this.buttonContinue.event.add(this.onButtonClick, this);
+            }
             this.buttonStart = new ButtonOrange(this.game, this.groupButtons, Constants.BUTTON_PLAY, 'НАЧАТЬ ИГРУ', 35, 0, 0);
             this.buttonStart.event.add(this.onButtonClick, this);
             this.buttonSettings = new ButtonOrange(this.game, this.groupButtons, Constants.BUTTON_SETTINGS, 'НАСТРОЙКИ', 40, 0, 50);
             this.buttonSettings.event.add(this.onButtonClick, this);
             this.buttonInvate = new ButtonOrange(this.game, this.groupButtons, Constants.BUTTON_INVATE, 'ПРИГЛАСИТЬ', 35, 0, 100);
-            this.buttonSettings.event.add(this.onButtonClick, this);
+            this.buttonInvate.event.add(this.onButtonClick, this);
         };
         Menu.prototype.settingsCreate = function () {
             this.settings = new Settings(this.game, this.groupMenu);
@@ -2387,14 +2579,16 @@ var StreetFighterCards;
             this.groupMenu.removeChild(this.settings);
         };
         Menu.prototype.onButtonClick = function (event) {
+            this.playButtonSound();
             switch (event.name) {
                 case Constants.BUTTON_PLAY:
                     {
                         this.game.state.start(StreetFighterCards.ChoiceFighter.Name, true, false);
                         break;
                     }
-                case 'continue':
+                case Constants.BUTTON_CONTINUE:
                     {
+                        this.game.state.start(StreetFighterCards.Tournament.Name, true, false);
                         break;
                     }
                 case Constants.BUTTON_SETTINGS:
@@ -2409,10 +2603,18 @@ var StreetFighterCards;
                     }
                 case Constants.BUTTON_INVATE:
                     {
+                        SocialVK.vkInvite();
                         break;
                     }
                 default:
                     break;
+            }
+        };
+        Menu.prototype.playButtonSound = function () {
+            if (Config.settingSound) {
+                GameData.Data.buttonSound.loop = false;
+                GameData.Data.buttonSound.volume = 0.5;
+                GameData.Data.buttonSound.play();
             }
         };
         Menu.Name = "menu";
@@ -2447,7 +2649,8 @@ var StreetFighterCards;
             this.buttonBack.shutdown();
             this.buttonSelect.shutdown();
             this.buttonSettings.shutdown();
-            this.tutorial.shutdown();
+            if (this.tutorial !== null && this.tutorial !== undefined)
+                this.tutorial.shutdown();
             this.groupWindow.removeAll();
             this.game.stage.removeChildren();
         };
@@ -2458,17 +2661,19 @@ var StreetFighterCards;
         ChoiceFighter.prototype.createButtons = function () {
             this.buttonBack = new ButtonComix(this.game, this.groupWindow, Constants.BUTTON_BACK, 'НАЗАД', 60, 10, 10);
             this.buttonBack.event.add(this.onButtonClick, this);
-            this.buttonSettings = new ButtonComix(this.game, this.groupWindow, Constants.BUTTON_SETTINGS, 'НАСТРОЙКИ', 40, 300, 530);
+            this.buttonSettings = new ButtonComix(this.game, this.groupWindow, Constants.BUTTON_SETTINGS, 'НАСТРОЙКИ', 40, 600, 10);
             this.buttonSettings.event.add(this.onButtonClick, this);
-            this.buttonSelect = new ButtonComix(this.game, this.groupWindow, Constants.BUTTON_SELECT, 'ВЫБРАТЬ', 55, 600, 530);
+            this.buttonSelect = new ButtonComix(this.game, this.groupWindow, Constants.BUTTON_SELECT, 'ВЫБРАТЬ', 55, 320, 530);
             this.buttonSelect.event.add(this.onButtonClick, this);
         };
         ChoiceFighter.prototype.createSlides = function () {
             this.slides = new Slides(this.game, this.groupWindow);
         };
         ChoiceFighter.prototype.createTutorial = function () {
-            this.tutorial = new Tutorial(this.game, 'Выберите персонаж!');
-            this.groupWindow.addChild(this.tutorial);
+            if (Config.settingTutorial === true) {
+                this.tutorial = new Tutorial(this.game, GameData.Data.tutorList[0], Tutorial.LEFT);
+                this.groupWindow.addChild(this.tutorial);
+            }
         };
         ChoiceFighter.prototype.createBorder = function () {
             var borderSprite = new Phaser.Sprite(this.game, 0, 0, Images.BorderImage);
@@ -2486,6 +2691,7 @@ var StreetFighterCards;
             this.groupWindow.removeChild(this.settings);
         };
         ChoiceFighter.prototype.onButtonClick = function (event) {
+            this.playButtonSound();
             switch (event.name) {
                 case Constants.BUTTON_SELECT:
                     {
@@ -2512,6 +2718,13 @@ var StreetFighterCards;
                     break;
             }
         };
+        ChoiceFighter.prototype.playButtonSound = function () {
+            if (Config.settingSound) {
+                GameData.Data.buttonSound.loop = false;
+                GameData.Data.buttonSound.volume = 0.5;
+                GameData.Data.buttonSound.play();
+            }
+        };
         ChoiceFighter.Name = "choce_fighter";
         return ChoiceFighter;
     }(Phaser.State));
@@ -2521,6 +2734,7 @@ var StreetFighterCards;
 (function (StreetFighterCards) {
     var Icon = Fabrique.Icon;
     var ButtonComix = Fabrique.ButtonComix;
+    var Tutorial = Fabrique.Tutorial;
     var Settings = Fabrique.Settings;
     var Comix = Fabrique.Comix;
     var Tournament = (function (_super) {
@@ -2538,9 +2752,11 @@ var StreetFighterCards;
                 this.createVSPlayers();
                 this.createIcons();
                 this.createButtons();
+                this.createTutorial();
                 this.createBorder();
             }
             this.createComix();
+            this.playMusic();
         };
         Tournament.prototype.shutdown = function () {
             this.icons.forEach(function (icon) {
@@ -2549,9 +2765,11 @@ var StreetFighterCards;
             this.buttonBack.shutdown();
             this.buttonStartBattle.shutdown();
             this.buttonSettings.shutdown();
-            if (this.tutorial != null)
+            this.buttonInvate.shutdown();
+            if (this.tutorial !== null && this.tutorial !== undefined)
                 this.tutorial.shutdown();
             this.group.removeAll();
+            this.game.stage.removeChildren();
         };
         Tournament.prototype.createBackground = function () {
             var background = new Phaser.Sprite(this.game, 0, 0, Images.BackgroundTournament);
@@ -2602,12 +2820,20 @@ var StreetFighterCards;
             });
         };
         Tournament.prototype.createButtons = function () {
-            this.buttonBack = new ButtonComix(this.game, this.group, Constants.BUTTON_BACK, 'НАЗАД', 60, 10, 10);
+            this.buttonBack = new ButtonComix(this.game, this.group, Constants.BUTTON_BACK, 'НАЗАД В МЕНЮ', 28, 10, 10);
             this.buttonBack.event.add(this.onButtonClick, this);
+            this.buttonInvate = new ButtonComix(this.game, this.group, Constants.BUTTON_INVATE, 'ПРИГЛАСИТЬ', 37, 315, 10);
+            this.buttonInvate.event.add(this.onButtonClick, this);
             this.buttonSettings = new ButtonComix(this.game, this.group, Constants.BUTTON_SETTINGS, 'НАСТРОЙКИ', 40, 600, 10);
             this.buttonSettings.event.add(this.onButtonClick, this);
-            this.buttonStartBattle = new ButtonComix(this.game, this.group, Constants.BUTTON_START_BATTLE, 'НАЧАТЬ БОЙ', 35, 300, 530);
+            this.buttonStartBattle = new ButtonComix(this.game, this.group, Constants.BUTTON_START_BATTLE, 'НАЧАТЬ БОЙ', 35, 315, 530);
             this.buttonStartBattle.event.add(this.onButtonClick, this);
+        };
+        Tournament.prototype.createTutorial = function () {
+            if (Config.settingTutorial === true && GameData.Data.progressIndex === 0) {
+                this.tutorial = new Tutorial(this.game, GameData.Data.tutorList[1], Tutorial.RIGHT);
+                this.group.addChild(this.tutorial);
+            }
         };
         Tournament.prototype.createBorder = function () {
             var border = new Phaser.Sprite(this.game, 0, 0, Images.BorderImage);
@@ -2626,6 +2852,7 @@ var StreetFighterCards;
             this.group.removeChild(this.settings);
         };
         Tournament.prototype.onButtonClick = function (event) {
+            this.playButtonSound();
             switch (event.name) {
                 case Constants.BUTTON_START_BATTLE:
                     {
@@ -2647,8 +2874,29 @@ var StreetFighterCards;
                         this.settingsClose();
                         break;
                     }
+                case Constants.BUTTON_INVATE:
+                    {
+                        SocialVK.vkInvite();
+                        break;
+                    }
                 default:
                     break;
+            }
+        };
+        Tournament.prototype.playMusic = function () {
+            GameData.Data.music.stop();
+            GameData.Data.music.key = GameData.Data.musicList[1][0];
+            GameData.Data.music.loop = true;
+            GameData.Data.music.volume = GameData.Data.musicList[1][1];
+            if (Config.settingMusic) {
+                GameData.Data.music.play();
+            }
+        };
+        Tournament.prototype.playButtonSound = function () {
+            if (Config.settingSound) {
+                GameData.Data.buttonSound.loop = false;
+                GameData.Data.buttonSound.volume = 0.5;
+                GameData.Data.buttonSound.play();
             }
         };
         Tournament.prototype.onGameOver = function (event) {
@@ -2671,6 +2919,7 @@ var StreetFighterCards;
     var ButtonComix = Fabrique.ButtonComix;
     var ButtonTablo = Fabrique.ButtonTablo;
     var Settings = Fabrique.Settings;
+    var Tutorial = Fabrique.Tutorial;
     var Card = Fabrique.Card;
     var FighterProgressBar = Fabrique.FighterProgressBar;
     var Slot = Fabrique.Slot;
@@ -2714,6 +2963,7 @@ var StreetFighterCards;
             this.totalHits = 0;
             this.steepHits = 0;
             this.targetDamage = null;
+            this.playMusic();
             this.createBackground();
             this.createTimer();
             this.createSlots();
@@ -2723,10 +2973,13 @@ var StreetFighterCards;
             this.createHand();
             this.createDeck();
             this.createFlash();
+            this.createTutorial();
             this.createBorder();
             this.showAnimFight();
         };
         Level.prototype.shutdown = function () {
+            if (this.tutorial !== null && this.tutorial !== undefined)
+                this.tutorial.shutdown();
             this.opponentAi = null;
             this.timer.shutdown();
             // groups clear
@@ -2789,18 +3042,22 @@ var StreetFighterCards;
             this.game.stage.removeChildren();
         };
         Level.prototype.settingsCreate = function () {
-            this.settings = new Settings(this.game, this.group);
+            this.settings = new Settings(this.game, this.borderGroup);
             this.settings.event.add(this.onButtonClick, this);
+            this.timer.pauseTimer(true);
         };
         Level.prototype.settingsClose = function () {
             this.settings.removeAll();
             this.group.removeChild(this.settings);
+            this.timer.pauseTimer(false);
         };
         Level.prototype.onButtonClick = function (event) {
+            this.playButtonSound();
+            if (this.battleEnd === true)
+                return;
             switch (event.name) {
                 case Constants.BUTTON_EXIT_BATTLE:
                     {
-                        //this.game.state.start(Menu.Name, true, false);
                         this.game.state.start(StreetFighterCards.Tournament.Name, true, false);
                         break;
                     }
@@ -2822,6 +3079,39 @@ var StreetFighterCards;
                     }
                 default:
                     break;
+            }
+        };
+        Level.prototype.playMusic = function () {
+            GameData.Data.musicSelected++;
+            if (GameData.Data.musicSelected > 4)
+                GameData.Data.musicSelected = 2;
+            GameData.Data.music.stop();
+            GameData.Data.music.key = GameData.Data.musicList[GameData.Data.musicSelected][0];
+            GameData.Data.music.loop = true;
+            GameData.Data.music.volume = GameData.Data.musicList[GameData.Data.musicSelected][1];
+            if (Config.settingMusic) {
+                GameData.Data.music.play();
+            }
+        };
+        Level.prototype.playButtonSound = function () {
+            if (Config.settingSound) {
+                GameData.Data.buttonSound.loop = false;
+                GameData.Data.buttonSound.volume = 0.5;
+                GameData.Data.buttonSound.play();
+            }
+        };
+        Level.prototype.playFlipUpSound = function () {
+            if (Config.settingSound) {
+                GameData.Data.flipUpSound.loop = false;
+                GameData.Data.flipUpSound.volume = 0.5;
+                GameData.Data.flipUpSound.play();
+            }
+        };
+        Level.prototype.playFlipDownSound = function () {
+            if (Config.settingSound) {
+                GameData.Data.flipDownSound.loop = false;
+                GameData.Data.flipDownSound.volume = 0.5;
+                GameData.Data.flipDownSound.play();
             }
         };
         Level.prototype.createBackground = function () {
@@ -2941,6 +3231,12 @@ var StreetFighterCards;
                 }
             }
         };
+        Level.prototype.createTutorial = function () {
+            if (Config.settingTutorial === true && GameData.Data.progressIndex === 0) {
+                this.tutorial = new Tutorial(this.game, GameData.Data.tutorList[2], Tutorial.RIGHT);
+                this.borderGroup.addChild(this.tutorial);
+            }
+        };
         Level.prototype.createBorder = function () {
             var border = new Phaser.Sprite(this.game, 0, 0, Images.BorderLevel);
             this.borderGroup.addChild(border);
@@ -2952,6 +3248,7 @@ var StreetFighterCards;
         // ДЕЙСТВИЕ: Взять карту
         Level.prototype.onDragStart = function (sprite, pointer, x, y) {
             Utilits.Data.debugLog("START: x=", pointer.x + " y= " + pointer.y);
+            this.playFlipUpSound();
             this.handGroup.addChild(sprite);
             this.group.removeChild(sprite);
             sprite.reduce(true);
@@ -2959,11 +3256,15 @@ var StreetFighterCards;
         // ДЕЙСТВИЕ: Положить карту
         Level.prototype.onDragStop = function (sprite, pointer) {
             Utilits.Data.debugLog("STOP: x=", pointer.x + " y= " + pointer.y);
+            this.playFlipDownSound();
             var pushInSlot = false;
             if (sprite.cardData.energy <= this.playerEnergy) {
                 for (var index in this.slotsPoints) {
-                    if (index === '3')
-                        break; // доступны только слоты игрока
+                    if (index === '3') {
+                        if (pointer.y < 300)
+                            this.tutorMessage(GameData.Data.tutorList[3]); // доступны только слоты игрока
+                        break;
+                    }
                     // проверяем координаты
                     if ((pointer.x >= this.slotsPoints[index][0] && pointer.x <= this.slotsPoints[index][0] + 84)
                         && (pointer.y >= this.slotsPoints[index][1] && pointer.y <= this.slotsPoints[index][1] + 84)) {
@@ -2989,6 +3290,10 @@ var StreetFighterCards;
                         break;
                     }
                 }
+            }
+            else {
+                if (pointer.y < 300)
+                    this.tutorMessage(GameData.Data.tutorList[4]); // недостаточно энергии
             }
             if (pushInSlot === false) {
                 sprite.reduce(false);
@@ -3016,6 +3321,7 @@ var StreetFighterCards;
                 this.tween.onComplete.add(this.moveCardDeckToHandPlayer, this);
                 this.tween.to({ x: this.handPoints[this.playerHand.length - 1][0] }, 250, 'Linear');
                 this.tween.start();
+                this.playFlipDownSound();
             }
             Utilits.Data.debugLog("Player Hand:", this.playerHand);
         };
@@ -3027,6 +3333,7 @@ var StreetFighterCards;
                     tweenMoveToEmpty = this.game.add.tween(this.playerHand[i]);
                     tweenMoveToEmpty.to({ x: this.handPoints[i][0] }, 250, 'Linear');
                     tweenMoveToEmpty.start();
+                    this.playFlipDownSound();
                 }
             }
         };
@@ -3112,6 +3419,7 @@ var StreetFighterCards;
                     tweenScale = this.game.add.tween(card.scale);
                     tweenScale.to({ x: 0.65, y: 0.65 }, 250, 'Linear');
                     tweenScale.start();
+                    this.playFlipDownSound();
                 }
                 // коррекция данных в руке (передвигаем карты в руке)
                 var indexCorrect = 0;
@@ -3144,6 +3452,7 @@ var StreetFighterCards;
         */
         Level.prototype.endTurn = function () {
             Utilits.Data.debugLog("Status", this.status);
+            this.tutorHidden();
             if (this.status === Constants.STATUS_1_PLAYER_P_PROCESS_AI_WAIT) {
                 /**
                  * Атака игрока.
@@ -3457,6 +3766,7 @@ var StreetFighterCards;
         };
         // Завершение битвы
         Level.prototype.endBattle = function () {
+            this.cardsDragAndDrop(false);
             var ko = new AnimationKO(this.game, 315, 100);
             this.borderGroup.addChild(ko);
             if (this.playerLife > 0 && this.opponentLife <= 0) {
@@ -3466,6 +3776,17 @@ var StreetFighterCards;
                 this.game.state.start(StreetFighterCards.Tournament.Name, true, false);
                 Utilits.Data.debugLog("BATTLE", "END!");
             }.bind(this), 3000);
+        };
+        // Обучение и подсказки
+        Level.prototype.tutorHidden = function () {
+            if (this.tutorial !== null && this.tutorial !== undefined) {
+                this.tutorial.hidden();
+            }
+        };
+        Level.prototype.tutorMessage = function (message) {
+            if (this.tutorial !== null && this.tutorial !== undefined) {
+                this.tutorial.showTemporarily(message);
+            }
         };
         Level.Name = "level";
         return Level;
@@ -3477,12 +3798,14 @@ var StreetFighterCards;
 /// <reference path="Data\Constants.ts" />
 /// <reference path="Data\Config.ts" />
 /// <reference path="Data\Images.ts" />
+/// <reference path="Data\Sounds.ts" />
 /// <reference path="Data\Animations.ts" />
 /// <reference path="Data\Atlases.ts" />
 /// <reference path="Data\Sheets.ts" />
 /// <reference path="Data\Decks.ts" />
 /// <reference path="Data\GameData.ts" />
 /// <reference path="Data\Utilits.ts" />
+/// <reference path="Data\SocialVK.ts" />
 /// <reference path="Fabrique\Objects\AnimationBigKen.ts" />
 /// <reference path="Fabrique\Objects\AnimationBigRyu.ts" />
 /// <reference path="Fabrique\Objects\AnimationFight.ts" />

@@ -8,16 +8,17 @@
         <script src="https://vk.com/js/api/openapi.js?153" type="text/javascript"></script>
         <script src="phaser/phaser.min.js"></script>
         <script src="game.js"></script>
-        <script type="text/javascript">
+</head>
+
+<body>
+		<div id="content"></div>
+		<script type="text/javascript">
                 VK.init({
                         apiId: 5883565
                 });
                 var game = new StreetFighterCards.Game.getInstance();
+				game.start();
         </script>
-</head>
-
-<body onload="javascript:game.start();">
-        <div id="content"></div>
 </body>
 
 </html>

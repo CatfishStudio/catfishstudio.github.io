@@ -2603,7 +2603,8 @@ var StreetFighterCards;
                     }
                 case Constants.BUTTON_INVATE:
                     {
-                        VK.callMethod("showInviteBox");
+                        //VK.callMethod("showInviteBox");
+						SocialVK.vkInvite();
                         break;
                     }
                 default:

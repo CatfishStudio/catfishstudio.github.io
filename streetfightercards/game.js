@@ -863,8 +863,10 @@ var SocialVK = (function () {
         VK.callMethod("showInviteBox");
     };
     SocialVK.vkWallPost = function () {
-        var personage = GameData.Data.personages[GameData.Data.tournamentListIds[GameData.Data.progressIndex - 1]];
-        VK.api("wall.post", {message: 'Я обержал победу в схватке с ' + personage.name + ' в игре Street Fighter Cards. Друзья присоединяйтесь к игре https://vk.com/app5883565', attachments: 'photo-62618339_456239021'}); 
+        if (GameData.Data.progressIndex > 0) {
+            var postPers = GameData.Data.personages[GameData.Data.tournamentListIds[GameData.Data.progressIndex - 1]];
+			VK.api("wall.post", {message: 'Я обержал победу в схватке с ' + personage.postPers + ' в игре Street Fighter Cards. Друзья присоединяйтесь к игре https://vk.com/app5883565', attachments: 'photo-62618339_456239021'}); 
+        }
     };
     SocialVK.vkWallPostWin = function () {
         VK.api("wall.post", {message: 'Примите поздравления! Вы победили всех соперников в игре Street Fighter Cards. Друзья присоединяйтесь к игре https://vk.com/app5883565', attachments: 'photo-62618339_456239022'}); 

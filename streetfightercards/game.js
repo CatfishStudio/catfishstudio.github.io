@@ -2617,7 +2617,7 @@ var StreetFighterCards;
                 this.buttonContinue.event.add(this.onButtonClick, this);
             }
             else {
-                SocialVK.vkLoadData(this.onVkDataGet);
+                SocialVK.vkLoadData(this.onVkDataGet.bind(this));
             }
             this.buttonStart = new ButtonOrange(this.game, this.groupButtons, Constants.BUTTON_PLAY, 'НАЧАТЬ ИГРУ', 35, 0, 0);
             this.buttonStart.event.add(this.onButtonClick, this);
@@ -2627,7 +2627,7 @@ var StreetFighterCards;
             this.buttonInvate.event.add(this.onButtonClick, this);
         };
         Menu.prototype.onVkDataGet = function (object) {
-            Utilits.Data.debugLog('ON VK DATA GET', object.response.toString());
+            Utilits.Data.debugLog('ON VK DATA GET:', object.response.toString());
             if (SocialVK.LoadData(object.response.toString()) === true) {
                 if (GameData.Data.fighterIndex >= 0 && GameData.Data.progressIndex < 20) {
                     this.buttonContinue = new ButtonOrange(this.game, this.groupButtons, Constants.BUTTON_CONTINUE, 'ПРОДОЛЖИТЬ', 37, 0, -50);

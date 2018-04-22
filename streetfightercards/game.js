@@ -932,7 +932,16 @@ var SocialVK = (function () {
                 GameData.Data.tournamentListIds = value;
             return value;
         });
-        Utilits.Data.debugLog('LOAD DATA COMPLETE', jsonData);
+        Utilits.Data.debugLog('LOAD DATA COMPLETE', GameData.Data.comixIndex.toString() + " " +
+            GameData.Data.progressIndex.toString() + " " +
+            GameData.Data.fighterIndex.toString() + " " +
+            GameData.Data.tournamentListIds.toString());
+        if (GameData.Data.fighterIndex > -1) {
+            return true;
+        }
+        else {
+            return false;
+        }
     };
     return SocialVK;
 }());
@@ -2619,10 +2628,11 @@ var StreetFighterCards;
         };
         Menu.prototype.onVkDataGet = function (object) {
             Utilits.Data.debugLog('ON VK DATA GET', object.response.toString());
-            SocialVK.LoadData(object.response.toString());
-            if (GameData.Data.fighterIndex >= 0 && GameData.Data.progressIndex < 20) {
-                this.buttonContinue = new ButtonOrange(this.game, this.groupButtons, Constants.BUTTON_CONTINUE, 'ПРОДОЛЖИТЬ', 37, 0, -50);
-                this.buttonContinue.event.add(this.onButtonClick, this);
+            if (SocialVK.LoadData(object.response.toString()) === true) {
+                if (GameData.Data.fighterIndex >= 0 && GameData.Data.progressIndex < 20) {
+                    this.buttonContinue = new ButtonOrange(this.game, this.groupButtons, Constants.BUTTON_CONTINUE, 'ПРОДОЛЖИТЬ', 37, 0, -50);
+                    this.buttonContinue.event.add(this.onButtonClick, this);
+                }
             }
         };
         Menu.prototype.settingsCreate = function () {

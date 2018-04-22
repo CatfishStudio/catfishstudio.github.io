@@ -1335,6 +1335,7 @@ var Fabrique;
             this.createBackground();
             this.createButton();
             this.createBorder();
+            this.postGame();
         };
         Comix.prototype.createBackground = function () {
             this.background = new Phaser.Sprite(this.game, 0, 0, GameData.Data.comixes[GameData.Data.comixIndex][this.index]);

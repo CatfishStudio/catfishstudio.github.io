@@ -882,10 +882,11 @@ var SocialVK = (function () {
     SocialVK.vkWallPost = function () {
         if (GameData.Data.progressIndex > 0) {
             var postPers = GameData.Data.personages[GameData.Data.tournamentListIds[GameData.Data.progressIndex - 1]];
+            VK.api("wall.post", { message: 'Я одержал победу в схватке с ' + postPers.name + ' в игре Street Fighter Cards.\nДрузья присоединяйтесь к игре https://vk.com/app5883565', attachments: 'photo-62618339_456239021' });
         }
     };
     SocialVK.vkWallPostWin = function () {
-        VK.api("wall.post", {message: 'Примите поздравления! Вы победили всех соперников в игре Street Fighter Cards.\nДрузья присоединяйтесь к игре https://vk.com/app5883565', attachments: 'photo-62618339_456239022'}); 
+        VK.api("wall.post", { message: 'Примите поздравления! Вы победили всех соперников в игре Street Fighter Cards.\nДрузья присоединяйтесь к игре https://vk.com/app5883565', attachments: 'photo-62618339_456239022' });
     };
     /**
      * Сохранение данных на сервер VK
@@ -897,7 +898,7 @@ var SocialVK = (function () {
         jsonData += '"ci": ' + GameData.Data.comixIndex.toString() + ',';
         jsonData += '"list": [' + GameData.Data.tournamentListIds.toString() + ']';
         jsonData += '}';
-        VK.api('storage.set', { key:'sfc_data', value: jsonData, global:0 }, SocialVK.onVkDataSet, SocialVK.onVkSetDataError);
+        VK.api('storage.set', { key: 'sfc_data', value: jsonData, global: 0 }, SocialVK.onVkDataSet, SocialVK.onVkSetDataError);
         Utilits.Data.debugLog('VK SAVE DATA:', jsonData);
     };
     SocialVK.onVkDataSet = function (response) {
@@ -910,7 +911,7 @@ var SocialVK = (function () {
      * Загрузка данных с сервера VK
      */
     SocialVK.vkLoadData = function (onVkDataGet) {
-        VK.api('storage.get', { key:'sfc_data' }, onVkDataGet, onVkDataGet);
+        VK.api('storage.get', { key: 'sfc_data' }, onVkDataGet, onVkDataGet);
     };
     SocialVK.onVkGetDataError = function (response) {
         console.error('VK GET DATA ERROR:', response);
@@ -2617,7 +2618,7 @@ var StreetFighterCards;
             this.buttonInvate.event.add(this.onButtonClick, this);
         };
         Menu.prototype.onVkDataGet = function (response) {
-            Utilits.Data.debugLog('ON VK DATA GET', response);
+            Utilits.Data.debugLog('ON VK DATA GET', response.toString());
             SocialVK.LoadData(response.toString());
             if (GameData.Data.fighterIndex >= 0 && GameData.Data.progressIndex < 20) {
                 this.buttonContinue = new ButtonOrange(this.game, this.groupButtons, Constants.BUTTON_CONTINUE, 'ПРОДОЛЖИТЬ', 37, 0, -50);

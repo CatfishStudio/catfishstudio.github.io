@@ -2608,7 +2608,7 @@ var StreetFighterCards;
                     }
                 case Constants.BUTTON_INVATE:
                     {
-                        SocialVK.vkInvite();
+                        VK.callMethod("showInviteBox");
                         break;
                     }
                 default:
@@ -2881,7 +2881,7 @@ var StreetFighterCards;
                     }
                 case Constants.BUTTON_INVATE:
                     {
-                        SocialVK.vkInvite();
+                        VK.callMethod("showInviteBox");
                         break;
                     }
                 default:

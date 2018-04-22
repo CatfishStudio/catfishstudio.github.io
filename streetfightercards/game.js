@@ -32,10 +32,10 @@ var StreetFighterCards;
             return Game.instance;
         };
         Game.prototype.start = function () {
-            Game.instance.onBlur.add(this.onGameBlur, this);
-            Game.instance.onFocus.add(this.onGameFocus, this);
-            Game.instance.onPause.add(this.onGamePause, this);
-            Game.instance.onResume.add(this.onGameResume, this);
+            //Game.instance.onBlur.add(this.onGameBlur, this);
+            //Game.instance.onFocus.add(this.onGameFocus, this);
+            //Game.instance.onPause.add(this.onGamePause, this);
+            //Game.instance.onResume.add(this.onGameResume, this);
             this.state.start(StreetFighterCards.Boot.Name);
         };
         Game.prototype.onGameBlur = function () {

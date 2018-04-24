@@ -96,4 +96,6 @@ canvas {
 	top: 20px;
 	margin: auto;
 	left: 20%;
+	box-shadow: 0 0 15px rgba(0,0,0,0.5);
+	border: 4px double black;
 }

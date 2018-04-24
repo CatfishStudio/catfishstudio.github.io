@@ -880,10 +880,12 @@ var SocialVK = (function () {
         //VK.callMethod("showInviteBox");
     };
     SocialVK.vkWallPost = function () {
+		/*
         if (GameData.Data.progressIndex > 0) {
-            //var postPers = GameData.Data.personages[GameData.Data.tournamentListIds[GameData.Data.progressIndex - 1]];
-			//VK.api("wall.post", { message: 'Я одержал победу в схватке с ' + postPers.name + ' в игре Street Fighter Cards.\nДрузья присоединяйтесь к игре https://vk.com/app5883565', attachments: 'photo-62618339_456239021' });
+            var postPers = GameData.Data.personages[GameData.Data.tournamentListIds[GameData.Data.progressIndex - 1]];
+            VK.api("wall.post", { message: 'Я одержал победу в схватке с ' + postPers.name + ' в игре Street Fighter Cards.\nДрузья присоединяйтесь к игре https://vk.com/app5883565', attachments: 'photo-62618339_456239021' });
         }
+		*/
     };
     SocialVK.vkWallPostWin = function () {
         //VK.api("wall.post", { message: 'Примите поздравления! Вы победили всех соперников в игре Street Fighter Cards.\nДрузья присоединяйтесь к игре https://vk.com/app5883565', attachments: 'photo-62618339_456239022' });
@@ -2322,7 +2324,8 @@ var Fabrique;
 (function (Fabrique) {
     var Tutorial = (function (_super) {
         __extends(Tutorial, _super);
-        function Tutorial(game, text, orientation) {
+        function Tutorial(game, text, orientation, autoRun) {
+            if (autoRun === void 0) { autoRun = true; }
             if (orientation === Tutorial.LEFT) {
                 _super.call(this, game, 25, 600, Images.TutorialLeftImage);
             }
@@ -2331,7 +2334,18 @@ var Fabrique;
             }
             this.text = text;
             this.orientation = orientation;
-            this.init();
+            this.statusIsDisplayed = false;
+            if (autoRun) {
+                this.init();
+            }
+            else {
+                if (this.orientation === Tutorial.LEFT) {
+                    this.createLeftDialog();
+                }
+                else {
+                    this.createRightDialog();
+                }
+            }
         }
         Tutorial.prototype.shutdown = function () {
             this.tween.stop();
@@ -3286,8 +3300,11 @@ var StreetFighterCards;
         Level.prototype.createTutorial = function () {
             if (Config.settingTutorial === true && GameData.Data.progressIndex === 0) {
                 this.tutorial = new Tutorial(this.game, GameData.Data.tutorList[2], Tutorial.RIGHT);
-                this.borderGroup.addChild(this.tutorial);
             }
+            else {
+                this.tutorial = new Tutorial(this.game, "", Tutorial.RIGHT, false);
+            }
+            this.borderGroup.addChild(this.tutorial);
         };
         Level.prototype.createBorder = function () {
             var border = new Phaser.Sprite(this.game, 0, 0, Images.BorderLevel);

@@ -3867,6 +3867,8 @@ var StreetFighterCards;
             }
         };
         Level.prototype.tutorMessage = function (message) {
+            if (Config.settingTutorial === false)
+                return;
             if (this.tutorial !== null && this.tutorial !== undefined) {
                 this.tutorial.showTemporarily(message);
             }

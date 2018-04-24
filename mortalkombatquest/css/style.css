@@ -1,5 +1,73 @@
-#vk_ads_64017
-{
+#street_fighter_cards {
+	border: 4px double black;
+	position: absolute;
+	width: 600px;
+	height: 125px;
+	top: 200px;
+	left: 5px;
+	z-index: 10000;
+}
+
+#street_fighter_cards img {
+	width: 100px;
+	height: 100px;
+	float: left;
+	/*margin: 5px 5px 5px 0;*/
+}
+
+#sfc_description {
+	width: 500px;
+	height: 100px;
+	padding-top: 5px;
+}
+
+#sfc_buttons {
+	position: relative;
+	top: -100px;
+	left: 500px;
+}
+
+#sfc_button_play{
+	width: 95px;
+    height: 35px;
+    cursor: pointer;
+    border: 0;
+    border-radius: 8px;
+    color: #D3D3D3;
+    background-color: rgb(0, 74, 127);
+}
+
+#sfc_button_play:hover {
+	width: 95px;
+    height: 35px;
+    cursor:pointer;
+    border: 0;
+    border-radius: 8px;
+    background-color: rgb(216, 216, 216);
+    color: #434343;
+}
+
+#sfc_button_close{
+	width: 95px;
+    height: 35px;
+    cursor: pointer;
+    border: 0;
+    border-radius: 8px;
+    color: #D3D3D3;
+    background-color: rgb(68, 68, 68);
+}
+
+#sfc_button_close:hover {
+	width: 95px;
+    height: 35px;
+    cursor:pointer;
+    border: 0;
+    border-radius: 8px;
+    background-color: rgb(216, 216, 216);
+    color: #434343;
+}
+
+#vk_ads_64017 {
     position: absolute;
     top: 150px;
     left: 860px;

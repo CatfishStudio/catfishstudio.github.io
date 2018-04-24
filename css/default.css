@@ -149,17 +149,6 @@ table{
 }
 
 #about{
-	/*
-	margin-left: 40%;
-	background-color: #ffffff;
-	border: 1 solid #ffffff;
-	border-radius: 50px 50px;
-    color: #0A50D1;
-	box-shadow: 5px 0 10px rgba(0,0,150,0.5);
-	width: 50%;
-	padding: 25px;
-	*/
-	
 	margin-left: 40%;
 	background-color: #00B2D8;
 	border-radius: 50px 50px;
@@ -388,13 +377,13 @@ table{
 
 .fish5{
 	position: absolute;
-	top: 1580px;
-	left: 60%;
+	top: 2000px;
+	left: 80%;
 }
 
 .fish6{
 	position: absolute;
-	top: 2050px;
+	top: 2150px;
 	left: 80%;
 }
 

@@ -4,17 +4,31 @@
 <head>
         <title>Street Fighter Cards</title>
         <meta charset="utf-8" />
-        <link rel="stylesheet" href="css/default.css" type="text/css" />
+        <link rel="stylesheet" href="css/local.css" type="text/css" />
 		<script src="phaser/phaser.min.js"></script>
         <script src="localgame.js"></script>
 </head>
 
 <body>
-	<div id="content"></div>
-	<script type="text/javascript">
-		var game = new StreetFighterCards.Game.getInstance();
-		game.start();
-	</script>
+	<nav>
+		<a href="https://catfishstudio.github.io/#about">О компании</a> | <a href="https://catfishstudio.github.io/#news">Новости</a> | <a href="https://catfishstudio.github.io/#projects">Проекты</a> | <a href="https://catfishstudio.github.io/#technologies">Технологии</a> | <a href="https://catfishstudio.github.io/#contacts">Контакты</a>
+	</nav>
+
+	<header>
+		<img id="logo" src="./img/logo.png" alt="Catfish Studio" />	
+	</header>
+
+	<section class="Section1">
+		<div id="content"></div>
+		<script type="text/javascript">
+			var game = new StreetFighterCards.Game.getInstance();
+			game.start();
+		</script>
+	</section>
+	
+	<footer>
+		<p>Copyright © 2015-2018 Catfish Studio. All Rights Reserved.</p>
+	</footer>
 </body>
 
 </html>

@@ -170,18 +170,6 @@ table{
 
 
 #news{
-	/*
-	margin-left: 5%;
-	background-color: #ffffff;
-	border: 1 solid #ffffff;
-	border-radius: 50px 50px;
-    color: #0A50D1;
-	box-shadow: 5px 0 10px rgba(0,0,150,0.5);
-	height: 25%;
-	width: 45%;
-	padding: 25px;
-	*/
-
 	margin-left: 5%;
 	background-color: #0095BE;
 	border-radius: 50px 50px;
@@ -191,39 +179,30 @@ table{
 	color: #FFFFFF;
 }
 
-#game1{
-	/*
-	margin-left: 50%;
-	background-color: #ffffff;
-	border: 1 solid #ffffff;
-	border-radius: 50px 50px;
-    color: #0A50D1;
-	box-shadow: 5px 0 10px rgba(0,0,150,0.5);
-	height: 250px;
-	width: 480px;
-	padding: 10px;
-	text-align: left;
-	overflow: hidden;
-	*/
+#projects {
 
-	margin-left: 50%;
+}
+
+
+#game1{
+	margin-left: 25%;
 	background-color: #00B2D8;
 	border-radius: 15px 15px;
 	color: #FFFFFF;
-    height: 300px;
-	width: 480px;
+    height: 590px;
+	width: 450px;
 	padding: 10px;
 	text-align: left;
 	overflow: hidden;
+	float: left;
 }
 
 #game1 img {
 	border: 1 solid #ffffff;
 	border-radius: 25px 25px;
-	margin-right: 5px;
-	height: 200px;
-	width: 250px;
-	float:left;
+	margin: 5px;
+	height: 372px;
+	width: 440px;
 }
 
 #game1 h3 {
@@ -232,39 +211,26 @@ table{
 	margin-right: 25px;
 }
 
+
 #game2{
-	/*
-	margin-left: 5%;
-	background-color: #ffffff;
-	border: 1 solid #ffffff;
-	border-radius: 50px 50px;
-    color: #0A50D1;
-	box-shadow: 5px 0 10px rgba(0,0,150,0.5);
-	height: 250px;
+	margin-left: 60%;
+	background-color: #00B2D8;
+	border-radius: 15px 15px;
+	color: #FFFFFF;
+    height: 590px;
 	width: 450px;
 	padding: 10px;
 	text-align: left;
 	overflow: hidden;
-	*/
-
-	margin-left: 5%;
-	background-color: #00B2D8;
-	border-radius: 15px 15px;
-	color: #FFFFFF;
-    height: 280px;
-	width: 480px;
-	padding: 10px;
-	text-align: left;
-	overflow: hidden;
+	float: center;
 }
 
 #game2 img {
 	border: 1 solid #ffffff;
 	border-radius: 25px 25px;
-	margin-right: 5px;
-	height: 200px;
-	width: 250px;
-	float:left;
+	margin: 5px;
+	height: 372px;
+	width: 440px;
 }
 
 #game2 h3 {
@@ -274,38 +240,24 @@ table{
 }
 
 #game3{
-	/*
-	margin-left: 45%;
-	background-color: #ffffff;
-	border: 1 solid #ffffff;
-	border-radius: 50px 50px;
-    color: #0A50D1;
-	box-shadow: 5px 0 10px rgba(0,0,150,0.5);
-	height: 250px;
+	margin-left: 5%;
+	background-color: #00B2D8;
+	border-radius: 15px 15px;
+	color: #FFFFFF;
+    height: 570px;
 	width: 450px;
 	padding: 10px;
 	text-align: left;
 	overflow: hidden;
-	*/
-
-	margin-left: 45%;
-	background-color: #00B2D8;
-	border-radius: 15px 15px;
-	color: #FFFFFF;
-    height: 280px;
-	width: 480px;
-	padding: 10px;
-	text-align: left;
-	overflow: hidden;
+	float: left;
 }
 
 #game3 img {
 	border: 1 solid #ffffff;
 	border-radius: 25px 25px;
-	margin-right: 5px;
-	height: 200px;
-	width: 250px;
-	float:left;
+	margin: 5px;
+	height: 372px;
+	width: 440px;
 }
 
 #game3 h3 {
@@ -314,21 +266,34 @@ table{
 	margin-right: 25px;
 }
 
-#technologies{
-	/*
-	position: relative;
-	top: 125px;
-	margin-left: 5%;
-	background-color: #ffffff;
-	border: 1 solid #ffffff;
-	border-radius: 50px 50px;
-    color: #0A50D1;
-	box-shadow: 5px 0 10px rgba(0,0,150,0.5);
-	width: 70%;
-	padding: 25px;
+#game4{
+	margin-left: 40%;
+	background-color: #00B2D8;
+	border-radius: 15px 15px;
+	color: #FFFFFF;
+    height: 570px;
+	width: 450px;
+	padding: 10px;
+	text-align: left;
 	overflow: hidden;
-	*/
+	float: center;
+}
 
+#game4 img {
+	border: 1 solid #ffffff;
+	border-radius: 25px 25px;
+	margin: 5px;
+	height: 372px;
+	width: 440px;
+}
+
+#game4 h3 {
+	text-align: right;
+	margin-bottom: 5px;
+	margin-right: 25px;
+}
+
+#technologies{
 	position: relative;
 	top: 125px;
 	background-color: #0095BE;
@@ -340,19 +305,6 @@ table{
 }
 
 #contacts{
-	/*
-	margin-top: 50px;
-	margin-left: 5%;
-	background-color: #ffffff;
-	border: 1 solid #ffffff;
-	border-radius: 50px 50px;
-    color: #0A50D1;
-	box-shadow: 5px 0 10px rgba(0,0,150,0.5);
-	width: 300px;
-	padding: 25px;
-	overflow: hidden;
-	*/
-
 	margin-top: 50px;
 	margin-left: 5%;
 	background-color: #0095BE;
@@ -406,7 +358,8 @@ table{
 .seaweed2{
 	position: absolute;
 	left: 10%;
-	top: 1150px;
+	top: 1300px;
+
 }
 
 .seaweed3{
@@ -429,7 +382,7 @@ table{
 
 .fish4{
 	position: absolute;
-	top: 1200px;
+	top: 1400px;
 	left: 10%;
 }
 
@@ -441,8 +394,8 @@ table{
 
 .fish6{
 	position: absolute;
-	top: 1880px;
-	left: 15%;
+	top: 2050px;
+	left: 80%;
 }
 
 .fish7{

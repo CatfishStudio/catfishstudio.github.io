@@ -6,11 +6,7 @@
 	z-index: 10000;
 	background-color: #FFFFFF;
 	border-right: 1px solid #4A76A8;
-	/*
-    border-top-right-radius: 5px;
-    border-left: 1px solid #FFFFFF;
-    */
-    border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
     border-bottom: 1px solid #4A76A8;
 }
 
@@ -28,10 +24,6 @@
 	background-color: rgb(74, 118, 168);
 	border-right: 0px solid #4A76A8;
     border-top-right-radius: 5px;
-    /*
-    border-left: 0px solid #FFFFFF;
-    border-top-left-radius: 5px;
-    */
 }
 
 #sfc_title img {

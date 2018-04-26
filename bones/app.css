@@ -13,3 +13,119 @@ span {
     top: 150px;
     left: 860px;
 }
+
+#street_fighter_cards {position: absolute;
+	width: 600px;
+	height: 135px;
+	top: 176px;
+	left: 0px;
+	z-index: 10000;
+	background-color: #FFFFFF;
+	border-right: 1px solid #4A76A8;
+	/*
+    border-top-right-radius: 5px;
+    border-left: 1px solid #FFFFFF;
+    */
+    border-top-left-radius: 5px;
+    border-bottom: 1px solid #4A76A8;
+}
+
+#street_fighter_cards img {
+	position: relative;
+	top: -15px;
+	width: 100px;
+	height: 100px;
+	float: left;
+}
+
+#sfc_title {
+	width: 100%;
+	height: 30px;
+	background-color: rgb(74, 118, 168);
+	border-right: 0px solid #4A76A8;
+    border-top-right-radius: 5px;
+    /*
+    border-left: 0px solid #FFFFFF;
+    border-top-left-radius: 5px;
+    */
+}
+
+#sfc_title img {
+	position: relative;
+	top: 0px;
+	width: 25px;
+	height: 20px;
+	margin-top: 5px;
+	margin-left: 10px;
+	margin-right: 10px;
+	float: left;
+}
+
+#sfc_title_text {
+	padding-top: 7px;
+	color: #FFFFFF;
+    font-size: 14px;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+}
+
+#sfc_description {
+	width: 500px;
+	height: 100px;
+	padding-top: 5px;
+	font-size: 12px;
+	font-family: -apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+}
+
+#sfc_description_name{
+	font-weight: bold;
+	color: #4A76A8;
+}
+
+#sfc_buttons {
+	position: relative;
+	top: -100px;
+	left: 500px;
+}
+
+#sfc_button_play{
+	position: relative;
+	top: 45px;
+	width: 95px;
+    height: 35px;
+    cursor: pointer;
+    border: 0;
+    border-radius: 8px;
+    color: #FFFFFF;
+    background-color: rgb(74, 118, 168);
+}
+
+#sfc_button_play:hover {
+	width: 95px;
+    height: 35px;
+    cursor:pointer;
+    border: 0;
+    border-radius: 8px;
+    background-color: rgb(216, 216, 216);
+    color: #434343;
+}
+
+#sfc_button_close{
+	position: relative;
+	left: 525px;
+	top: -20px;
+	width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border: 0;
+    background-image: url(../img/vk_button_close.png);
+    background-repeat: no-repeat;
+}
+
+#sfc_button_close:hover {
+	width: 25px;
+    height: 25px;
+    cursor:pointer;
+    border: 0;
+    background-image: url(../img/vk_button_close_active.png);
+    background-repeat: no-repeat;
+}

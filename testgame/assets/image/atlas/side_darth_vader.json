@@ -1,0 +1,140 @@
+{"frames": {
+
+"side_darth_vader_01.png":
+{
+	"frame": {"x":869,"y":503,"w":281,"h":499},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":51,"y":50,"w":281,"h":499},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_darth_vader_02.png":
+{
+	"frame": {"x":583,"y":503,"w":284,"h":499},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":48,"y":50,"w":284,"h":499},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_darth_vader_03.png":
+{
+	"frame": {"x":2,"y":503,"w":289,"h":499},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":43,"y":50,"w":289,"h":499},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_darth_vader_04.png":
+{
+	"frame": {"x":605,"y":2,"w":293,"h":499},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":39,"y":50,"w":293,"h":499},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_darth_vader_05.png":
+{
+	"frame": {"x":2,"y":2,"w":303,"h":499},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":29,"y":50,"w":303,"h":499},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_darth_vader_06.png":
+{
+	"frame": {"x":307,"y":2,"w":296,"h":499},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":36,"y":50,"w":296,"h":499},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_darth_vader_07.png":
+{
+	"frame": {"x":293,"y":503,"w":288,"h":499},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":44,"y":50,"w":288,"h":499},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_darth_vader_08.png":
+{
+	"frame": {"x":869,"y":503,"w":281,"h":499},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":51,"y":50,"w":281,"h":499},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_darth_vader_09.png":
+{
+	"frame": {"x":869,"y":503,"w":281,"h":499},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":51,"y":50,"w":281,"h":499},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_darth_vader_10.png":
+{
+	"frame": {"x":293,"y":503,"w":288,"h":499},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":44,"y":50,"w":288,"h":499},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_darth_vader_11.png":
+{
+	"frame": {"x":307,"y":2,"w":296,"h":499},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":36,"y":50,"w":296,"h":499},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_darth_vader_12.png":
+{
+	"frame": {"x":2,"y":2,"w":303,"h":499},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":29,"y":50,"w":303,"h":499},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_darth_vader_13.png":
+{
+	"frame": {"x":605,"y":2,"w":293,"h":499},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":39,"y":50,"w":293,"h":499},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_darth_vader_14.png":
+{
+	"frame": {"x":2,"y":503,"w":289,"h":499},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":43,"y":50,"w":289,"h":499},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_darth_vader_15.png":
+{
+	"frame": {"x":583,"y":503,"w":284,"h":499},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":48,"y":50,"w":284,"h":499},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_darth_vader_16.png":
+{
+	"frame": {"x":869,"y":503,"w":281,"h":499},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":51,"y":50,"w":281,"h":499},
+	"sourceSize": {"w":355,"h":600}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "side_darth_vader.png",
+	"format": "RGBA8888",
+	"size": {"w":1152,"h":1004},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:6917b4a9df0bf1aee171ce66b9d4acd3:0b30877957d65218eab8f472cb32dcf1:d7e8d06269c149f7c651b9752b6eaa9e$"
+}
+}

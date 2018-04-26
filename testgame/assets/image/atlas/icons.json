@@ -1,0 +1,596 @@
+{"frames": {
+
+"aayla_secura_icon.png":
+{
+	"frame": {"x":309,"y":1,"w":73,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":0,"w":73,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"adigallia_icon.png":
+{
+	"frame": {"x":384,"y":1,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"admiral_ozzel_icon.png":
+{
+	"frame": {"x":461,"y":1,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"alliance_to_restore_the_republic_icon.png":
+{
+	"frame": {"x":538,"y":1,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"anakin_skywalker_icon.png":
+{
+	"frame": {"x":615,"y":1,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"aurra_sing_icon.png":
+{
+	"frame": {"x":692,"y":1,"w":69,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":0,"w":69,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"b1_battle_droid_icon.png":
+{
+	"frame": {"x":763,"y":1,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"bail_organa_icon.png":
+{
+	"frame": {"x":840,"y":1,"w":65,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":0,"w":65,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"barriss_offee_icon.png":
+{
+	"frame": {"x":907,"y":1,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"beru_lars_icon.png":
+{
+	"frame": {"x":984,"y":1,"w":66,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":0,"w":66,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"bib_fortuna_icon.png":
+{
+	"frame": {"x":1052,"y":1,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"boba_fett_icon.png":
+{
+	"frame": {"x":1129,"y":1,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"boss_nass_icon.png":
+{
+	"frame": {"x":1206,"y":1,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"c_3po_icon.png":
+{
+	"frame": {"x":1283,"y":1,"w":62,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":0,"w":62,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"capitan_panaka_icon.png":
+{
+	"frame": {"x":1347,"y":1,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"chewbacca_icon.png":
+{
+	"frame": {"x":1424,"y":1,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"clone_commander_bakara_icon.png":
+{
+	"frame": {"x":1501,"y":1,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"clone_commander_cody_icon.png":
+{
+	"frame": {"x":1578,"y":1,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"clone_commander_neyo_icon.png":
+{
+	"frame": {"x":1655,"y":1,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"clone_commander_rex_icon.png":
+{
+	"frame": {"x":1732,"y":1,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"commander_jerjerrod_icon.png":
+{
+	"frame": {"x":1,"y":74,"w":64,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":64,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"darth_maul_icon.png":
+{
+	"frame": {"x":67,"y":76,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"darth_sidious_icon.png":
+{
+	"frame": {"x":144,"y":76,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"darth_vader_icon.png":
+{
+	"frame": {"x":221,"y":77,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"dooku_icon.png":
+{
+	"frame": {"x":298,"y":78,"w":73,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":73,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"eeth_koth_icon.png":
+{
+	"frame": {"x":373,"y":78,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"finn_icon.png":
+{
+	"frame": {"x":450,"y":78,"w":65,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":65,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"general_grievous_icon.png":
+{
+	"frame": {"x":517,"y":78,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"general_madine_icon.png":
+{
+	"frame": {"x":594,"y":78,"w":66,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":66,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"han_solo_icon.png":
+{
+	"frame": {"x":662,"y":78,"w":64,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":64,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"jango_fett_icon.png":
+{
+	"frame": {"x":728,"y":78,"w":71,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":71,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"jar_jar_binks_icon.png":
+{
+	"frame": {"x":801,"y":78,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"jawas_icon.png":
+{
+	"frame": {"x":878,"y":78,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"kapitan_antilles_icon.png":
+{
+	"frame": {"x":955,"y":78,"w":71,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":4,"y":0,"w":71,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"ki_adi_mundi_icon.png":
+{
+	"frame": {"x":1028,"y":78,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"kit_fisto_icon.png":
+{
+	"frame": {"x":1105,"y":78,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"kylo_ren_icon.png":
+{
+	"frame": {"x":1182,"y":78,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"lando_calrissian_icon.png":
+{
+	"frame": {"x":1259,"y":78,"w":72,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"leia_organa_icon.png":
+{
+	"frame": {"x":1333,"y":78,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"luke_skywalker_icon.png":
+{
+	"frame": {"x":1410,"y":78,"w":58,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":11,"y":0,"w":58,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"mace_windu_icon.png":
+{
+	"frame": {"x":1470,"y":78,"w":69,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":69,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"mas_amedda_icon.png":
+{
+	"frame": {"x":1541,"y":78,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"maximilian_veers_icon.png":
+{
+	"frame": {"x":1618,"y":78,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"mon_motma_icon.png":
+{
+	"frame": {"x":1695,"y":78,"w":72,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":72,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"nute_gunray_icon.png":
+{
+	"frame": {"x":61,"y":153,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"obi_wan_kenobi_icon.png":
+{
+	"frame": {"x":138,"y":153,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"owen_lars_icon.png":
+{
+	"frame": {"x":215,"y":154,"w":70,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"padme_amidala_icon.png":
+{
+	"frame": {"x":1769,"y":78,"w":58,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":7,"y":0,"w":58,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"palpatine_icon.png":
+{
+	"frame": {"x":287,"y":155,"w":68,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":7,"y":0,"w":68,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"phasma_icon.png":
+{
+	"frame": {"x":357,"y":155,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"plo_koon_icon.png":
+{
+	"frame": {"x":434,"y":155,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"poe_dameron_icon.png":
+{
+	"frame": {"x":511,"y":155,"w":69,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":69,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"poggle_the_lesser_icon.png":
+{
+	"frame": {"x":582,"y":155,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"qui_gon_jinn_icon.png":
+{
+	"frame": {"x":659,"y":155,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"red_battle_droid_icon.png":
+{
+	"frame": {"x":232,"y":1,"w":75,"h":74},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":1,"w":75,"h":74},
+	"sourceSize": {"w":75,"h":75}
+},
+"republic_clone_army_icon.png":
+{
+	"frame": {"x":1,"y":1,"w":75,"h":71},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":4,"w":75,"h":71},
+	"sourceSize": {"w":75,"h":75}
+},
+"rey_icon.png":
+{
+	"frame": {"x":736,"y":155,"w":69,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":6,"y":0,"w":69,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"royal_guards_icon.png":
+{
+	"frame": {"x":807,"y":155,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"rune_haako_icon.png":
+{
+	"frame": {"x":884,"y":155,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"saesee_tiin_icon.png":
+{
+	"frame": {"x":961,"y":155,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"separatists_icon.png":
+{
+	"frame": {"x":78,"y":1,"w":75,"h":73},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":75,"h":73},
+	"sourceSize": {"w":75,"h":75}
+},
+"shaak_ti_icon.png":
+{
+	"frame": {"x":1038,"y":155,"w":73,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":0,"w":73,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"shmi_skywalker_icon.png":
+{
+	"frame": {"x":1,"y":151,"w":58,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":10,"y":0,"w":58,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"sio_bibble_icon.png":
+{
+	"frame": {"x":1113,"y":155,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"stormtrooper_icon.png":
+{
+	"frame": {"x":1190,"y":155,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"stormtroopers_icon.png":
+{
+	"frame": {"x":155,"y":1,"w":75,"h":73},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":75,"h":73},
+	"sourceSize": {"w":75,"h":75}
+},
+"tion_medon_icon.png":
+{
+	"frame": {"x":1267,"y":155,"w":70,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":0,"w":70,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"trade_federation_icon.png":
+{
+	"frame": {"x":1339,"y":155,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"tusken_icon.png":
+{
+	"frame": {"x":1416,"y":155,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"wat_tambor_icon.png":
+{
+	"frame": {"x":1493,"y":155,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"watto_icon.png":
+{
+	"frame": {"x":1570,"y":155,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"wicket_wysri_warrick_icon.png":
+{
+	"frame": {"x":1647,"y":155,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+},
+"yoda_icon.png":
+{
+	"frame": {"x":1724,"y":155,"w":75,"h":75},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":75,"h":75},
+	"sourceSize": {"w":75,"h":75}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "icons.png",
+	"format": "RGBA8888",
+	"size": {"w":1828,"h":231},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:1e2951d9db2fe34af445e80c9bb9444a:8b30aa87eb5d9baf0379e38b4e4c473c:b5c5bd7252d2048fecbb1bda1760f9ef$"
+}
+}

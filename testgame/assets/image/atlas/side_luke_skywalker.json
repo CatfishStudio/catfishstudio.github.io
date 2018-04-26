@@ -1,0 +1,180 @@
+{"frames": {
+
+"side_luke_skywalker_01.png":
+{
+	"frame": {"x":1,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_02.png":
+{
+	"frame": {"x":1,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_03.png":
+{
+	"frame": {"x":1,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_04.png":
+{
+	"frame": {"x":209,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_05.png":
+{
+	"frame": {"x":209,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_06.png":
+{
+	"frame": {"x":209,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_07.png":
+{
+	"frame": {"x":417,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_08.png":
+{
+	"frame": {"x":417,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_09.png":
+{
+	"frame": {"x":417,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_10.png":
+{
+	"frame": {"x":625,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_11.png":
+{
+	"frame": {"x":625,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_12.png":
+{
+	"frame": {"x":625,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_13.png":
+{
+	"frame": {"x":833,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_14.png":
+{
+	"frame": {"x":833,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_15.png":
+{
+	"frame": {"x":833,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_16.png":
+{
+	"frame": {"x":1041,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_17.png":
+{
+	"frame": {"x":1041,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_18.png":
+{
+	"frame": {"x":1041,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_19.png":
+{
+	"frame": {"x":1249,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_20.png":
+{
+	"frame": {"x":1249,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+},
+"side_luke_skywalker_21.png":
+{
+	"frame": {"x":1249,"y":1,"w":206,"h":522},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":52,"y":41,"w":206,"h":522},
+	"sourceSize": {"w":355,"h":600}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "side_luke_skywalker.png",
+	"format": "RGBA8888",
+	"size": {"w":1456,"h":524},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:3ccf7f559767f7bb464184f1fd759fc6:4ce17b1cf691354313fc01c5d2a521dc:00277ad00b90f78b773426af2a16ed0e$"
+}
+}

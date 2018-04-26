@@ -1,0 +1,52 @@
+{"frames": {
+
+"hit_1.png":
+{
+	"frame": {"x":1,"y":160,"w":63,"h":71},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":9,"y":5,"w":63,"h":71},
+	"sourceSize": {"w":80,"h":80}
+},
+"hit_2.png":
+{
+	"frame": {"x":1,"y":78,"w":65,"h":80},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":7,"y":0,"w":65,"h":80},
+	"sourceSize": {"w":80,"h":80}
+},
+"hit_3.png":
+{
+	"frame": {"x":69,"y":1,"w":48,"h":78},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":16,"y":2,"w":48,"h":78},
+	"sourceSize": {"w":80,"h":80}
+},
+"hit_4.png":
+{
+	"frame": {"x":68,"y":81,"w":57,"h":79},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":11,"y":1,"w":57,"h":79},
+	"sourceSize": {"w":80,"h":80}
+},
+"hit_5.png":
+{
+	"frame": {"x":1,"y":1,"w":66,"h":75},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":2,"w":66,"h":75},
+	"sourceSize": {"w":80,"h":80}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "crystals.png",
+	"format": "RGBA8888",
+	"size": {"w":126,"h":232},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:79600298042485e40e1d1aaa21504515:2be874f0ad6b2c10eef6f3234fec7318:4859dd71091a9e04f8b3b68baf1ae72f$"
+}
+}

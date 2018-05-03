@@ -87,16 +87,16 @@ footer p{
 }
 
 #content{
-	position: relative;
-	top: 60px;
+	width: 870px;
+	height: 100%;
+	margin: 0 auto;
 }
 
 canvas {
-	position: absolute;
-	top: 80px;
-	left: 20%;
+	position: relative;
 	width: 860px;
 	height: 730px;
+	top: 5%;
 	box-shadow: 0 0 15px rgba(0,0,0,0.5);
 	border: 4px double black;
 }

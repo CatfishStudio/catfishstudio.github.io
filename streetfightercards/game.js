@@ -32,6 +32,9 @@ var StreetFighterCards;
             return Game.instance;
         };
         Game.prototype.start = function () {
+            this.game.input.onDown.addOnce(() => { 
+                this.game.sound.context.resume(); 
+            });
             this.state.start(StreetFighterCards.Boot.Name);
         };
         Game.instance = null;

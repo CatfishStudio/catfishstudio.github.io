@@ -32,9 +32,6 @@ var StreetFighterCards;
             return Game.instance;
         };
         Game.prototype.start = function () {
-            this.game.input.onDown.addOnce(() => { 
-                this.game.sound.context.resume(); 
-            });
             this.state.start(StreetFighterCards.Boot.Name);
         };
         Game.instance = null;
@@ -2608,6 +2605,9 @@ var StreetFighterCards;
             this.game.stage.removeChildren();
         };
         Menu.prototype.initSounds = function () {
+            this.game.input.onDown.addOnce(() => { 
+                this.game.sound.context.resume(); 
+            });
             if (GameData.Data.music === undefined || GameData.Data.music === null) {
                 GameData.Data.music = this.game.add.audio(GameData.Data.musicList[0][0]);
                 GameData.Data.buttonSound = this.game.add.audio(Sounds.ButtonSound);

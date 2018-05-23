@@ -10958,7 +10958,7 @@ var Game = function (mainStage) {
 		menuShow: function () {
 			that.sound.soundPlayStarWarsThemeSong();
 
-			that.dataSore = DataStore(that);
+			that.dataSore = DataStore(that);	// DATA STORE
 
 			that.menu = Menu(that);
 			that.menu.create();
@@ -10979,6 +10979,8 @@ var Game = function (mainStage) {
 			that.settings = Settings(that, location);
 			that.settings.create();
 			mainStage.addChild(that.settings.show());
+
+			that.dataSore.setData();	// DATA STORE
 		},
 
 		settingsClose: function () {
@@ -10987,6 +10989,8 @@ var Game = function (mainStage) {
 			mainStage.removeChild(that.settings.close());
 			that.settings.destroy();
 			that.settings = null;
+
+			that.dataSore.getData();	// DATA STORE
 		},
 
 		sideShow: function () {
@@ -11008,7 +11012,7 @@ var Game = function (mainStage) {
 			that.initialization = Initialization(that.assets.getAsset("planetTextures"), that.assets.getAsset("heroesTextures"), that.assets.getAsset("personagesJson"), that.assets.getAsset("planetsJson"), that.assets.getAsset("fieldLevelsJson"), that.config.side);
 			that.initialization.initGame();
 
-			that.dataSore.showData(that);
+			that.dataSore.showData();	// DATA STORE
 		},
 
 		mapShow: function () {
@@ -11223,8 +11227,12 @@ var Game = function (mainStage) {
 /* == END FILE ========================================================== */
 
 /* == START FILE ========================================================= */
+// DATA STORE
 var DataStore = function (parent) {
 	var that = {
+		jsonDataOther: null,
+		jsonDataPers: null,
+
 		showData: function () {
 			console.log(parent);
 			console.log('initialization', parent.initialization);
@@ -11242,6 +11250,75 @@ var DataStore = function (parent) {
 				parent.initialization.userExperiencePointsAI,
 				parent.initialization.userTotalBattle);
 			console.log('config', parent.config);
+		},
+
+		getData: function () {
+			VK.api('storage.get', { keys: 'swh_data_other, swh_data_pers' }, onVkDataGet, onVkDataGet);
+		},
+		onVkDataGet: function(response){
+			console.log('VK GET DATA:', response);
+		},
+
+		setData: function () {
+			// json for other
+			that.jsonDataOther = '{';
+			that.jsonDataOther += '"side": "' + parent.config.side + '",';
+			that.jsonDataOther += '"levels_planets": {';
+			for(var value in parent.initialization.levels){
+				that.jsonDataOther += '"' + value + '": ["' 
+					+ parent.initialization.levels[value].name + '", "' 
+					+ parent.initialization.planets[value].status + '"]' ;
+				if(value !== 'Jakku') that.jsonDataOther += ','
+			}
+			that.jsonDataOther += '},';
+			that.jsonDataOther += '"commandUser": [' + 
+					'"' + parent.initialization.commandUser.personage1 + '",' +
+					'"' + parent.initialization.commandUser.personage2 + '",' +
+					'"' + parent.initialization.commandUser.personage3 + '"' +
+					'],';
+			that.jsonDataOther += '"commandAI": [' + 
+					'"' + parent.initialization.commandAI.personage1 + '",' +
+					'"' + parent.initialization.commandAI.personage2 + '",' +
+					'"' + parent.initialization.commandAI.personage3 + '"' +
+					'],';
+			that.jsonDataOther += '"userExperiencePoints": ' + parent.initialization.userExperiencePoints + ',';
+			that.jsonDataOther += '"userTotalPointsPlayerTournament": ' + parent.initialization.userTotalPointsPlayerTournament + ',';
+			that.jsonDataOther += '"userlTotalPointsPlayerLevel": ' + parent.initialization.userlTotalPointsPlayerLevel + ',';
+			that.jsonDataOther += '"userExperiencePointsAI": ' + parent.initialization.userExperiencePointsAI + ',';
+			that.jsonDataOther += '"userTotalBattle": ' + parent.initialization.userTotalBattle + '';
+			that.jsonDataOther += '}';
+
+			//console.log('JSON', that.jsonDataOther);
+
+			//json for personages
+			that.jsonDataPers = '{';
+			for(var pers in parent.initialization.personages){
+				that.jsonDataPers += '"' + pers + '": [' +
+					'"' + parent.initialization.personages[pers].command + '",' +
+					'"' + parent.initialization.personages[pers].hitAttack1 + '",' +
+					'"' + parent.initialization.personages[pers].hitAttack2 + '",' +
+					'"' + parent.initialization.personages[pers].hitAttack3 + '",' +
+					'"' + parent.initialization.personages[pers].hitAttack4 + '",' +
+					'"' + parent.initialization.personages[pers].hitAttack5 + '",' +
+					'"' + parent.initialization.personages[pers].hitDefense1 + '",' +
+					'"' + parent.initialization.personages[pers].hitDefense2 + '",' +
+					'"' + parent.initialization.personages[pers].hitDefense3 + '",' +
+					'"' + parent.initialization.personages[pers].hitDefense4 + '",' +
+					'"' + parent.initialization.personages[pers].hitDefense5 + '",' +
+					'"' + parent.initialization.personages[pers].life + '",' +
+					'"' + parent.initialization.personages[pers].status + '"]';
+				if(pers !== 'yoda') that.jsonDataPers += ',';
+			}
+			that.jsonDataPers += '}';
+
+			//console.log('JSON', that.jsonDataPers);
+
+			// Save data in VK
+			VK.api('storage.set', { key: 'swh_data_other', value: that.jsonDataOther, global: 0 }, that.onVkDataSet, that.onVkDataSet);
+			VK.api('storage.set', { key: 'swh_data_pers', value: that.jsonDataPers, global: 0 }, that.onVkDataSet, that.onVkDataSet);
+		},
+		onVkDataSet: function(response){
+			console.log('VK SET DATA:', response);
 		}
 	}
 	return that;

@@ -11253,7 +11253,7 @@ var DataStore = function (parent) {
 		},
 
 		getData: function () {
-			VK.api('storage.get', { keys: 'swh_data_other, swh_data_pers' }, onVkDataGet, onVkDataGet);
+			VK.api('storage.get', { keys: 'swh_data_other, swh_data_pers' }, that.onVkDataGet, that.onVkDataGet);
 		},
 		onVkDataGet: function(response){
 			console.log('VK GET DATA:', response);

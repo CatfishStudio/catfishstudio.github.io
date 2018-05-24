@@ -11030,7 +11030,7 @@ var Game = function (mainStage) {
 				that.mapShow();
 			}else{									// DATA STORE (continue)
 
-				console.log(that.dataSore.jsonDataOther);
+				console.log(that, that.dataSore);
 				JSON.parse(that.dataSore.jsonDataOther, function (key, value) {
 					console.log(that.config.side, key, value);
 					console.log(value[key]);

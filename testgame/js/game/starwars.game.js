@@ -11029,7 +11029,7 @@ var Game = function (mainStage) {
 				that.menu = that.settings = null;
 				that.mapShow();
 			}else{									// DATA STORE (continue)
-				JSON.parse(jsonData, function (key, value) {
+				JSON.parse(that.dataSore.jsonDataOther, function (key, value) {
 					console.log(that.config.side, key, value);
 				}).bind(that);
 				//that.config.side = that.dataSore.jsonDataOther

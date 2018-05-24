@@ -10976,10 +10976,10 @@ var Game = function (mainStage) {
 			console.log('VK GET DATA:', response);
 			if(response === undefined || response === null) return;
 			if(that.dataSore !== null){			// DATA STORE
-				that.dataSore.jsonDataOther = response.value;
-				that.dataSore.jsonDataPers1 = response.value;
-				that.dataSore.jsonDataPers2 = response.value;
-				that.dataSore.jsonDataPers3 = response.value;
+				that.dataSore.jsonDataOther = response[0].value;
+				that.dataSore.jsonDataPers1 = response[1].value;
+				that.dataSore.jsonDataPers2 = response[2].value;
+				that.dataSore.jsonDataPers3 = response[3].value;
 				if(that.menu !== null || that.menu !== undefined) {
 					that.menu.buttonContinue();
 				}

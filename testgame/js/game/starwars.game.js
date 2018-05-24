@@ -110,8 +110,8 @@ var Backmenu = function (parent) {
 
 		textCreate: function () {
 			var text;
-			if (parent.config.side === that.SIDE_NONE || parent.config.side === that.SIDE_JEDI) text = new PIXI.Text("\n    Вы собираетесь выйти в главное меню.\n    В таком случае прогресс будет потерян.\n\n\n     Продолжить выход в основное меню?", that.styleBlueText);
-			if (parent.config.side === that.SIDE_SITH) text = new PIXI.Text("\n    Вы собираетесь выйти в главное меню.\n    В таком случае прогресс будет потерян.\n\n\n     Продолжить выход в основное меню?", that.styleRedText);
+			if (parent.config.side === that.SIDE_NONE || parent.config.side === that.SIDE_JEDI) text = new PIXI.Text("\n    Вы собираетесь выйти в главное меню.\n\n    Продолжить выход в основное меню?", that.styleBlueText);
+			if (parent.config.side === that.SIDE_SITH) text = new PIXI.Text("\n    Вы собираетесь выйти в главное меню.\n\n    Продолжить выход в основное меню?", that.styleRedText);
 			text.x = 255;
 			text.y = 285;
 			that.windowStage.addChild(text);
@@ -3884,8 +3884,12 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 			var index = that.randomIndex();
 			if (index >= 0 && index < 7) return true; // ИИ победил
 			else return false; // ИИ проиграл
-		}
+		},
 
+		/* Загрузка сохраненных данных */
+		loadingSavedData: function (jsonDataOther, jsonDataPers1, jsonDataPers2, jsonDataPers3){
+
+		}
 	};
 	return that;
 };
@@ -11002,8 +11006,12 @@ var Game = function (mainStage) {
 			that.menu.create();
 			mainStage.addChild(that.menu.show());
 
-			that.dataSore = DataStore(that);	// DATA STORE (init)
-			that.dataSore.getData();			// DATA STORE (load)
+			if(that.initialization === null){
+				that.dataSore = DataStore(that);	// DATA STORE (init)
+				that.dataSore.getData();			// DATA STORE (load)
+			}else{
+				that.menu.buttonContinue();
+			}
 		},
 
 		menuStartGame: function () {
@@ -11015,7 +11023,25 @@ var Game = function (mainStage) {
 		},
 
 		continueGame: function() {
-			console.log('Continue Game !');
+			if(that.initialization !== null){
+				mainStage.removeChild(that.menu.close());
+				that.menu.destroy();
+				that.menu = that.settings = null;
+				that.mapShow();
+			}else{									// DATA STORE (continue)
+				JSON.parse(jsonData, function (key, value) {
+					console.log(that.config.side, key, value);
+				}).bind(that);
+				//that.config.side = that.dataSore.jsonDataOther
+				/*
+				that.initializationGame();
+				that.initialization.loadingSavedData(
+					that.dataSore.jsonDataOther, 
+					that.dataSore.jsonDataPers1, 
+					that.dataSore.jsonDataPers2, 
+					that.dataSore.jsonDataPers3);
+				*/
+			}
 		},
 
 		settingsShow: function (location) {
@@ -11053,7 +11079,7 @@ var Game = function (mainStage) {
 			that.initialization = Initialization(that.assets.getAsset("planetTextures"), that.assets.getAsset("heroesTextures"), that.assets.getAsset("personagesJson"), that.assets.getAsset("planetsJson"), that.assets.getAsset("fieldLevelsJson"), that.config.side);
 			that.initialization.initGame();
 
-			that.dataSore.showData();			// DATA STORE (log)
+			that.dataSore.showData();			// DATA STORE (log)			
 		},
 
 		mapShow: function () {
@@ -11087,7 +11113,7 @@ var Game = function (mainStage) {
 			that.backmenu.destroy();
 			that.backmenu = null;
 			if (back === true) {
-				that.config.side = "side_none";
+				//that.config.side = "side_none";
 				if (that.map !== null) that.mapClose();
 				if (that.level !== null) that.levelClose();
 				that.menuShow();

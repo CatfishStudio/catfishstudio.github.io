@@ -7947,6 +7947,29 @@ var Menu = function (parent) {
 			}
 		},
 
+		buttonContinue: function() {
+			var button = new PIXI.extras.MovieClip(parent.assets.getAsset("animTexButtonBlue"));
+			button.name = "button_3";
+			button.position.x = 85;
+			button.position.y = 350 - 75;
+			button.interactive = true;
+			button.buttonMode = true;
+			button.loop = false;
+			button.animationSpeed = 0.2;
+			button.onComplete = that.onButtonUpdate;
+			button.tap = that.onButtonClick;
+			button.click = that.onButtonClick;
+			button.on('mouseover', that.onButtonOver);
+			button.on('mouseout', that.onButtonOut);
+
+			var text = new PIXI.Text("ПРОДОЛЖИТЬ", that.styleButtonText);
+			text.x = button.width / 3.8;
+			text.y = button.height / 3;
+
+			button.addChild(text);
+			that.windowStage.addChild(button);
+		},
+
 		onButtonOver: function (e) {
 			this.isOver = true;
 			this.gotoAndPlay(1);
@@ -7976,6 +7999,9 @@ var Menu = function (parent) {
 					break;
 				case "button_2":        // Позвать друзей ВК
 					parent.vkInvite();
+					break;
+				case "button_3":        // Продолжить игру
+					parent.continueGame();
 					break;
 				default:
 					break;
@@ -10942,6 +10968,20 @@ var Game = function (mainStage) {
 			VK.api("wall.post", { message: text + '.\nПрисоединяйтесь к игре https://vk.com/app5170657', attachments: 'photo-62618339_398688727' });
 		},
 
+		onVkDataGet: function (response) {
+			console.log('VK GET DATA:', response);
+			if(response === undefined || response === null) return;
+			if(that.dataSore !== null){			// DATA STORE
+				that.dataSore.jsonDataOther = response.value;
+				that.dataSore.jsonDataPers1 = response.value;
+				that.dataSore.jsonDataPers2 = response.value;
+				that.dataSore.jsonDataPers3 = response.value;
+				if(that.menu !== null || that.menu !== undefined) {
+					that.menu.buttonContinue();
+				}
+			}
+		},
+
 		loadAssets: function () {
 			that.assets = Preloader(that);
 			that.assets.load();
@@ -10958,11 +10998,12 @@ var Game = function (mainStage) {
 		menuShow: function () {
 			that.sound.soundPlayStarWarsThemeSong();
 
-			that.dataSore = DataStore(that);	// DATA STORE
-
 			that.menu = Menu(that);
 			that.menu.create();
 			mainStage.addChild(that.menu.show());
+
+			that.dataSore = DataStore(that);	// DATA STORE (init)
+			that.dataSore.getData();			// DATA STORE (load)
 		},
 
 		menuStartGame: function () {
@@ -10973,14 +11014,16 @@ var Game = function (mainStage) {
 			that.sideShow();
 		},
 
+		continueGame: function() {
+			console.log('Continue Game !');
+		},
+
 		settingsShow: function (location) {
 			that.sound.soundPlayStarWarsWindowOpen();
 
 			that.settings = Settings(that, location);
 			that.settings.create();
 			mainStage.addChild(that.settings.show());
-
-			that.dataSore.setData();	// DATA STORE
 		},
 
 		settingsClose: function () {
@@ -10989,8 +11032,6 @@ var Game = function (mainStage) {
 			mainStage.removeChild(that.settings.close());
 			that.settings.destroy();
 			that.settings = null;
-
-			that.dataSore.getData();	// DATA STORE
 		},
 
 		sideShow: function () {
@@ -11012,10 +11053,12 @@ var Game = function (mainStage) {
 			that.initialization = Initialization(that.assets.getAsset("planetTextures"), that.assets.getAsset("heroesTextures"), that.assets.getAsset("personagesJson"), that.assets.getAsset("planetsJson"), that.assets.getAsset("fieldLevelsJson"), that.config.side);
 			that.initialization.initGame();
 
-			that.dataSore.showData();	// DATA STORE
+			that.dataSore.showData();			// DATA STORE (log)
 		},
 
 		mapShow: function () {
+			that.dataSore.setData();			// DATA STORE (save)
+
 			that.sound.soundPlayStarWarsThemeSong();
 
 			that.map = Map(that);
@@ -11255,10 +11298,7 @@ var DataStore = function (parent) {
 		},
 
 		getData: function () {
-			VK.api('storage.get', { keys: 'swh_data_other, swh_data_pers1, swh_data_pers2, swh_data_pers3' }, that.onVkDataGet, that.onVkDataGet);
-		},
-		onVkDataGet: function (response) {
-			console.log('VK GET DATA:', response);
+			VK.api('storage.get', { keys: 'swh_data_other, swh_data_pers1, swh_data_pers2, swh_data_pers3' }, parent.onVkDataGet, parent.onVkDataGet);
 		},
 
 		setData: function () {
@@ -11363,6 +11403,7 @@ var DataStore = function (parent) {
 			VK.api('storage.set', { key: 'swh_data_pers2', value: that.jsonDataPers2, global: 0 }, that.onVkDataSet, that.onVkDataSet);
 			VK.api('storage.set', { key: 'swh_data_pers3', value: that.jsonDataPers3, global: 0 }, that.onVkDataSet, that.onVkDataSet);
 		},
+
 		onVkDataSet: function (response) {
 			console.log('VK SET DATA:', response);
 		}

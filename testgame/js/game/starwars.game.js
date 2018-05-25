@@ -11049,7 +11049,11 @@ var Game = function (mainStage) {
 					that.dataSore.jsonDataOther, 
 					that.dataSore.jsonDataPers1, 
 					that.dataSore.jsonDataPers2, 
-					that.dataSore.jsonDataPers3);
+					that.dataSore.jsonDataPers3
+				);
+				that.menu.destroy();
+				that.menu = that.settings = null;
+				that.mapShow();
 			}
 		},
 

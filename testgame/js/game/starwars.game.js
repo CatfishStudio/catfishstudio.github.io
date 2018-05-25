@@ -10975,21 +10975,16 @@ var Game = function (mainStage) {
 		onVkDataGet: function (response) {
 			console.log('VK GET DATA:', response);
 			
-			console.log('VK GET DATA:', response.response);
-			console.log('VK GET DATA:', response.response[0]);
-			console.log('VK GET DATA:', response.response[0].value);
-
 			if(response === undefined || response === null) return;
 			if(that.dataSore !== null){			// DATA STORE
-				that.dataSore.jsonDataOther = response[0].value;
-				that.dataSore.jsonDataPers1 = response[1].value;
-				that.dataSore.jsonDataPers2 = response[2].value;
-				that.dataSore.jsonDataPers3 = response[3].value;
+				that.dataSore.jsonDataOther = response.response[0].value;
+				that.dataSore.jsonDataPers1 = response.response[1].value;
+				that.dataSore.jsonDataPers2 = response.response[2].value;
+				that.dataSore.jsonDataPers3 = response.response[3].value;
 				if(that.menu !== null || that.menu !== undefined) {
 					that.menu.buttonContinue();
 				}
 			}
-			console.log("onVkDataGet", that.dataSore, that);
 		},
 
 		loadAssets: function () {
@@ -11334,6 +11329,7 @@ var DataStore = function (parent) {
 				parent.initialization.userExperiencePointsAI,
 				parent.initialization.userTotalBattle);
 			console.log('config', parent.config);
+			console.log('end game', parent.endGame);
 		},
 
 		getData: function () {
@@ -11343,6 +11339,7 @@ var DataStore = function (parent) {
 		setData: function () {
 			// json for other
 			that.jsonDataOther = '{';
+			that.jsonDataOther += '"game": "' + parent.endGame + '",';
 			that.jsonDataOther += '"side": "' + parent.config.side + '",';
 			that.jsonDataOther += '"levels_planets": {';
 			for (var value in parent.initialization.levels) {

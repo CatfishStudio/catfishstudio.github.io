@@ -11043,7 +11043,7 @@ var Game = function (mainStage) {
 				that.menu = that.settings = null;
 				that.mapShow();
 			}else{									// DATA STORE (continue)
-				JSON.parse(jsonDataOther, function (key, value) {
+				JSON.parse(that.dataSore.jsonDataOther, function (key, value) {
 					if(key === "side") that.config.side = value;
 				});
 				
@@ -11054,6 +11054,9 @@ var Game = function (mainStage) {
 					that.dataSore.jsonDataPers2, 
 					that.dataSore.jsonDataPers3
 				);
+
+				console.log(that.initialization);
+
 				that.menu.destroy();
 				that.menu = that.settings = null;
 				that.mapShow();

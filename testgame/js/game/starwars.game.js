@@ -3888,7 +3888,20 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 
 		/* Загрузка сохраненных данных */
 		loadingSavedData: function (jsonDataOther, jsonDataPers1, jsonDataPers2, jsonDataPers3){
+			console.log('DATA OTHER:', jsonDataOther);
 
+			JSON.parse(jsonDataOther, function (key, value) {
+				console.log(key, value);
+			});
+
+			console.log('DATA 1:',jsonDataPers1);
+
+			JSON.parse(jsonDataPers1, function (key, value) {
+				console.log(key, value);
+			});
+
+			console.log('DATA 2:',jsonDataPers2);
+			console.log('DATA 3:',jsonDataPers3);
 		}
 	};
 	return that;
@@ -11030,25 +11043,13 @@ var Game = function (mainStage) {
 				that.menu = that.settings = null;
 				that.mapShow();
 			}else{									// DATA STORE (continue)
-
-				console.log("continueGame", that, that.dataSore);
-				JSON.parse(that.dataSore.jsonDataOther, function (key, value) {
-					console.log(that.config.side, key, value);
-					console.log(value[key]);
-					console.log(value["side"]);
-					console.log(value.side);
-				}).bind(that);
-
-
-				//that.config.side = that.dataSore.jsonDataOther
-				/*
+				that.config.side = that.dataSore.jsonDataOther
 				that.initializationGame();
 				that.initialization.loadingSavedData(
 					that.dataSore.jsonDataOther, 
 					that.dataSore.jsonDataPers1, 
 					that.dataSore.jsonDataPers2, 
 					that.dataSore.jsonDataPers3);
-				*/
 			}
 		},
 

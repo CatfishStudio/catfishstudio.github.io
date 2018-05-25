@@ -10974,8 +10974,12 @@ var Game = function (mainStage) {
 
 		onVkDataGet: function (response) {
 			console.log('VK GET DATA:', response);
-			console.log('VK GET DATA:', response[0]);
-			console.log('VK GET DATA:', response[0]["value"]);
+			
+			for (var value in response){
+				console.log(value);
+			}
+
+			console.log('VK GET DATA:', response.length());
 
 			if(response === undefined || response === null) return;
 			if(that.dataSore !== null){			// DATA STORE

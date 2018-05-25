@@ -11043,7 +11043,10 @@ var Game = function (mainStage) {
 				that.menu = that.settings = null;
 				that.mapShow();
 			}else{									// DATA STORE (continue)
-				that.config.side = that.dataSore.jsonDataOther
+				JSON.parse(jsonDataOther, function (key, value) {
+					if(key === "side") that.config.side = value;
+				});
+				
 				that.initializationGame();
 				that.initialization.loadingSavedData(
 					that.dataSore.jsonDataOther, 

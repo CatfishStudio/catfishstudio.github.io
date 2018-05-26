@@ -3929,15 +3929,79 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 				if(key === 'commandAI') flag = '';
 			});
 
-			console.log('DATA 1:',jsonDataPers1);
+			//console.log('DATA 1:',jsonDataPers1);
 
+			data = [];
 			JSON.parse(jsonDataPers1, function (key, value) {
-				console.log('KEY =', key);
-				console.log('VALUE =', value, typeof(value));
+				//console.log('KEY =', key);
+				//console.log('VALUE =', value, typeof(value));
+				if(typeof(key) === 'string'){
+					personages[key].command = data[0];
+					personages[key].hitAttack1 = data[1];
+					personages[key].hitAttack2 = data[2];
+					personages[key].hitAttack3 = data[3];
+					personages[key].hitAttack4 = data[4];
+					personages[key].hitAttack5 = data[5];
+					personages[key].hitDefense1 = data[6];
+					personages[key].hitDefense2 = data[7];
+					personages[key].hitDefense3 = data[8];
+					personages[key].hitDefense4 = data[9];
+					personages[key].hitDefense5 = data[10];
+					personages[key].life = data[11];
+					personages[key].status = data[12];
+					data = [];
+				}else{
+					data.push(value);
+				}
 			});
 
 			//console.log('DATA 2:',jsonDataPers2);
+
+			data = [];
+			JSON.parse(jsonDataPers2, function (key, value) {
+				if(typeof(key) === 'string'){
+					personages[key].command = data[0];
+					personages[key].hitAttack1 = data[1];
+					personages[key].hitAttack2 = data[2];
+					personages[key].hitAttack3 = data[3];
+					personages[key].hitAttack4 = data[4];
+					personages[key].hitAttack5 = data[5];
+					personages[key].hitDefense1 = data[6];
+					personages[key].hitDefense2 = data[7];
+					personages[key].hitDefense3 = data[8];
+					personages[key].hitDefense4 = data[9];
+					personages[key].hitDefense5 = data[10];
+					personages[key].life = data[11];
+					personages[key].status = data[12];
+					data = [];
+				}else{
+					data.push(value);
+				}
+			});
+
 			//console.log('DATA 3:',jsonDataPers3);
+
+			data = [];
+			JSON.parse(jsonDataPers3, function (key, value) {
+				if(typeof(key) === 'string'){
+					personages[key].command = data[0];
+					personages[key].hitAttack1 = data[1];
+					personages[key].hitAttack2 = data[2];
+					personages[key].hitAttack3 = data[3];
+					personages[key].hitAttack4 = data[4];
+					personages[key].hitAttack5 = data[5];
+					personages[key].hitDefense1 = data[6];
+					personages[key].hitDefense2 = data[7];
+					personages[key].hitDefense3 = data[8];
+					personages[key].hitDefense4 = data[9];
+					personages[key].hitDefense5 = data[10];
+					personages[key].life = data[11];
+					personages[key].status = data[12];
+					data = [];
+				}else{
+					data.push(value);
+				}
+			});
 		}
 	};
 	return that;
@@ -11430,51 +11494,51 @@ var DataStore = function (parent) {
 			for (var pers in parent.initialization.personages) {
 				if (i <= 30) {
 					that.jsonDataPers1 += '"' + pers + '": [' 
-						+ parent.initialization.personages[pers].command.toString() + ',' +
-						'"' + parent.initialization.personages[pers].hitAttack1 + '",' +
-						'"' + parent.initialization.personages[pers].hitAttack2 + '",' +
-						'"' + parent.initialization.personages[pers].hitAttack3 + '",' +
-						'"' + parent.initialization.personages[pers].hitAttack4 + '",' +
-						'"' + parent.initialization.personages[pers].hitAttack5 + '",' +
-						'"' + parent.initialization.personages[pers].hitDefense1 + '",' +
-						'"' + parent.initialization.personages[pers].hitDefense2 + '",' +
-						'"' + parent.initialization.personages[pers].hitDefense3 + '",' +
-						'"' + parent.initialization.personages[pers].hitDefense4 + '",' +
-						'"' + parent.initialization.personages[pers].hitDefense5 + '",' +
-						'"' + parent.initialization.personages[pers].life + '",' +
-						'"' + parent.initialization.personages[pers].status + '"]';
+						+ parent.initialization.personages[pers].command.toString() + ','
+						+ parent.initialization.personages[pers].hitAttack1 + ','
+						+ parent.initialization.personages[pers].hitAttack2 + ','
+						+ parent.initialization.personages[pers].hitAttack3 + ','
+						+ parent.initialization.personages[pers].hitAttack4 + ','
+						+ parent.initialization.personages[pers].hitAttack5 + ','
+						+ parent.initialization.personages[pers].hitDefense1 + ','
+						+ parent.initialization.personages[pers].hitDefense2 + ','
+						+ parent.initialization.personages[pers].hitDefense3 + ','
+						+ parent.initialization.personages[pers].hitDefense4 + ','
+						+ parent.initialization.personages[pers].hitDefense5 + ','
+						+ '"' + parent.initialization.personages[pers].life + '",'
+						+ '"' + parent.initialization.personages[pers].status + '"]';
 					if (i < 30) that.jsonDataPers1 += ',';
 				} else if (i <= 60) {
 					that.jsonDataPers2 += '"' + pers + '": [' 
-						+ parent.initialization.personages[pers].command.toString() + ',' +
-						'"' + parent.initialization.personages[pers].hitAttack1 + '",' +
-						'"' + parent.initialization.personages[pers].hitAttack2 + '",' +
-						'"' + parent.initialization.personages[pers].hitAttack3 + '",' +
-						'"' + parent.initialization.personages[pers].hitAttack4 + '",' +
-						'"' + parent.initialization.personages[pers].hitAttack5 + '",' +
-						'"' + parent.initialization.personages[pers].hitDefense1 + '",' +
-						'"' + parent.initialization.personages[pers].hitDefense2 + '",' +
-						'"' + parent.initialization.personages[pers].hitDefense3 + '",' +
-						'"' + parent.initialization.personages[pers].hitDefense4 + '",' +
-						'"' + parent.initialization.personages[pers].hitDefense5 + '",' +
-						'"' + parent.initialization.personages[pers].life + '",' +
-						'"' + parent.initialization.personages[pers].status + '"]';
+						+ parent.initialization.personages[pers].command.toString() + ','
+						+ parent.initialization.personages[pers].hitAttack1 + ','
+						+ parent.initialization.personages[pers].hitAttack2 + ','
+						+ parent.initialization.personages[pers].hitAttack3 + ','
+						+ parent.initialization.personages[pers].hitAttack4 + ','
+						+ parent.initialization.personages[pers].hitAttack5 + ','
+						+ parent.initialization.personages[pers].hitDefense1 + ','
+						+ parent.initialization.personages[pers].hitDefense2 + ','
+						+ parent.initialization.personages[pers].hitDefense3 + ','
+						+ parent.initialization.personages[pers].hitDefense4 + ','
+						+ parent.initialization.personages[pers].hitDefense5 + ','
+						+ '"' + parent.initialization.personages[pers].life + '",'
+						+ '"' + parent.initialization.personages[pers].status + '"]';
 					if (i < 60) that.jsonDataPers2 += ',';
 				} else if (i <= 90) {
 					that.jsonDataPers3 += '"' + pers + '": [' 
-						+ parent.initialization.personages[pers].command.toString() + ',' +
-						'"' + parent.initialization.personages[pers].hitAttack1 + '",' +
-						'"' + parent.initialization.personages[pers].hitAttack2 + '",' +
-						'"' + parent.initialization.personages[pers].hitAttack3 + '",' +
-						'"' + parent.initialization.personages[pers].hitAttack4 + '",' +
-						'"' + parent.initialization.personages[pers].hitAttack5 + '",' +
-						'"' + parent.initialization.personages[pers].hitDefense1 + '",' +
-						'"' + parent.initialization.personages[pers].hitDefense2 + '",' +
-						'"' + parent.initialization.personages[pers].hitDefense3 + '",' +
-						'"' + parent.initialization.personages[pers].hitDefense4 + '",' +
-						'"' + parent.initialization.personages[pers].hitDefense5 + '",' +
-						'"' + parent.initialization.personages[pers].life + '",' +
-						'"' + parent.initialization.personages[pers].status + '"]';
+						+ parent.initialization.personages[pers].command.toString() + ','
+						+ parent.initialization.personages[pers].hitAttack1 + ','
+						+ parent.initialization.personages[pers].hitAttack2 + ','
+						+ parent.initialization.personages[pers].hitAttack3 + ','
+						+ parent.initialization.personages[pers].hitAttack4 + ','
+						+ parent.initialization.personages[pers].hitAttack5 + ','
+						+ parent.initialization.personages[pers].hitDefense1 + ','
+						+ parent.initialization.personages[pers].hitDefense2 + ','
+						+ parent.initialization.personages[pers].hitDefense3 + ','
+						+ parent.initialization.personages[pers].hitDefense4 + ','
+						+ parent.initialization.personages[pers].hitDefense5 + ','
+						+ '"' + parent.initialization.personages[pers].life + '",'
+						+ '"' + parent.initialization.personages[pers].status + '"]';
 					if (pers !== "yoda") that.jsonDataPers3 += ',';
 				}
 				i++

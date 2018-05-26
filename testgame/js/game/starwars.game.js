@@ -3893,15 +3893,43 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 			var data = [];
 			var flag = '';
 			JSON.parse(jsonDataOther, function (key, value) {
-				console.log('KEY =', key);
-				console.log('VALUE =', value);
-				/*
-				if(key >= 0) data.push(value);
-				if(key === 'Alderaan'){
+				//console.log('KEY =', key);
+				//console.log('VALUE =', value);
+				if(key >= 0) { 
+					data.push(value);
+				}else if(flag === 'PLANETS'){
 					that.levels[key].name = data[0];
-					that.levels[key].url = './assets/data/levels/'+ data[1] + '.json';
-				} 
-				*/
+					that.levels[key].url = './assets/data/levels/'+ data[0] + '.json';
+					that.planets[key].status = data[1];
+					data = [];
+					flag = '';
+					console.log('PLANETS', key, that.levels[key], that.planets[key]);
+				} else if(flag === 'COMMAND_USER'){
+					that.commandUser.personage1 = data[0];
+					that.commandUser.personage2 = data[1];
+					that.commandUser.personage3 = data[2];
+					data = [];
+					flag = '';
+					console.log('COMMAND_USER', key, that.commandUser);
+				}else if(flag === 'COMMAND_AI'){
+					that.commandAI.personage1 = data[0];
+					that.commandAI.personage2 = data[1];
+					that.commandAI.personage3 = data[2];
+					data = [];
+					flag = '';
+					console.log('COMMAND_AI', key, that.commandAI);
+				}
+
+				if(key === 'userExperiencePoints') that.userExperiencePoints = value;
+				if(key === 'userTotalPointsPlayerTournament') that.userTotalPointsPlayerTournament = value;
+				if(key === 'userlTotalPointsPlayerLevel') that.userlTotalPointsPlayerLevel = value;
+				if(key === 'userExperiencePointsAI') that.userExperiencePointsAI = value;
+				if(key === 'userTotalBattle') that.userTotalBattle = value;
+
+				if(key === 'side') flag = 'PLANETS';
+				if(key === 'levels_planets') flag = 'COMMAND_USER';
+				if(key === 'commandUser') flag = 'COMMAND_AI';
+				if(key === 'commandAI') flag = '';
 			});
 
 			//console.log('DATA 1:',jsonDataPers1);

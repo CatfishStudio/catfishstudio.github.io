@@ -3902,21 +3902,18 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 					that.levels[key].url = './assets/data/levels/'+ data[0] + '.json';
 					that.planets[key].status = data[1];
 					data = [];
-					flag = '';
 					console.log('PLANETS', key, that.levels[key], that.planets[key]);
 				} else if(flag === 'COMMAND_USER'){
 					that.commandUser.personage1 = data[0];
 					that.commandUser.personage2 = data[1];
 					that.commandUser.personage3 = data[2];
 					data = [];
-					flag = '';
 					console.log('COMMAND_USER', key, that.commandUser);
 				}else if(flag === 'COMMAND_AI'){
 					that.commandAI.personage1 = data[0];
 					that.commandAI.personage2 = data[1];
 					that.commandAI.personage3 = data[2];
 					data = [];
-					flag = '';
 					console.log('COMMAND_AI', key, that.commandAI);
 				}
 

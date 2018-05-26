@@ -3936,19 +3936,19 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 				//console.log('KEY =', key);
 				//console.log('VALUE =', value, typeof(value));
 				if(typeof(key) === 'string'){
-					personages[key].command = data[0];
-					personages[key].hitAttack1 = data[1];
-					personages[key].hitAttack2 = data[2];
-					personages[key].hitAttack3 = data[3];
-					personages[key].hitAttack4 = data[4];
-					personages[key].hitAttack5 = data[5];
-					personages[key].hitDefense1 = data[6];
-					personages[key].hitDefense2 = data[7];
-					personages[key].hitDefense3 = data[8];
-					personages[key].hitDefense4 = data[9];
-					personages[key].hitDefense5 = data[10];
-					personages[key].life = data[11];
-					personages[key].status = data[12];
+					that.personages[key].command = data[0];
+					that.personages[key].hitAttack1 = data[1];
+					that.personages[key].hitAttack2 = data[2];
+					that.personages[key].hitAttack3 = data[3];
+					that.personages[key].hitAttack4 = data[4];
+					that.personages[key].hitAttack5 = data[5];
+					that.personages[key].hitDefense1 = data[6];
+					that.personages[key].hitDefense2 = data[7];
+					that.personages[key].hitDefense3 = data[8];
+					that.personages[key].hitDefense4 = data[9];
+					that.personages[key].hitDefense5 = data[10];
+					that.personages[key].life = data[11];
+					that.personages[key].status = data[12];
 					data = [];
 				}else{
 					data.push(value);
@@ -3960,19 +3960,19 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 			data = [];
 			JSON.parse(jsonDataPers2, function (key, value) {
 				if(typeof(key) === 'string'){
-					personages[key].command = data[0];
-					personages[key].hitAttack1 = data[1];
-					personages[key].hitAttack2 = data[2];
-					personages[key].hitAttack3 = data[3];
-					personages[key].hitAttack4 = data[4];
-					personages[key].hitAttack5 = data[5];
-					personages[key].hitDefense1 = data[6];
-					personages[key].hitDefense2 = data[7];
-					personages[key].hitDefense3 = data[8];
-					personages[key].hitDefense4 = data[9];
-					personages[key].hitDefense5 = data[10];
-					personages[key].life = data[11];
-					personages[key].status = data[12];
+					that.personages[key].command = data[0];
+					that.personages[key].hitAttack1 = data[1];
+					that.personages[key].hitAttack2 = data[2];
+					that.personages[key].hitAttack3 = data[3];
+					that.personages[key].hitAttack4 = data[4];
+					that.personages[key].hitAttack5 = data[5];
+					that.personages[key].hitDefense1 = data[6];
+					that.personages[key].hitDefense2 = data[7];
+					that.personages[key].hitDefense3 = data[8];
+					that.personages[key].hitDefense4 = data[9];
+					that.personages[key].hitDefense5 = data[10];
+					that.personages[key].life = data[11];
+					that.personages[key].status = data[12];
 					data = [];
 				}else{
 					data.push(value);
@@ -3984,19 +3984,19 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 			data = [];
 			JSON.parse(jsonDataPers3, function (key, value) {
 				if(typeof(key) === 'string'){
-					personages[key].command = data[0];
-					personages[key].hitAttack1 = data[1];
-					personages[key].hitAttack2 = data[2];
-					personages[key].hitAttack3 = data[3];
-					personages[key].hitAttack4 = data[4];
-					personages[key].hitAttack5 = data[5];
-					personages[key].hitDefense1 = data[6];
-					personages[key].hitDefense2 = data[7];
-					personages[key].hitDefense3 = data[8];
-					personages[key].hitDefense4 = data[9];
-					personages[key].hitDefense5 = data[10];
-					personages[key].life = data[11];
-					personages[key].status = data[12];
+					that.personages[key].command = data[0];
+					that.personages[key].hitAttack1 = data[1];
+					that.personages[key].hitAttack2 = data[2];
+					that.personages[key].hitAttack3 = data[3];
+					that.personages[key].hitAttack4 = data[4];
+					that.personages[key].hitAttack5 = data[5];
+					that.personages[key].hitDefense1 = data[6];
+					that.personages[key].hitDefense2 = data[7];
+					that.personages[key].hitDefense3 = data[8];
+					that.personages[key].hitDefense4 = data[9];
+					that.personages[key].hitDefense5 = data[10];
+					that.personages[key].life = data[11];
+					that.personages[key].status = data[12];
 					data = [];
 				}else{
 					data.push(value);

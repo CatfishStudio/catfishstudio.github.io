@@ -3890,30 +3890,29 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 		loadingSavedData: function (jsonDataOther, jsonDataPers1, jsonDataPers2, jsonDataPers3){
 			console.log('DATA OTHER:', jsonDataOther);
 
-			/*
-			var data_levels_planets = [null, null];
-			var data_commands = [null, null, null];
+			var data = [];
+			var flag = '';
 			JSON.parse(jsonDataOther, function (key, value) {
-				//console.log('KEY =', key);
-				//console.log('VALUE =', value);
-				if(key === 0) data[0] = value;
-				if(key === 1) data[1] = value;
+				console.log('KEY =', key);
+				console.log('VALUE =', value);
+				/*
+				if(key >= 0) data.push(value);
 				if(key === 'Alderaan'){
-					that.levels[key]
+					that.levels[key].name = data[0];
+					that.levels[key].url = './assets/data/levels/'+ data[1] + '.json';
 				} 
+				*/
 			});
-			*/
 
-			console.log('DATA 1:',jsonDataPers1);
+			//console.log('DATA 1:',jsonDataPers1);
 
-			JSON.parse(jsonDataPers1, function (data) {
+			JSON.parse(jsonDataPers1, function (key, value) {
 				//console.log('KEY =', key);
 				//console.log('VALUE =', value);
-				console.log('TEST DATA', data);
 			});
 
-			console.log('DATA 2:',jsonDataPers2);
-			console.log('DATA 3:',jsonDataPers3);
+			//console.log('DATA 2:',jsonDataPers2);
+			//console.log('DATA 3:',jsonDataPers3);
 		}
 	};
 	return that;

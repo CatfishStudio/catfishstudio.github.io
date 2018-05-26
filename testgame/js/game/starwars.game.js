@@ -3890,14 +3890,16 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 		loadingSavedData: function (jsonDataOther, jsonDataPers1, jsonDataPers2, jsonDataPers3){
 			console.log('DATA OTHER:', jsonDataOther);
 
-			JSON.parse(jsonDataOther, function (key, value) {
-				console.log(key, value);
+			JSON.parse(jsonDataOther, function (key, value, arr) {
+				console.log('ARRAY=', arr);
+				console.log('KEY=', key, 'VALUE=', value);
 			});
 
 			console.log('DATA 1:',jsonDataPers1);
 
-			JSON.parse(jsonDataPers1, function (key, value) {
-				console.log(key, value);
+			JSON.parse(jsonDataPers1, function (key, value, arr) {
+				console.log('ARRAY=', arr);
+				console.log('KEY=', key, 'VALUE=', value);
 			});
 
 			console.log('DATA 2:',jsonDataPers2);
@@ -10968,6 +10970,7 @@ var Game = function (mainStage) {
 		lost: null,
 		endGame: null,
 		dataSore: null,
+		gameOver: false,
 
 		vkInvite: function () {
 			VK.callMethod("showInviteBox");
@@ -10989,6 +10992,14 @@ var Game = function (mainStage) {
 			console.log('VK GET DATA:', response);
 			
 			if(response === undefined || response === null) return;
+			
+			JSON.parse(response.response[0].value, function (key, value) {
+				if(key === "side") that.config.side = value;
+				if(key === "gameover") that.gameOver = value;
+			});
+
+			if(that.gameOver === true) return;
+
 			if(that.dataSore !== null){			// DATA STORE
 				that.dataSore.jsonDataOther = response.response[0].value;
 				that.dataSore.jsonDataPers1 = response.response[1].value;
@@ -11024,7 +11035,7 @@ var Game = function (mainStage) {
 				that.dataSore = DataStore(that);	// DATA STORE (init)
 				that.dataSore.getData();			// DATA STORE (load)
 			}else{
-				that.menu.buttonContinue();
+				if(that.gameOver === false) that.menu.buttonContinue();
 			}
 		},
 
@@ -11032,7 +11043,7 @@ var Game = function (mainStage) {
 			mainStage.removeChild(that.menu.close());
 			that.menu.destroy();
 			that.endGame = that.timer = that.match = that.initialization = that.menu = that.backmenu = that.settings = that.message = that.side = that.command = that.startbattle = that.level = that.victory = that.lost = null;
-
+			that.gameOver = false;
 			that.sideShow();
 		},
 
@@ -11043,10 +11054,6 @@ var Game = function (mainStage) {
 				that.menu = that.settings = null;
 				that.mapShow();
 			}else{									// DATA STORE (continue)
-				JSON.parse(that.dataSore.jsonDataOther, function (key, value) {
-					if(key === "side") that.config.side = value;
-				});
-				
 				that.initializationGame();
 				that.initialization.loadingSavedData(
 					that.dataSore.jsonDataOther, 
@@ -11055,8 +11062,7 @@ var Game = function (mainStage) {
 					that.dataSore.jsonDataPers3
 				);
 
-				console.log(that.initialization);
-
+				mainStage.removeChild(that.menu.close());
 				that.menu.destroy();
 				that.menu = that.settings = null;
 				that.mapShow();
@@ -11262,6 +11268,9 @@ var Game = function (mainStage) {
 		},
 
 		endGameShow: function (status) {
+			that.gameOver = true;
+			that.dataSore.setData();			// DATA STORE (save)
+
 			if (status === "win") that.sound.soundPlayStarWarsThemeSong();
 			if (status === "lost") {
 				that.sound.soundStopStarWarsThemeSong();
@@ -11350,7 +11359,7 @@ var DataStore = function (parent) {
 		setData: function () {
 			// json for other
 			that.jsonDataOther = '{';
-			that.jsonDataOther += '"game": "' + parent.endGame + '",';
+			that.jsonDataOther += '"gameover": '+ parent.gameOver.toString() + ',';
 			that.jsonDataOther += '"side": "' + parent.config.side + '",';
 			that.jsonDataOther += '"levels_planets": {';
 			for (var value in parent.initialization.levels) {

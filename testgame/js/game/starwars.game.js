@@ -3888,13 +3888,11 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 
 		/* Загрузка сохраненных данных */
 		loadingSavedData: function (jsonDataOther, jsonDataPers1, jsonDataPers2, jsonDataPers3){
-			console.log('DATA OTHER:', jsonDataOther);
+			//console.log('DATA OTHER:', jsonDataOther);
 
 			var data = [];
 			var flag = '';
 			JSON.parse(jsonDataOther, function (key, value) {
-				//console.log('KEY =', key);
-				//console.log('VALUE =', value);
 				if(key >= 0) { 
 					if(value === 'null') data.push(null);
 					else data.push(value);
@@ -3931,11 +3929,11 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 				if(key === 'commandAI') flag = '';
 			});
 
-			//console.log('DATA 1:',jsonDataPers1);
+			console.log('DATA 1:',jsonDataPers1);
 
 			JSON.parse(jsonDataPers1, function (key, value) {
-				//console.log('KEY =', key);
-				//console.log('VALUE =', value);
+				console.log('KEY =', key);
+				console.log('VALUE =', value, typeof(value));
 			});
 
 			//console.log('DATA 2:',jsonDataPers2);
@@ -11431,8 +11429,8 @@ var DataStore = function (parent) {
 			var i = 0;
 			for (var pers in parent.initialization.personages) {
 				if (i <= 30) {
-					that.jsonDataPers1 += '"' + pers + '": [' +
-						'"' + parent.initialization.personages[pers].command + '",' +
+					that.jsonDataPers1 += '"' + pers + '": [' 
+						+ parent.initialization.personages[pers].command.toString() + ',' +
 						'"' + parent.initialization.personages[pers].hitAttack1 + '",' +
 						'"' + parent.initialization.personages[pers].hitAttack2 + '",' +
 						'"' + parent.initialization.personages[pers].hitAttack3 + '",' +
@@ -11447,8 +11445,8 @@ var DataStore = function (parent) {
 						'"' + parent.initialization.personages[pers].status + '"]';
 					if (i < 30) that.jsonDataPers1 += ',';
 				} else if (i <= 60) {
-					that.jsonDataPers2 += '"' + pers + '": [' +
-						'"' + parent.initialization.personages[pers].command + '",' +
+					that.jsonDataPers2 += '"' + pers + '": [' 
+						+ parent.initialization.personages[pers].command.toString() + ',' +
 						'"' + parent.initialization.personages[pers].hitAttack1 + '",' +
 						'"' + parent.initialization.personages[pers].hitAttack2 + '",' +
 						'"' + parent.initialization.personages[pers].hitAttack3 + '",' +
@@ -11463,8 +11461,8 @@ var DataStore = function (parent) {
 						'"' + parent.initialization.personages[pers].status + '"]';
 					if (i < 60) that.jsonDataPers2 += ',';
 				} else if (i <= 90) {
-					that.jsonDataPers3 += '"' + pers + '": [' +
-						'"' + parent.initialization.personages[pers].command + '",' +
+					that.jsonDataPers3 += '"' + pers + '": [' 
+						+ parent.initialization.personages[pers].command.toString() + ',' +
 						'"' + parent.initialization.personages[pers].hitAttack1 + '",' +
 						'"' + parent.initialization.personages[pers].hitAttack2 + '",' +
 						'"' + parent.initialization.personages[pers].hitAttack3 + '",' +

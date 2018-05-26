@@ -3924,6 +3924,7 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 				if(key === 'userTotalBattle') that.userTotalBattle = value;
 
 				if(key === 'side') flag = 'PLANETS';
+				if(key === 'Jakku') flag = '';
 				if(key === 'levels_planets') flag = 'COMMAND_USER';
 				if(key === 'commandUser') flag = 'COMMAND_AI';
 				if(key === 'commandAI') flag = '';

@@ -3896,7 +3896,8 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 				//console.log('KEY =', key);
 				//console.log('VALUE =', value);
 				if(key >= 0) { 
-					data.push(value);
+					if(value === 'null') data.push(null);
+					else data.push(value);
 				}else if(flag === 'PLANETS'){
 					that.levels[key].name = data[0];
 					that.levels[key].url = './assets/data/levels/'+ data[0] + '.json';

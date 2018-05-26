@@ -3890,16 +3890,19 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 		loadingSavedData: function (jsonDataOther, jsonDataPers1, jsonDataPers2, jsonDataPers3){
 			console.log('DATA OTHER:', jsonDataOther);
 
-			JSON.parse(jsonDataOther, function (key, value, arr) {
-				console.log('ARRAY=', arr);
-				console.log('KEY=', key, 'VALUE=', value);
+			JSON.parse(jsonDataOther, function (key, value) {
+				console.log('KEY =', key);
+				console.log('VALUE =', value);
+				if(key === 'Coruscant'){
+					console.log('Coruscant', value[0], value[1]);
+				}
 			});
 
 			console.log('DATA 1:',jsonDataPers1);
 
-			JSON.parse(jsonDataPers1, function (key, value, arr) {
-				console.log('ARRAY=', arr);
-				console.log('KEY=', key, 'VALUE=', value);
+			JSON.parse(jsonDataPers1, function (key, value) {
+				console.log('KEY =', key);
+				console.log('VALUE =', value);
 			});
 
 			console.log('DATA 2:',jsonDataPers2);

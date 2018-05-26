@@ -3936,6 +3936,8 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 				//console.log('KEY =', key);
 				//console.log('VALUE =', value, typeof(value));
 				if(key >= 0){
+					data.push(value);
+				}else{
 					console.log('KEY =', key, that.personages[key]);
 					that.personages[key].command = data[0];
 					that.personages[key].hitAttack1 = data[1];
@@ -3951,8 +3953,6 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 					that.personages[key].life = data[11];
 					that.personages[key].status = data[12];
 					data = [];
-				}else{
-					data.push(value);
 				}
 			});
 
@@ -3960,7 +3960,9 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 
 			data = [];
 			JSON.parse(jsonDataPers2, function (key, value) {
-				if(typeof(key) === 'string'){
+				if(key >= 0){
+					data.push(value);
+				}else{
 					that.personages[key].command = data[0];
 					that.personages[key].hitAttack1 = data[1];
 					that.personages[key].hitAttack2 = data[2];
@@ -3975,8 +3977,6 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 					that.personages[key].life = data[11];
 					that.personages[key].status = data[12];
 					data = [];
-				}else{
-					data.push(value);
 				}
 			});
 
@@ -3984,7 +3984,9 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 
 			data = [];
 			JSON.parse(jsonDataPers3, function (key, value) {
-				if(typeof(key) === 'string'){
+				if(key >= 0){
+					data.push(value);
+				}else{
 					that.personages[key].command = data[0];
 					that.personages[key].hitAttack1 = data[1];
 					that.personages[key].hitAttack2 = data[2];
@@ -3999,8 +4001,6 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 					that.personages[key].life = data[11];
 					that.personages[key].status = data[12];
 					data = [];
-				}else{
-					data.push(value);
 				}
 			});
 		}

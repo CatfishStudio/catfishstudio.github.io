@@ -3936,6 +3936,7 @@ var Initialization = function (planetTextures, heroesTextures, personagesJson, p
 				//console.log('KEY =', key);
 				//console.log('VALUE =', value, typeof(value));
 				if(typeof(key) === 'string'){
+					console.log('KEY =', key, that.personages[key]);
 					that.personages[key].command = data[0];
 					that.personages[key].hitAttack1 = data[1];
 					that.personages[key].hitAttack2 = data[2];

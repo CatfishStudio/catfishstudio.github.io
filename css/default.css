@@ -222,12 +222,13 @@ li {
 
 .SectionList {
 	padding: 25px;
+	width: 100%;
 	display: inline-block;
 }
 
 .SectionProjectGame {
 	display: inline-block;
-	width: 315px;
+	width: 310px;
 	height: 100%;
 	padding: 10px;
 	margin-bottom: 5px;
@@ -252,6 +253,11 @@ li {
 	margin-right: 25px;
 }
 
+.SectionDescription {
+	width: 300px;
+	height: 200px;
+}
+
 .vkbutton{
 	background-image: url("../img/vkbutton.png");
 	width: 164px;
@@ -260,14 +266,13 @@ li {
 }
 
 #technologies{
-	margin-left: 5%;
+	display: inline-block;
 	background-color: #0095BE;
 	border-radius: 50px 50px;
     color: #FFFFFF;
-	width: 40%;
+	width: 60%;
 	padding: 25px;
 	overflow: hidden;
-	display: inline-block;
 }
 
 .TechnologiesImage {
@@ -275,16 +280,19 @@ li {
 	width: 50%;
 }
 
-#contacts{
+.SectionInformationImage {
 	position: absolute;
-	right: 5%;
-	top: 0px;
+	margin-left: 50px;
+}
+
+#contacts{
+	display: inline-block;
 	background-color: #0095BE;
 	border-radius: 50px 50px;
     color: #FFFFFF;
-	width: 300px;
+	width: 250px;
 	padding: 25px;
-	overflow: hidden;
+	margin-left: 15px;
 }
 
 footer{
@@ -301,5 +309,5 @@ footer p{
 	position: relative;
 	top: 150px;
 	left: 50px;
-	width: 300px;
+	width: 80%;
 }

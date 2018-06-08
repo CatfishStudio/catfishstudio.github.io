@@ -1450,7 +1450,7 @@ var Fabrique;
             }
         };
         Comix.prototype.playButtonSound = function () {
-            if (Config.settingSound) {
+            if (Config.settingSound === true) {
                 GameData.Data.buttonSound.loop = false;
                 GameData.Data.buttonSound.volume = 0.5;
                 GameData.Data.buttonSound.play();
@@ -2050,7 +2050,7 @@ var Fabrique;
             GameData.Data.music.play();
         };
         Settings.prototype.playButtonSound = function () {
-            if (Config.settingSound) {
+            if (Config.settingSound === true) {
                 GameData.Data.buttonSound.loop = false;
                 GameData.Data.buttonSound.volume = 0.5;
                 GameData.Data.buttonSound.play();
@@ -2150,7 +2150,7 @@ var Fabrique;
             this.canClick = true;
         };
         Slides.prototype.playArrowSound = function () {
-            if (Config.settingSound) {
+            if (Config.settingSound === true) {
                 GameData.Data.arrowSound.loop = false;
                 GameData.Data.arrowSound.volume = 0.1;
                 GameData.Data.arrowSound.play();
@@ -2699,7 +2699,7 @@ var StreetFighterCards;
             }
         };
         Menu.prototype.playButtonSound = function () {
-            if (Config.settingSound) {
+            if (Config.settingSound === true) {
                 GameData.Data.buttonSound.loop = false;
                 GameData.Data.buttonSound.volume = 0.5;
                 GameData.Data.buttonSound.play();
@@ -2807,7 +2807,7 @@ var StreetFighterCards;
             }
         };
         ChoiceFighter.prototype.playButtonSound = function () {
-            if (Config.settingSound) {
+            if (Config.settingSound === true) {
                 GameData.Data.buttonSound.loop = false;
                 GameData.Data.buttonSound.volume = 0.5;
                 GameData.Data.buttonSound.play();
@@ -2982,7 +2982,7 @@ var StreetFighterCards;
             }
         };
         Tournament.prototype.playButtonSound = function () {
-            if (Config.settingSound) {
+            if (Config.settingSound === true) {
                 GameData.Data.buttonSound.loop = false;
                 GameData.Data.buttonSound.volume = 0.5;
                 GameData.Data.buttonSound.play();
@@ -3994,21 +3994,21 @@ var StreetFighterCards;
             }
         };
         Level.prototype.playButtonSound = function () {
-            if (Config.settingSound) {
+            if (Config.settingSound === true) {
                 GameData.Data.buttonSound.loop = false;
                 GameData.Data.buttonSound.volume = 0.5;
                 GameData.Data.buttonSound.play();
             }
         };
         Level.prototype.playFlipUpSound = function () {
-            if (Config.settingSound) {
+            if (Config.settingSound === true) {
                 GameData.Data.flipUpSound.loop = false;
                 GameData.Data.flipUpSound.volume = 0.5;
                 GameData.Data.flipUpSound.play();
             }
         };
         Level.prototype.playFlipDownSound = function () {
-            if (Config.settingSound) {
+            if (Config.settingSound === true) {
                 GameData.Data.flipDownSound.loop = false;
                 GameData.Data.flipDownSound.volume = 0.5;
                 GameData.Data.flipDownSound.play();

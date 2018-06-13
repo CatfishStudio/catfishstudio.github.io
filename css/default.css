@@ -19,34 +19,6 @@ header{
 	overflow: hidden;
 }
 
-nav{
-	float: right;
-	padding: 25px;
-	display: block;
-	color: #FFFFFF;
-}
-
-nav a{
-	text-decoration: none;
-	color: #FFFFFF;
-	font: 12pt sans-serif;
-	font-weight: bold;
-	padding-left: 5px;
-	padding-right: 5px;
-}
-
-nav a:visited{
-	color: #FFFFFF;
-}
-
-nav a:active{
-	color: #F0F0F0;
-}
-
-nav a:hover{
-	color: #FC1B1B;
-}
-
 #logo {
 	display: block;
 	position: absolute;
@@ -133,17 +105,6 @@ section a:active {
   color: #497DDD; 
   border-bottom: 1px dashed;
 }
-
-ul{
-    margin: 0;
-    padding: 0;
-}
-
-li {
-    list-style-type: none;
-    display: inline;
-}
-
 
 #about{
 	position: relative;
@@ -310,4 +271,121 @@ footer p{
 	top: 150px;
 	left: 50px;
 	width: 80%;
+}
+
+/*
+ul{
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}
+*/
+
+ul{
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+    display: inline;
+}
+
+nav{
+	padding: 25px;
+	display: block;
+	color: #FFFFFF;
+}
+
+nav .wrapper{
+    position: relative;
+}
+
+nav a{
+	text-decoration: none;
+	color: #FFFFFF;
+	font: 12pt sans-serif;
+	font-weight: bold;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+nav a:visited{
+	color: #FFFFFF;
+}
+
+nav a:active{
+	color: #F0F0F0;
+}
+
+nav a:hover{
+	color: #FC1B1B;
+}
+
+.menu {
+	float: right;
+}
+
+.menu ul {
+	margin: 0;
+	padding: 0;
+}
+
+.menu li {
+	list-style-type: none;
+	float: left;
+	display: block;
+}
+
+
+.menu li a {
+    display: inline-block;
+    padding: 10px 15px;
+}
+
+.menuButton {
+    position: relative;
+    top: -15px;
+    left: -15px;
+    display: none;
+    cursor: pointer;
+}
+
+.menuButton img {
+	width: 45px;
+	height: 45px;
+}
+
+#menuCheck{
+    display: none;
+}
+
+@media screen and (max-width: 625px){
+    .menu{
+        display: none;
+        position: absolute;
+        background: #0095BE;
+        color: #FFFFFF;
+        z-index: 10000;
+    }
+
+    .menu li {
+        float: none;
+    }
+
+    .menuButton{
+        display: inline-block;
+    }
+
+    #menuCheck:checked + .menu{
+    	background: #46B0FF;
+        display: block;
+        top: 35px;
+        left: -25px;
+        padding: 0 30px;
+        width: 100%;
+    }
 }

@@ -456,13 +456,13 @@ section a:active {
 	#technologies{
 		margin: 5px;
 		max-width: 85%;
-		min-width: 85%;
+		min-width: 80%;
 	}
 	#contacts {
 		left: 0;
 		margin: 5px;
 		max-width: 85%;
-		min-width: 85%;
+		min-width: 80%;
 	}
 	.section-information-image {
 		display: none;

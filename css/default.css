@@ -343,7 +343,7 @@ section a:active {
 
 /** -- PROJECTS -- **/
 #projects {
-	margin: 10px 5px;
+	margin: 10px 10px;
 	margin-bottom: 50px;
 }
 
@@ -405,6 +405,11 @@ section a:active {
 /** -- PROJECTS -- **/
 
 /** -- TECHNOLOGIES & CONTACTS -- **/
+#information{
+	margin-left: 2%;
+	margin-bottom: 5%;
+}
+
 #technologies{
 	display: inline-block;
 	background-color: #0095BE;

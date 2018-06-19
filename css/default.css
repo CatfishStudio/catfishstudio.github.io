@@ -8,6 +8,17 @@ body{
 	background-color: #0095BE;
 }
 
+ul{
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+    display: inline;
+}
+
+/** -- HEADER -- **/
 header{
 	position: absolute;
 	width: 100%;
@@ -70,230 +81,9 @@ header{
 	top: -30%;
 	left: 90%;
 }
+/** -- HEADER -- **/
 
-section{
-	position: relative;
-	top:385px;
-	display: block;
-	overflow: hidden;
-	font: 12pt Georgia, 'Times New Roman', Times, serif;
-	margin: 0;
-	padding: 0;
-	border: 0;
-}
-
-section a{
-    text-decoration: none;
-    color: #FFFFFF;
-}
-
-section a:link {
-  border-bottom: 1px dashed; 
-}
-
-section a:visited {
-  /*color: #EF7D55;*/
-  /*color: #154088;*/
-}
-
-section a:hover {
-  color: #154088; 
-  border-bottom: .07em solid;
-}
-
-section a:active {
-  color: #497DDD; 
-  border-bottom: 1px dashed;
-}
-
-#about{
-	position: relative;
-	left: 35%;
-	background-color: #00B2D8;
-	border-radius: 50px 50px;
-    width: 50%;
-	padding: 25px;
-	color: #FFFFFF;
-	z-index: 1000;
-}
-
-#news{
-	margin-left: 5%;
-	background-color: #0095BE;
-	border-radius: 50px 50px;
-	width: 60%;
-	padding: 25px;
-	color: #FFFFFF;
-}
-
-.SectionDark {
-	background-color: #0095BE;
-}
-
-.SectionLight {
-	background-color: #00B2D8;
-}
-
-.SectionFooter {
-	height: 50px;
-	width: 100%;
-}
-
-.SectionFooterLeft {
-	position: relative;
-	left: -10px;
-	height: 100px;
-	width: 120%;
-	margin-top: 20px;
-	background-color: #00B2D8;
-	-moz-transform: rotate(2deg); 		/* Для Firefox */
-    -ms-transform: rotate(2deg); 		/* Для IE */
-    -webkit-transform: rotate(2deg); 	/* Для Safari, Chrome, iOS */
-    -o-transform: rotate(2deg); 		/* Для Opera */
-    transform: rotate(2deg);
-}
-
-.SectionFooterRight {
-	position: relative;
-	left: -10px;
-	height: 100px;
-	width: 120%;
-	margin-top: 20px;
-	background-color: #0095BE;
-	-moz-transform: rotate(-2deg); 		/* Для Firefox */
-    -ms-transform: rotate(-2deg); 		/* Для IE */
-    -webkit-transform: rotate(-2deg); 	/* Для Safari, Chrome, iOS */
-    -o-transform: rotate(-2deg); 		/* Для Opera */
-    transform: rotate(-2deg);
-}
-
-.SectionImageLeft {
-	position: absolute;
-	left: 5%;
-	top: 25%;
-	z-index: 100;
-}
-
-.SectionImageRight {
-	position: absolute;
-	top: 25%;
-	left: 75%;
-	z-index: 100;
-}
-
-.SectionList {
-	padding: 25px;
-	width: 100%;
-	display: inline-block;
-}
-
-.SectionProjectGame {
-	display: inline-block;
-	width: 310px;
-	height: 100%;
-	padding: 10px;
-	margin-bottom: 5px;
-	background-color: #00B2D8;
-	border-radius: 15px 15px;
-	color: #FFFFFF;
-    text-align: left;
-
-}
-
-.SectionProjectGame img {
-	border: 1 solid #ffffff;
-	border-radius: 25px 25px;
-	margin: 5px;
-	height: 95%;
-	width: 95%;
-}
-
-.SectionProjectGame h3 {
-	text-align: right;
-	margin-bottom: 5px;
-	margin-right: 25px;
-}
-
-.SectionDescription {
-	width: 300px;
-	height: 200px;
-}
-
-.vkbutton{
-	background-image: url("../img/vkbutton.png");
-	width: 164px;
-	height: 41px;
-	float: right;
-}
-
-#technologies{
-	display: inline-block;
-	background-color: #0095BE;
-	border-radius: 50px 50px;
-    color: #FFFFFF;
-	width: 60%;
-	padding: 25px;
-	overflow: hidden;
-}
-
-.TechnologiesImage {
-	height: 35%;
-	width: 50%;
-}
-
-.SectionInformationImage {
-	position: absolute;
-	margin-left: 50px;
-}
-
-#contacts{
-	display: inline-block;
-	background-color: #0095BE;
-	border-radius: 50px 50px;
-    color: #FFFFFF;
-	width: 250px;
-	padding: 25px;
-	margin-left: 15px;
-}
-
-footer{
-	position: relative;
-	top:385px;
-	display: block;
-	font: 8pt sans-serif;
-	width: 100%;
-	height: 200px;
-	color: #FFFFFF;
-}
-
-footer p{
-	position: relative;
-	top: 150px;
-	left: 50px;
-	width: 80%;
-}
-
-/*
-ul{
-    margin: 0;
-    padding: 0;
-}
-
-li {
-    list-style-type: none;
-}
-*/
-
-ul{
-    margin: 0;
-    padding: 0;
-}
-
-li {
-    list-style-type: none;
-    display: inline;
-}
-
+/** -- MENU (NAV) -- **/
 nav{
 	padding: 25px;
 	display: block;
@@ -346,7 +136,7 @@ nav a:hover{
     padding: 10px 15px;
 }
 
-.menuButton {
+.menu-button {
     position: relative;
     top: -15px;
     left: -15px;
@@ -354,7 +144,7 @@ nav a:hover{
     cursor: pointer;
 }
 
-.menuButton img {
+.menu-button img {
 	width: 45px;
 	height: 45px;
 }
@@ -376,7 +166,7 @@ nav a:hover{
         float: none;
     }
 
-    .menuButton{
+    .menu-button{
         display: inline-block;
     }
 
@@ -389,3 +179,312 @@ nav a:hover{
         width: 100%;
     }
 }
+/** -- MENU (NAV) -- **/
+
+/** -- SECTION -- **/
+section{
+	position: relative;
+	top:385px;
+	display: block;
+	overflow: hidden;
+	font: 12pt Georgia, 'Times New Roman', Times, serif;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	margin-bottom: -2px;
+}
+
+section a{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+section a:link {
+    border-bottom: 1px dashed; 
+}
+
+section a:visited {
+    /*color: #EF7D55;*/
+    /*color: #154088;*/
+}
+
+section a:hover {
+    color: #154088; 
+    border-bottom: .07em solid;
+}
+
+section a:active {
+    color: #497DDD; 
+    border-bottom: 1px dashed;
+}
+
+.section-dark {
+    background-color: #0095BE;
+}
+
+.section-light {
+    background-color: #00B2D8;
+}
+
+.section-image-left {
+    position: absolute;
+    left: 5%;
+    top: 25%;
+    z-index: 100;
+}
+
+.section-image-right {
+    position: absolute;
+    top: 25%;
+    left: 75%;
+    z-index: 100;
+}
+
+.section-footer {
+    height: 50px;
+    width: 100%;
+}
+
+.section-footer-left {
+    position: relative;
+    left: -10px;
+    height: 100px;
+    width: 120%;
+    margin-top: 20px;
+    background-color: #00B2D8;
+    -moz-transform: rotate(2deg);     /* Для Firefox */
+    -ms-transform: rotate(2deg);    /* Для IE */
+    -webkit-transform: rotate(2deg);  /* Для Safari, Chrome, iOS */
+    -o-transform: rotate(2deg);     /* Для Opera */
+    transform: rotate(2deg);
+}
+
+.section-footer-right {
+    position: relative;
+    left: -10px;
+    height: 100px;
+    width: 120%;
+    margin-top: 20px;
+    background-color: #0095BE;
+    -moz-transform: rotate(-2deg);    /* Для Firefox */
+    -ms-transform: rotate(-2deg);     /* Для IE */
+    -webkit-transform: rotate(-2deg);   /* Для Safari, Chrome, iOS */
+    -o-transform: rotate(-2deg);    /* Для Opera */
+    transform: rotate(-2deg);
+}
+/** -- SECTION -- **/
+
+/** -- ABOUT -- **/
+#about{
+	position: relative;
+	left: 35%;
+	background-color: #00B2D8;
+	border-radius: 50px 50px;
+	max-width:50%;
+	min-width: 50%;
+	padding: 25px;
+	color: #FFFFFF;
+	z-index: 1000;
+}
+
+#about-image{
+	position: absolute;
+    left: 5%;
+    top: 25%;
+    z-index: 100;
+}
+
+@media screen and (max-width: 450px){
+	#about-image{
+		display: none;
+	}
+
+	#about {
+		left: 0;
+		margin: 5px;
+		max-width:100%;
+		min-width: 75%;
+	}
+}
+/** -- ABOUT -- **/
+
+/** -- NEWS -- **/
+#news{
+	margin-top: 5px;
+	margin-left: 5%;
+	background-color: #0095BE;
+	border-radius: 50px 50px;
+	max-width:60%;
+	min-width: 60%;
+	padding: 25px;
+	color: #FFFFFF;
+}
+
+.news-image-right{
+	position: absolute;
+    top: 25%;
+    left: 75%;
+    z-index: 100;
+}
+
+@media screen and (max-width: 450px){
+	.news-image-right{
+		display: none;
+	}
+
+	#news {
+		left: 0;
+		margin: 5px;
+		max-width:100%;
+		min-width: 75%;
+	}
+}
+/** -- NEWS -- **/
+
+/** -- PROJECTS -- **/
+#projects {
+	margin: 10px 5px;
+	margin-bottom: 50px;
+}
+
+.item{
+	display: inline-block;
+	padding: 10px;
+	margin-bottom: 5px;
+	background-color: #00B2D8;
+	border-radius: 15px 15px;
+	color: #FFFFFF;
+    text-align: left;
+    max-width: 24%;
+    box-sizing: border-box;
+}
+
+.item img {
+	border: 1 solid #ffffff;
+	border-radius: 25px 25px;
+	margin: 5px;
+	height: 95%;
+	width: 95%;
+}
+
+.item h3 {
+	text-align: right;
+	margin-bottom: 5px;
+	margin-right: 25px;
+}
+
+.section-description {
+	overflow: hidden;
+	height: 170px;
+}
+
+.vkbutton{
+	background-image: url("../img/vkbutton.png");
+	width: 164px;
+	height: 41px;
+	float: right;
+}
+
+@media screen and (max-width: 1100px){
+	#projects .item {
+		left: 0;
+		margin: 5px;
+		max-width:48%;
+		min-width: 25%;
+	}
+}
+
+@media screen and (max-width: 625px){
+	#projects .item {
+		left: 0;
+		margin: 5px;
+		max-width:100%;
+		min-width: 75%;
+	}
+}
+/** -- PROJECTS -- **/
+
+/** -- TECHNOLOGIES & CONTACTS -- **/
+#technologies{
+	display: inline-block;
+	background-color: #0095BE;
+	border-radius: 50px 50px;
+    color: #FFFFFF;
+	width: 60%;
+	padding: 25px;
+	overflow: hidden;
+}
+
+.technologies-image {
+	height: 35%;
+	width: 50%;
+}
+
+.section-information-image {
+	position: absolute;
+	margin-left: 50px;
+}
+
+#contacts{
+	display: inline-block;
+	background-color: #0095BE;
+	border-radius: 50px 50px;
+    color: #FFFFFF;
+	width: 250px;
+	padding: 25px;
+	margin-left: 15px;
+}
+
+@media screen and (max-width: 1000px){
+	#technologies{
+		margin-left: 10px;
+	}
+	#contacts {
+		left: 0;
+		margin: 5px;
+		margin-left: 10px;
+		max-width: 60%;
+		min-width: 60%;
+	}
+	.section-information-image {
+		margin-top: 50%;
+		margin-left: 5px;
+	}
+}
+
+@media screen and (max-width: 450px){
+	#technologies{
+		margin: 5px;
+		max-width: 85%;
+		min-width: 85%;
+	}
+	#contacts {
+		left: 0;
+		margin: 5px;
+		max-width: 85%;
+		min-width: 85%;
+	}
+	.section-information-image {
+		display: none;
+	}
+}
+/** -- TECHNOLOGIES & CONTACTS -- **/
+
+/** -- FOOTER -- **/
+footer{
+	position: relative;
+	top:385px;
+	display: block;
+	font: 8pt sans-serif;
+	width: 100%;
+	height: 200px;
+	color: #FFFFFF;
+}
+
+footer p{
+	position: relative;
+	top: 150px;
+	left: 50px;
+	width: 80%;
+}
+/** -- FOOTER -- **/

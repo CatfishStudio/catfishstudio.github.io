@@ -484,6 +484,7 @@ footer{
 	width: 100%;
 	height: 200px;
 	color: #FFFFFF;
+	overflow: hidden;
 }
 
 footer p{
@@ -491,5 +492,27 @@ footer p{
 	top: 150px;
 	left: 50px;
 	width: 80%;
+}
+
+.footer-section-footer {
+	position: absolute;
+	top: -100px;
+    height: 50px;
+    width: 100%;
+	z-index: 10000;
+}
+
+.footer-section-footer-right {
+    position: relative;
+    left: -10px;
+    height: 100px;
+    width: 120%;
+    margin-top: 20px;
+    background-color: #00B2D8;
+    -moz-transform: rotate(-2deg);    /* Для Firefox */
+    -ms-transform: rotate(-2deg);     /* Для IE */
+    -webkit-transform: rotate(-2deg);   /* Для Safari, Chrome, iOS */
+    -o-transform: rotate(-2deg);    /* Для Opera */
+    transform: rotate(-2deg);
 }
 /** -- FOOTER -- **/

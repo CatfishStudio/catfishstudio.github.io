@@ -11074,12 +11074,13 @@ var Victory = function(parent)
         buttonStyleRedText: { font : 'bold 24px Arial', fill : '#FFFFFF', stroke : '#880000', strokeThickness : 1, wordWrap : true, wordWrapWidth : 340 }, 
 
         SIDE_NONE: "side_none",
-	SIDE_JEDI: "side_jedi",
-	SIDE_SITH: "side_sith",
+		SIDE_JEDI: "side_jedi",
+		SIDE_SITH: "side_sith",
         
         intercept: null,
         planetID: null,
         aiPlanetID: null,
+
         
         create: function(planetID, intercept, aiPlanetID)
         {
@@ -11093,6 +11094,32 @@ var Victory = function(parent)
             that.titleCreate();
             that.textCreate();
             if(that.intercept === true) that.buttonCloseCreate();
+            else{
+            	if(that.checkNewAlliesAvailable() === false) that.buttonCloseCreate();
+            }
+        },
+
+        checkNewAlliesAvailable: function ()
+        {
+        	if(parent.config.side === that.SIDE_JEDI)
+            {
+	        	if(parent.initialization.personages[parent.initialization.planets[that.planetID].blueRewardPersonage1].status === parent.initialization.USER_PERSONAGE_AVAILABLE
+	            	&& parent.initialization.personages[parent.initialization.planets[that.planetID].blueRewardPersonage2].status === parent.initialization.USER_PERSONAGE_AVAILABLE
+	            	&& parent.initialization.personages[parent.initialization.planets[that.planetID].blueRewardPersonage3].status === parent.initialization.USER_PERSONAGE_AVAILABLE){
+	            	return false;
+	            }else{
+	            	return true;
+	            }
+        	}
+        	if(parent.config.side === that.SIDE_SITH){
+        		if(parent.initialization.personages[parent.initialization.planets[that.planetID].redRewardPersonage1].status === parent.initialization.USER_PERSONAGE_AVAILABLE
+        			&& parent.initialization.personages[parent.initialization.planets[that.planetID].redRewardPersonage2].status === parent.initialization.USER_PERSONAGE_AVAILABLE
+        			&& parent.initialization.personages[parent.initialization.planets[that.planetID].redRewardPersonage3].status === parent.initialization.USER_PERSONAGE_AVAILABLE){
+        			return false;
+	            }else{
+	            	return true;
+	            }
+        	}
         },
         
         backgroundCreate: function()
@@ -11212,11 +11239,13 @@ var Victory = function(parent)
                 
                 if(that.intercept === false)
                 {
-                    text = new PIXI.Text("Доступны новые союзники:", that.styleBlueText); 
-                    text.x = 355;
-                    text.y = 275;
-                    that.windowStage.addChild(text);
-                    that.contentCreate();
+                    if(that.checkNewAlliesAvailable() === true){
+                    	text = new PIXI.Text("Доступны новые союзники:", that.styleBlueText); 
+	                    text.x = 355;
+	                    text.y = 275;
+	                    that.windowStage.addChild(text);
+	                    that.contentCreate();
+                    }
                 }else{
                     
                     if(parent.config.side === that.SIDE_SITH && parent.initialization.planets[that.planetID].id === "Coruscant")
@@ -11250,11 +11279,13 @@ var Victory = function(parent)
                 
                 if(that.intercept === false)
                 {
-                    text = new PIXI.Text("Доступны новые союзники:", that.styleRedText); 
-                    text.x = 355;
-                    text.y = 275;
-                    that.windowStage.addChild(text);
-                    that.contentCreate();
+                    if(that.checkNewAlliesAvailable() === true){
+	                    text = new PIXI.Text("Доступны новые союзники:", that.styleRedText); 
+	                    text.x = 355;
+	                    text.y = 275;
+	                    that.windowStage.addChild(text);
+	                    that.contentCreate();
+                	}
                 }else{
                     
                     if(parent.config.side === that.SIDE_SITH && parent.initialization.planets[that.planetID].id === "Coruscant")
@@ -11640,10 +11671,6 @@ var Victory = function(parent)
                     parent.victoryClose(); // закрываем окно
                 }
             }
-            
-            
-            
-            
         },
         
         buttonCloseCreate: function()
@@ -11717,21 +11744,99 @@ var Victory = function(parent)
         onButtonCloseClick: function(event)
         {
             parent.sound.soundPlayStarWarsButtonClick();
-            
-            if(parent.config.side === that.SIDE_SITH && parent.initialization.planets[that.planetID].id === "Coruscant") parent.endGameShow("win");
-            else{
-                if(parent.config.side === that.SIDE_JEDI && parent.initialization.planets[that.planetID].id === "DeathStar") parent.endGameShow("win");
-                else{
-                    // ИИ пропускает ход!
-                    parent.config.stopAI = true;    
-                    // Увеличиваем очки опыта Пользователя
-                    parent.initialization.userExperiencePoints += 3;
-                    parent.vkWallPost(that.planetID, that.intercept, null);
-                    parent.victoryClose(); // закрываем окно
-                }
+            if(that.intercept === true){
+            	if(parent.config.side === that.SIDE_SITH && parent.initialization.planets[that.planetID].id === "Coruscant") parent.endGameShow("win");
+	            else{
+	                if(parent.config.side === that.SIDE_JEDI && parent.initialization.planets[that.planetID].id === "DeathStar") parent.endGameShow("win");
+	                else{
+	                    // ИИ пропускает ход!
+	                    parent.config.stopAI = true;    
+	                    // Увеличиваем очки опыта Пользователя
+	                    parent.initialization.userExperiencePoints += 3;
+	                    parent.vkWallPost(that.planetID, that.intercept, null);
+	                    parent.victoryClose(); // закрываем окно
+	                }
+	            }
+            }else{ // на случай если у игрока уже все персонажи получены
+            	if(parent.config.side === that.SIDE_JEDI)
+	            {
+	                // присваиваем планете статус завоёванной
+	                parent.initialization.planets[that.planetID].status = parent.initialization.USER_PLANET_QUEST_COMPLETE_JEDI;
+	                // ИИ победил в своей битве
+	                if(parent.initialization.aiResultBattle() === true && parent.config.stopAI === false)
+	                {
+	                    // ИИ присваиваем планете статус завоёванной
+	                    parent.initialization.planets[that.aiPlanetID].status = parent.initialization.USER_PLANET_QUEST_COMPLETE_SITH;
+	                    // Увеличиваем очки опыта ИИ
+	                    parent.initialization.userExperiencePointsAI += 3;
+	                    // обновление команды ИИ распределение очков опыта
+	                    parent.initialization.aiUpgradeCommand(that.SIDE_SITH, that.aiPlanetID);
+	                    
+	                    if(parent.config.side === that.SIDE_JEDI && parent.initialization.planets[that.aiPlanetID].id === "Coruscant") parent.endGameShow("lost");
+	                    else{
+	                        if(parent.config.side === that.SIDE_SITH && parent.initialization.planets[that.aiPlanetID].id === "DeathStar") parent.endGameShow("lost");
+	                        else{
+
+	                            // Увеличиваем очки опыта Пользователя
+	                            parent.initialization.userExperiencePoints += 3;
+	                            // ИИ получает разрешение на выполнение действий!
+	                            parent.config.stopAI = false;
+	                            parent.victoryClose(); // закрываем окно
+	                        }
+	                    }
+	                }
+	                else
+	                {
+	                    // ИИ проиграл!
+	                    parent.initialization.aiRemovePersonageCommand(that.SIDE_SITH);
+	                    // Увеличиваем очки опыта Пользователя
+	                    parent.initialization.userExperiencePoints += 3;
+	                    // ИИ получает разрешение на выполнение действий!
+	                    parent.config.stopAI = false;
+	                    parent.vkWallPost(that.planetID, that.intercept, parent.initialization.personages[this.name].name);
+	                    parent.victoryClose(); // закрываем окно
+	                }
+	            }
+	            if(parent.config.side === that.SIDE_SITH)
+	            {
+	                // присваиваем планете статус завоёванной
+	                parent.initialization.planets[that.planetID].status = parent.initialization.USER_PLANET_QUEST_COMPLETE_SITH;
+	                // ИИ победил в своей битве
+	                if(parent.initialization.aiResultBattle() === true && parent.config.stopAI === false)
+	                {
+	                    // ИИ присваиваем планете статус завоёванной
+	                    parent.initialization.planets[that.aiPlanetID].status = parent.initialization.USER_PLANET_QUEST_COMPLETE_JEDI;
+	                    // Увеличиваем очки опыта ИИ
+	                    parent.initialization.userExperiencePointsAI += 3;
+	                    // обновление команды ИИ распределение очков опыта
+	                    parent.initialization.aiUpgradeCommand(that.SIDE_JEDI, that.aiPlanetID);
+	                    
+	                    if(parent.config.side === that.SIDE_JEDI && parent.initialization.planets[that.aiPlanetID].id === "Coruscant") parent.endGameShow("lost");
+	                    else{
+	                        if(parent.config.side === that.SIDE_SITH && parent.initialization.planets[that.aiPlanetID].id === "DeathStar") parent.endGameShow("lost");
+	                        else{
+
+	                            // Увеличиваем очки опыта Пользователя
+	                            parent.initialization.userExperiencePoints += 3;
+	                            // ИИ получает разрешение на выполнение действий!
+	                            parent.config.stopAI = false;
+	                            parent.victoryClose(); // закрываем окно
+	                        }
+	                    }
+	                }
+	                else
+	                {
+	                    // ИИ проиграл!
+	                    parent.initialization.aiRemovePersonageCommand(that.SIDE_JEDI);
+	                    // Увеличиваем очки опыта Пользователя
+	                    parent.initialization.userExperiencePoints += 3;
+	                    // ИИ получает разрешение на выполнение действий!
+	                    parent.config.stopAI = false;
+	                    parent.vkWallPost(that.planetID, that.intercept, parent.initialization.personages[this.name].name);
+	                    parent.victoryClose(); // закрываем окно
+	                }
+	            }
             }
-            
-            
         },
         
         tweenStart: function()
@@ -11805,23 +11910,25 @@ var Game = function(mainStage)
 
 		vkInvite: function()
 		{
-                    VK.callMethod("showInviteBox");
+            //VK.callMethod("showInviteBox");
 		},
                 
-                vkWallPost: function(planetID, intercept, personage)
-                {
-                    if(intercept === false)
-                    {
-                        VK.api("wall.post", {message:'Star Wars Heroes. \nЯ победил в битве на планете ' + that.initialization.planets[planetID].name + '\n Набрал ' + that.initialization.userlTotalPointsPlayerLevel + ' очков в миссии. \nПолучил +3 очка опыта и нового союзника ' + personage + '.\nПрисоединяйтесь к игре https://vk.com/app5170657', attachments : 'photo-62618339_398688727'}); 
-                    }else{
-                        VK.api("wall.post", {message:'Star Wars Heroes. \nЯ победил соперника на планете ' + that.initialization.planets[planetID].name + '\n Набрал ' + that.initialization.userlTotalPointsPlayerLevel + ' очков в миссии и получил +3 очка опыта.\nПрисоединяйтесь к игре https://vk.com/app5170657', attachments : 'photo-62618339_398688727'}); 
-                    }
-                },
-                
-                vkWallPostEndGame: function(text)
-                {
-                    VK.api("wall.post", {message: text + '.\nПрисоединяйтесь к игре https://vk.com/app5170657', attachments : 'photo-62618339_398688727'}); 
-                },
+        vkWallPost: function(planetID, intercept, personage)
+        {
+            /*
+            if(intercept === false)
+            {
+                VK.api("wall.post", {message:'Star Wars Heroes. \nЯ победил в битве на планете ' + that.initialization.planets[planetID].name + '\n Набрал ' + that.initialization.userlTotalPointsPlayerLevel + ' очков в миссии. \nПолучил +3 очка опыта и нового союзника ' + personage + '.\nПрисоединяйтесь к игре https://vk.com/app5170657', attachments : 'photo-62618339_398688727'}); 
+            }else{
+                VK.api("wall.post", {message:'Star Wars Heroes. \nЯ победил соперника на планете ' + that.initialization.planets[planetID].name + '\n Набрал ' + that.initialization.userlTotalPointsPlayerLevel + ' очков в миссии и получил +3 очка опыта.\nПрисоединяйтесь к игре https://vk.com/app5170657', attachments : 'photo-62618339_398688727'}); 
+            }
+            */
+        },
+        
+        vkWallPostEndGame: function(text)
+        {
+            //VK.api("wall.post", {message: text + '.\nПрисоединяйтесь к игре https://vk.com/app5170657', attachments : 'photo-62618339_398688727'}); 
+        },
 		
 		loadAssets: function()
 		{
@@ -12154,9 +12261,11 @@ function onInit()
 	game.loadAssets();
 	
 	/* Инициализация ВКонтакте */
+	/*
 	VK.init(function() {
             apiId: 5170657;
         });
+    */
 }
 
 function draw() 

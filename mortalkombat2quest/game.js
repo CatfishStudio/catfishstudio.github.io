@@ -2547,10 +2547,10 @@ var SocialVK = /** @class */ (function () {
         return jsonData;
     };
     SocialVK.onVkDataSet = function (response) {
-        //Utilits.Data.debugLog('VK SET DATA:', response);
+        Utilits.Data.debugLog('VK SET DATA:', response);
     };
     SocialVK.onVkSetDataError = function (response) {
-        //console.error('VK SET DATA ERROR:', response);
+        console.error('VK SET DATA ERROR:', response);
     };
     /**
      * Загрузка данных с сервера VK --------------------------------------------------------------------------------------------
@@ -4040,7 +4040,7 @@ var MortalKombat;
             }
         };
         Menu.prototype.onVkDataGet = function (object) {
-            Utilits.Data.debugLog('ON VK DATA GET:', object.response.toString());
+            Utilits.Data.debugLog('ON VK DATA GET:', object);
             if (SocialVK.LoadData(object.response.toString()) === true) {
                 this.continueGame();
             }

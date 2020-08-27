@@ -1817,7 +1817,7 @@ var Constants = /** @class */ (function () {
 var Config = /** @class */ (function () {
     function Config() {
     }
-    Config.buildDev = true;
+    Config.buildDev = false;
     Config.settingSound = true;
     Config.settingMusic = true;
     Config.settingTutorial = true;
@@ -2542,21 +2542,21 @@ var SocialVK = /** @class */ (function () {
         jsonData += '"life": ' + GameData.Data.user_personage.life.toString();
         jsonData += '}';
         jsonData += '}';
-        VK.api('storage.set', { key: 'mk2q_data', value: jsonData, global: 0 }, SocialVK.onVkDataSet, SocialVK.onVkSetDataError);
+        //VK.api('storage.set', { key: 'mk2q_data', value: jsonData, global: 0 }, SocialVK.onVkDataSet, SocialVK.onVkSetDataError);
         Utilits.Data.debugLog('VK SAVE DATA:', jsonData);
         return jsonData;
     };
     SocialVK.onVkDataSet = function (response) {
-        Utilits.Data.debugLog('VK SET DATA:', response);
+        //Utilits.Data.debugLog('VK SET DATA:', response);
     };
     SocialVK.onVkSetDataError = function (response) {
-        console.error('VK SET DATA ERROR:', response);
+        //Utilits.Data.debugLog('VK SET DATA ERROR:', response);
     };
     /**
      * Загрузка данных с сервера VK --------------------------------------------------------------------------------------------
      */
     SocialVK.vkLoadData = function (onVkDataGet) {
-        VK.api('storage.get', { key: 'mk2q_data' }, onVkDataGet, onVkDataGet);
+        //VK.api('storage.get', { key: 'mk2q_data' }, onVkDataGet, onVkDataGet);
     };
     SocialVK.LoadData = function (jsonData) {
         Utilits.Data.debugLog('jsonData', jsonData);
@@ -2783,21 +2783,13 @@ var Fabrique;
             this.blood.y = this.y - 50;
             this.addChild(this.blood);
         };
-        /*
-        public winAnimation():void{
-            this.animation.stop();
-            this.animation.onComplete.removeAll();
-            this.animation.destroy();
-            this.animationType = Constants.ANIMATION_TYPE_STANCE;
-            this.animation = this.animations.add(this.personageAnimation.id, this.personageAnimation.animWin);
-            this.animation.onComplete.add(this.onComplete, this);
-            this.animation.play(10, true, false);
-        }
-        */
         AnimationFighter.prototype.stanceAnimation = function () {
             this.animationType = Constants.ANIMATION_TYPE_STANCE;
             this.animation = this.animations.add(this.personageAnimation.id, this.personageAnimation.animStance);
             this.animation.onComplete.add(this.onComplete, this);
+            this.animation.onStart.addOnce(this.onStart, this);
+            //this.animation.enableUpdate = true;
+            //this.animation.onUpdate.add(this.onUpdate, this);
             this.animation.play(10, true, false);
         };
         AnimationFighter.prototype.blockAnimation = function () {
@@ -2832,8 +2824,11 @@ var Fabrique;
             if (this.animationType === Constants.ANIMATION_TYPE_WIN)
                 this.animation = this.animations.add(this.personageAnimation.id, this.personageAnimation.animWin);
             this.animation.onComplete.add(this.onComplete, this);
+            this.animation.onStart.addOnce(this.onStart, this);
             if (this.animationType === Constants.ANIMATION_TYPE_LOSE && this.personageAnimation.id !== Constants.ID_SHAOKAHN && this.personageAnimation.id !== Constants.ID_GORO)
                 this.animation.play(10, true, true);
+            else if (this.animationType === Constants.ANIMATION_TYPE_STANCE)
+                this.animation.play(10, true, false);
             else
                 this.animation.play(10, false, false);
         };
@@ -2849,7 +2844,7 @@ var Fabrique;
                 return;
             else {
                 if (this.block === false)
-                    this.stanceAnimation();
+                    this.changeAnimation(Constants.ANIMATION_TYPE_STANCE); //this.stanceAnimation();
                 else
                     this.blockAnimation();
             }
@@ -2857,6 +2852,29 @@ var Fabrique;
         AnimationFighter.prototype.showBlood = function () {
             if (this.block === false)
                 this.blood.show();
+        };
+        AnimationFighter.prototype.onStart = function (sprite, animation) {
+            if (GameData.Data.user_personage === undefined)
+                return;
+            if (animation.name === GameData.Data.user_personage.id) {
+                //Utilits.Data.debugLog("ANIMATION currentFrame", animation.currentFrame);
+                //Utilits.Data.debugLog("SPRITE Type", (sprite as AnimationFighter).animationType);
+                //Utilits.Data.debugLog("SPRITE width", sprite.width);
+                //Utilits.Data.debugLog("SPRITE height", sprite.height);
+                this.x = 100 - (sprite.width / 2);
+                this.y = Constants.GAME_HEIGHT - (sprite.height * 2) + 150;
+            }
+            else {
+                this.x = Constants.GAME_WIDTH - 125 - (sprite.width / 2);
+                this.y = Constants.GAME_HEIGHT - (sprite.height * 2) + 150;
+            }
+        };
+        AnimationFighter.prototype.onUpdate = function (sprite, frame) {
+            if (GameData.Data.user_personage === undefined)
+                return;
+            if (sprite.name === GameData.Data.user_personage.id) {
+                Utilits.Data.debugLog("FRAME", frame);
+            }
         };
         return AnimationFighter;
     }(Phaser.Sprite));
@@ -3211,7 +3229,7 @@ var Fabrique;
             graphicOverlay.endFill();
             graphicOverlay.inputEnabled = true;
             this.addChild(graphicOverlay);
-            var labelText = new Phaser.Text(this.game, startX + 50, startY + 55, text, { font: "18px Georgia", fill: "#FFFFFF", align: "left" });
+            var labelText = new Phaser.Text(this.game, startX + 50, startY + 35, text, { font: "18px Georgia", fill: "#FFFFFF", align: "left" });
             this.addChild(labelText);
             /* button close */
             var buttonClose = new Phaser.Button(this.game, startX + 180, startY + 350, Sheet.ButtonClose, this.onButtonCloseClick, this, 1, 2);
@@ -3369,10 +3387,12 @@ var Fabrique;
 (function (Fabrique) {
     var UpgradeCharacteristics = /** @class */ (function (_super) {
         __extends(UpgradeCharacteristics, _super);
-        function UpgradeCharacteristics(game, thisIsPersonage) {
+        function UpgradeCharacteristics(game, thisIsPersonage, tournament) {
             if (thisIsPersonage === void 0) { thisIsPersonage = true; }
+            if (tournament === void 0) { tournament = null; }
             var _this = _super.call(this, game) || this;
             _this.thisIsPersonage = thisIsPersonage;
+            _this.tournament = tournament;
             _this.updateTransform();
             _this.init();
             return _this;
@@ -3568,6 +3588,7 @@ var Fabrique;
         };
         UpgradeCharacteristics.prototype.removeUpgradeButtons = function () {
             if (GameData.Data.user_upgrade_points == 0) {
+                this.tournament.updateTutorial();
                 this.removeChild(this.buttonLegPlus);
                 this.removeChild(this.buttonHandPlus);
                 this.removeChild(this.buttonBlockPlus);
@@ -4191,7 +4212,7 @@ var MortalKombat;
             }
         };
         Fighters.prototype.helpCreate = function () {
-            this.help = new Help(this.game, this.groupFighters, "ВЫБОР БОЙЦА.");
+            this.help = new Help(this.game, this.groupFighters, "ВЫБОР БОЙЦА.\n\n1. Нажмите на иконку персонажа.\n\nОбратите внимание на окно характеристик персонажа,\nданная информация поможет вам выбрать персонаж\nс наилучшими характеристиками.\n\n2. Нажмите кнопку \"Выбрать бойца\" чтобы перейти в\n    окно турнира.");
             this.help.event.add(this.onButtonClick.bind(this));
         };
         Fighters.prototype.helpClose = function () {
@@ -4289,6 +4310,19 @@ var MortalKombat;
             this.tutorial.x = -500;
             this.tutorial.y = 150;
             this.groupContent.addChild(this.tutorial);
+            this.updateTutorial();
+            /* Upgrade */
+            this.userUpgradeCharacteristics = new UpgradeCharacteristics(this.game, true, this);
+            this.userUpgradeCharacteristics.x = -500;
+            this.userUpgradeCharacteristics.y = 300;
+            this.groupContent.addChild(this.userUpgradeCharacteristics);
+            this.enemyUpgradeCharacteristics = new UpgradeCharacteristics(this.game, false);
+            this.enemyUpgradeCharacteristics.x = Constants.GAME_WIDTH + 500;
+            this.enemyUpgradeCharacteristics.y = 300;
+            this.groupContent.addChild(this.enemyUpgradeCharacteristics);
+            Utilits.Data.debugLog("TOURNAMENT - CHANGE USER PERSOHAGE", GameData.Data.user_personage);
+        };
+        Tournament.prototype.updateTutorial = function () {
             if (GameData.Data.user_upgrade_points > 0) {
                 if (GameData.Data.user_upgrade_points === 1)
                     this.tutorial.setText('Вам доступно ' + GameData.Data.user_upgrade_points + ' очко\nнераспределенного опыта');
@@ -4301,16 +4335,6 @@ var MortalKombat;
             }
             else
                 this.tutorial.setText('У вас осталось ' + GameData.Data.user_continue + ' попыток\nчтобы победить Шао Кана\nи спасти земное царство');
-            /* Upgrade */
-            this.userUpgradeCharacteristics = new UpgradeCharacteristics(this.game, true);
-            this.userUpgradeCharacteristics.x = -500;
-            this.userUpgradeCharacteristics.y = 300;
-            this.groupContent.addChild(this.userUpgradeCharacteristics);
-            this.enemyUpgradeCharacteristics = new UpgradeCharacteristics(this.game, false);
-            this.enemyUpgradeCharacteristics.x = Constants.GAME_WIDTH + 500;
-            this.enemyUpgradeCharacteristics.y = 300;
-            this.groupContent.addChild(this.enemyUpgradeCharacteristics);
-            Utilits.Data.debugLog("TOURNAMENT - CHANGE USER PERSOHAGE", GameData.Data.user_personage);
         };
         Tournament.prototype.onButtonClick = function (event) {
             this.playButtonSound();
@@ -4369,7 +4393,7 @@ var MortalKombat;
             }
         };
         Tournament.prototype.helpCreate = function () {
-            this.help = new Help(this.game, this.groupContent, "БАШНЯ.");
+            this.help = new Help(this.game, this.groupContent, "ТУРНИР.\n\n- В самом начале игры вам доступно 9-ть попыток.\nКаждое поражение в битве будет отнимать у вас по 1-й попытке.\nВы проиграете когда у вас запончится последняя попытка.\n\n- Каждая победа в битве дает вам 1 очко опыта.\nПолученные очки опыта вы можете потратить на прокачку\nхарактеристик вашего персонажа.\n\n- Чтобы начать бой нажмите на кнопку \"Начать битву\".");
             this.help.event.add(this.onButtonClick.bind(this));
         };
         Tournament.prototype.helpClose = function () {
@@ -4503,11 +4527,11 @@ var MortalKombat;
             if (hitType === null && hitCount === null) {
                 if (statusAction === Field.ACTION_PLAYER) {
                     this.animUser.block = false; // сбросить блок игрока
-                    this.animUser.stanceAnimation();
+                    this.animUser.changeAnimation(Constants.ANIMATION_TYPE_STANCE);
                 }
                 else {
                     this.animEnemies.block = false; // сбросить блок оппонента
-                    this.animEnemies.stanceAnimation();
+                    this.animEnemies.changeAnimation(Constants.ANIMATION_TYPE_STANCE);
                 }
                 this.checkGameOver(); // проверка завершения битвы
             }
@@ -4681,7 +4705,7 @@ var MortalKombat;
             //Utilits.Data.debugLog("DIALOG EVENT:", event);
             if (event === DialodFightWinsDied.WINS) {
                 if (this.persEnemies.id === Constants.ID_GORO)
-                    GameData.Data.user_upgrade_points += 5;
+                    GameData.Data.user_upgrade_points += 1;
                 else
                     GameData.Data.user_upgrade_points += 1;
                 GameData.Data.tournamentProgress++;
@@ -4700,7 +4724,7 @@ var MortalKombat;
             this.playMenuMusic();
         };
         Level.prototype.helpCreate = function () {
-            this.help = new Help(this.game, this.groupContent, "БИТВА.");
+            this.help = new Help(this.game, this.groupContent, "- Чтобы победить противника у него должа закончиться жизнь.\n\n- Чтобы нанести удар противнику вы должны собрать на поле\nв ряд 3-и и более фишек.\n\n- Удары наносятся по очереди, сначала вы потом ваш оппонент.\n\n- На принятие решения у вас есть 10-ть секунд, после чего\nход переходит к противнику.\n\n- Кнопка \"Сдаться\" завершает битву и вам будет засчитано\n поражение в битве.");
             this.help.event.add(this.onButtonClick.bind(this));
         };
         Level.prototype.helpClose = function () {
@@ -4834,7 +4858,7 @@ var MortalKombat;
             this.inviteButton.name = Constants.INVITE;
             if (GameData.Data.tournamentProgress <= 12) {
                 this.groupContent.addChild(new Phaser.Sprite(this.game, 0, 0, Images.game_lose));
-                this.messageText = this.game.add.text(400, 100, 'Вы проиграли!\nУ вас не осталось попыток.\nВы можете начать игру заново, \nили получить 1 дополнительную попытку\nза приглашение друга в игру.', { font: "18px Georgia", fill: "#AAAAAA", align: "left" });
+                this.messageText = this.game.add.text(400, 100, 'Вы проиграли!\nУ вас не осталось попыток.\nВы можете начать игру заново, \nили получить 1-ну дополнительную попытку\nза приглашение друга в игру.', { font: "18px Georgia", fill: "#AAAAAA", align: "left" });
             }
             else {
                 this.groupContent.addChild(new Phaser.Sprite(this.game, 0, 0, Images.game_win));

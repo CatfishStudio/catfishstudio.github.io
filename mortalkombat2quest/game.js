@@ -2557,13 +2557,11 @@ var SocialVK = /** @class */ (function () {
         jsonData += '"life": ' + GameData.Data.user_personage.life.toString();
         jsonData += '}';
         jsonData += '}';
-        /*
         try{
             VK.api('storage.set', { key: 'mk2q_data', value: jsonData, global: 0 }, SocialVK.onVkDataSet, SocialVK.onVkSetDataError);
         }catch (e){
             console.log(e);
         }
-        */
         Utilits.Data.debugLog('VK SAVE DATA:', jsonData);
         return jsonData;
     };
@@ -2577,13 +2575,11 @@ var SocialVK = /** @class */ (function () {
      * Загрузка данных с сервера VK --------------------------------------------------------------------------------------------
      */
     SocialVK.vkLoadData = function (onVkDataGet) {
-        /*
         try{
             VK.api('storage.get', { key: 'mk2q_data' }, onVkDataGet, onVkDataGet);
         }catch (e){
             console.log(e);
         }
-        */
     };
     SocialVK.LoadData = function (jsonData) {
         Utilits.Data.debugLog('jsonData', jsonData);
@@ -3872,7 +3868,7 @@ var MortalKombat;
             return _this;
         }
         Preloader.prototype.init = function (config) {
-            console.log("Mortal Kombat 2 Quest - Version - 1.0.0");
+            console.log("Mortal Kombat 2 Quest - Version - 1.0.1");
             this.config = config;
         };
         Preloader.prototype.preload = function () {
@@ -4131,6 +4127,7 @@ var MortalKombat;
             }
             catch (e) {
                 console.log(e);
+				console.log(object);
             }
         };
         Menu.Name = "menu";

@@ -1821,7 +1821,7 @@ var Config = /** @class */ (function () {
     Config.settingSound = true;
     Config.settingMusic = true;
     Config.settingTutorial = true;
-    Config.version = "1.0.9";
+    Config.version = "1.0.10";
     return Config;
 }());
 var Utilits;
@@ -2237,7 +2237,7 @@ var GameData;
         /* инициализация новой игры */
         Data.initNewGame = function () {
             this.user_continue = 9;
-            this.user_upgrade_points = 0;
+            this.user_upgrade_points = 1;
             this.tournamentProgress = 0;
             this.id_enemies = [];
             this.saveData = "";

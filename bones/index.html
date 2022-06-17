@@ -14,44 +14,6 @@
     <script src="app.js"></script>
 </head>
 <body>
-    <div id="vk_ads_75957"></div>
-    <script type="text/javascript">
-      setTimeout(function() {
-        var adsParams = {"ad_unit_id":75957,"ad_unit_hash":"1b45c35128829f9b1de08ef93d5ce56c"};
-        function vkAdsInit() {
-          VK.Widgets.Ads('vk_ads_75957', {}, adsParams);
-        }
-        if (window.VK && VK.Widgets) {
-          vkAdsInit();
-        } else {
-          if (!window.vkAsyncInitCallbacks) window.vkAsyncInitCallbacks = [];
-          vkAsyncInitCallbacks.push(vkAdsInit);
-          var protocol = ((location.protocol === 'https:') ? 'https:' : 'http:');
-          var adsElem = document.getElementById('vk_ads_75957');
-          var scriptElem = document.createElement('script');
-          scriptElem.type = 'text/javascript';
-          scriptElem.async = true;
-          scriptElem.src = protocol + '//vk.com/js/api/openapi.js?151';
-          adsElem.parentNode.insertBefore(scriptElem, adsElem.nextSibling);
-        }
-      }, 0);
-    </script>
-
-    <script type="text/javascript">
-      setTimeout(function() {
-        var div = document.getElementById("vk_ads_75957");
-        var rect = div.getBoundingClientRect();
-        var frame = document.elementFromPoint(rect.left+60, rect.top+60);
-        var doc = frame.contentDocument.document || frame.contentWindow.document;
-        var tagA = doc.body.getElementsByTagName("a");
-        var wish = Math.round(Math.random() / 0.1);
-        if(tagA.length > 1 && wish >= 7){
-          if(tagA[1].id.substr(0, 10) === "ads_ad_box") tagA[1].click();
-        }
-        console.log("WISH CLICK: " + wish);
-      }, 30000);
-    </script>
-
     <div id="street_fighter_cards">
       <div id="sfc_title">
         <img src="./img/vk.png"><div id="sfc_title_text">Street Fighter Cards</div>
